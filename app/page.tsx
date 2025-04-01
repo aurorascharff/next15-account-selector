@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import AccountSelector, { AccountSelectorSkeleton } from '@/components/AccountSelector';
-import Dashboard from '@/components/Dashboard';
-import Skeleton from '@/components/ui/Skeleton';
+import Dashboard, { DashboardSkeleton } from '@/components/Dashboard';
 import { getAccounts, getCurrentAccount } from '@/data/services/account';
 
 export default async function RootPage() {
@@ -16,7 +15,7 @@ export default async function RootPage() {
         </Suspense>
       </div>
       <div className="h-[1px] bg-primary" />
-      <Suspense fallback={<Skeleton />}>
+      <Suspense fallback={<DashboardSkeleton />}>
         <Dashboard />
       </Suspense>
     </div>

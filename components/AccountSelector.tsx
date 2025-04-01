@@ -7,6 +7,7 @@ import { logOut, setCurrentAccount } from '@/data/actions/account';
 import { cn } from '@/utils/cn';
 import { button } from './ui/Button';
 import Spinner from './ui/Spinner';
+import { ActionIcon } from './ui/icons/ActionIcon';
 import type { Account } from '@prisma/client';
 
 type Props = {
@@ -40,11 +41,20 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           </Ariakit.Select>
           {isPending && <Spinner />}
         </div>
-        <Ariakit.SelectPopover gutter={4} className="flex flex-col gap-2 bg-white shadow-md">
-          <Ariakit.SelectHeading className="flex flex-col gap-2 px-3 py-2 text-lg">
-            {optimisticAccount?.name}
-            <span className="text-sm">{optimisticAccount?.email}</span>
-            <span className="text-sm italic">{optimisticAccount?.plan}</span>
+        <Ariakit.SelectPopover
+          gutter={4}
+          className="flex flex-col gap-2 rounded border border-gray-light bg-white shadow-lg"
+        >
+          <Ariakit.SelectHeading className="flex items-start justify-between px-3 py-2 text-lg">
+            <div className="flex flex-col gap-2">
+              {optimisticAccount?.name}
+              <span className="text-sm capitalize italic">
+                {optimisticAccount?.plan} plan {optimisticAccount?.plan === 'pro' ? '☆' : ''}
+              </span>
+            </div>
+            <button className="mt-2">
+              <ActionIcon width={16} height={16} />
+            </button>
           </Ariakit.SelectHeading>
           <div className="h-[1px] bg-gray" />
           <Ariakit.SelectList>
@@ -69,7 +79,6 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                   <div className="flex flex-col">
                     <span>{account.name}</span>
                     <span className="text-sm">{account.email}</span>
-                    <span className="text-sm italic">{account.plan}</span>
                   </div>
                   <Ariakit.SelectItemCheck />
                 </Ariakit.SelectItem>
