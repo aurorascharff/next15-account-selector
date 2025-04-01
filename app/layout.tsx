@@ -10,8 +10,8 @@ import type { Metadata } from 'next';
 const GeistSans = Geist({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  description: 'Next.js 15 Async Select with Ariakit and React 19',
-  title: 'Next.js 15 Async Select',
+  description: 'Account Selector using Server Functions, React 19 and Ariakit',
+  title: 'Next.js 15 Account Selector',
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
