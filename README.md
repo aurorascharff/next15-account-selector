@@ -1,85 +1,54 @@
 # Next.js 15 Account Selector using Server Functions, React 19 and Ariakit
 
+An interactive account selector using Server Functions, React 19 and Ariakit. It's been purposely slowed down to showcase the handling of loading state.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Prisma Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+You need decide between prisma local development with `sqlite` or a real database with for example `postgresql` or `sqlserver`. Define it in the `schema.prisma` file.
 
-## Upgrading to Eslint 9 (executed on 2024-12-03)
+Consider adding a `.env` file to the root of the project and use the environment variables inside `schema.prisma` with `env("DATABASE_URL")`, refer to `.env.sample`.
 
-First, update the eslint package to the latest version. I'll use the `ncu` package to update everything in the package.json file.
-
-```bash
-ncu -u 
-npm install
-```
-
-Then, update the eslint configuration file to the new format.
-
-Referring to the [migration guide](https://eslint.org/docs/latest/use/configure/migration-guide), run the following command:
+When using sqlite, initialize the database with:
 
 ```bash
-npx @eslint/migrate-config .eslintrc.json
+npm run prisma.push
 ```
 
-Wait for the migration to finish and then run the following command to install the necessary dependencies (as prompted by the migration tool):
+Seed prisma/seed.ts for initial data:
+
+```sh
+npm run prisma.seed
+```
+
+To view your data in the database, you can run:
 
 ```bash
-npm install @eslint/compat globals @eslint/js @eslint/eslintrc -D
+npm run prisma.studio
 ```
 
-Reload the editor and open the new `eslint.config.mjs` file.
-
-Assign the default to a variable before exporting it as prompted by eslint. Then save it to run eslint format on the file.
-
-Aslo, remove excess spacing between lines to clean up the file.
-
-```javascript
-const eslintConfig = [
-  // your config here
-];
-
-export default eslintConfig;
-```
-
-Delete the `eslint.json` and `.eslintignore` files.
-
-Ignored files are now inside the `ignores: {}` section of the `eslint.config.mjs` file.
-
-Verify that eslint works by running the following command:
+When using a real database with for example postgresql or sqlserver, you need to migrate the database schema with:
 
 ```bash
-npm run lint
+npm run prisma.migrate
 ```
-
-You should see the following output:
-
-```bash
-✔ No ESLint warnings or errors
-```
-
-Also, verify that autoformatting works by adding the following to any tsx file:
-
-```javascript
-const t = "t"
-```
-
-Then save the file and verify that the variable is deleted and the file is formatted correctly.
 
 ## Learn More
 
