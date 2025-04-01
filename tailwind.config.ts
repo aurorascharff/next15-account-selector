@@ -33,6 +33,10 @@ const config: Config = {
           lighter: '#DFE7FF',
         },
       },
+      fontFamily: {
+        mono: ['var(--font-geist-mono)'],
+        sans: ['var(--font-geist-sans)'],
+      },
     },
   },
 };

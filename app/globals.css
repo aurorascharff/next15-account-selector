@@ -1,46 +1,48 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@config '../tailwind.config.ts';
+@layer base {
+  body {
+    @apply bg-white font-sans text-black dark:bg-black dark:text-white;
+  }
 
-body {
-  @apply bg-white text-black dark:bg-black dark:text-white;
-}
+  textarea,
+  input {
+    @apply m-0 border border-gray bg-white p-2 px-3 shadow-sm outline-none focus:outline focus:-outline-offset-1 focus:outline-primary disabled:bg-gray-100 dark:bg-black disabled:dark:bg-neutral-800;
+  }
 
-textarea,
-input {
-  @apply border-gray focus:outline-primary m-0 border bg-white p-2 px-3 shadow-xs outline-hidden focus:outline focus:-outline-offset-1 disabled:bg-gray-100 dark:bg-black dark:disabled:bg-neutral-800;
-}
+  h1 {
+    @apply font-sans text-4xl leading-[60px];
+  }
 
-h1 {
-  @apply text-4xl leading-[60px];
-}
+  h2 {
+    @apply text-2xl;
+  }
 
-h2 {
-  @apply text-2xl;
-}
+  h3 {
+    @apply text-xl;
+  }
 
-h3 {
-  @apply text-xl;
-}
+  table {
+    @apply w-full border-collapse border-spacing-0 border border-gray-light dark:border-gray-dark;
+  }
 
-table {
-  @apply border-gray-light dark:border-gray-dark w-full border-collapse border-spacing-0 border;
-}
+  tr {
+    @apply w-full border-b border-gray-light dark:border-gray-dark;
+  }
 
-tr {
-  @apply border-gray-light dark:border-gray-dark w-full border-b;
-}
+  th {
+    @apply text-nowrap border-b border-gray-light bg-gray-50 px-4 py-2 text-left font-medium uppercase dark:border-gray-dark dark:bg-neutral-800;
+  }
 
-th {
-  @apply border-gray-light dark:border-gray-dark border-b bg-gray-50 px-4 py-2 text-left font-medium text-nowrap uppercase dark:bg-neutral-800;
-}
+  th:not(:first-child):not(:last-child) {
+    @apply border-l;
+  }
 
-th:not(:first-child):not(:last-child) {
-  @apply border-l;
-}
-
-td {
-  @apply px-4 py-4 text-left;
+  td {
+    @apply px-4 py-4 text-left;
+  }
 }
 
 .skeleton-animation {

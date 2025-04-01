@@ -2,6 +2,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { cn } from '@/utils/cn';
 
+const shadow = 'shadow-sm active:enabled:shadow-xs disabled:shadow-xs';
+
 export const button = cva('button', {
   defaultVariants: {
     theme: 'primary',
@@ -9,14 +11,18 @@ export const button = cva('button', {
   variants: {
     theme: {
       primary: [
+        'outline-none',
+        'rounded',
+        'outline-white',
+        'focus:outline',
+        'focus:-outline-offset-4',
         'bg-primary',
-        'text-white hover:bg-primary-dark focus:outline focus:-outline-offset-4 outline-white disabled:bg-gray',
-      ],
-      secondary: [
-        'bg-white',
-        'text-black',
-        'border',
-        'border-primary hover:bg-gray-light outline-primary focus:outline-2',
+        'px-3',
+        'py-2',
+        'text-white',
+        'hover:enabled:bg-primary-dark',
+        'disabled:bg-gray-dark',
+        shadow,
       ],
     },
   },
@@ -25,7 +31,6 @@ export const button = cva('button', {
 export type Props = {
   type?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
-  active?: boolean;
   className?: string;
 };
 
@@ -37,7 +42,7 @@ export default function Button({
   ...otherProps
 }: Props & React.HTMLProps<HTMLButtonElement> & VariantProps<typeof button>) {
   return (
-    <button {...otherProps} type={type} className={cn(button({ className, theme }), 'w-fit px-6 py-3')}>
+    <button {...otherProps} type={type} className={cn(button({ className, theme }))}>
       {children}
     </button>
   );

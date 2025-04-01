@@ -16,7 +16,13 @@ export const hasSelectedAccount = cache(async () => {
 export const getAccounts = cache(async () => {
   await slow(2000);
 
-  return prisma.account.findMany();
+  const accounts = await prisma.account.findMany();
+
+  if (accounts.length === 0) {
+    throw new Error('No accounts found, run seed script');
+  }
+
+  return accounts;
 });
 
 export const getCurrentAccount = cache(async () => {
