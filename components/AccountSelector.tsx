@@ -31,7 +31,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             className={cn(
               button({
                 className:
-                  'group flex items-center gap-2 rounded-xl outline-offset-1 aria-expanded:bg-white aria-expanded:text-black aria-expanded:outline-primary aria-expanded:hover:bg-gray-light aria-expanded:focus:outline-offset-1',
+                  'group flex items-center gap-2 rounded-xl -outline-offset-2 aria-expanded:bg-white aria-expanded:text-black aria-expanded:outline-primary aria-expanded:hover:bg-gray-light aria-expanded:focus:-outline-offset-2',
                 theme: 'primary',
               }),
             )}
