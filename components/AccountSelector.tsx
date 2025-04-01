@@ -24,7 +24,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
   return (
     <div>
       <Ariakit.SelectProvider defaultValue={currentAccount?.id}>
-        <Ariakit.SelectLabel>ACCOUNT</Ariakit.SelectLabel>
+        <Ariakit.SelectLabel className="mb-2 font-bold">ACCOUNT</Ariakit.SelectLabel>
         <div className="flex items-center gap-4">
           <Ariakit.Select
             className={cn(
@@ -91,9 +91,9 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
 export function AccountSelectorSkeleton() {
   return (
     <div className="flex w-fit flex-col">
-      ACCOUNT
-      <button disabled className="rounded-xl border border-gray-light px-3 py-2 text-gray">
-        Loading accounts...
+      <span className="mb-2 font-bold">ACCOUNT</span>
+      <button disabled className="rounded-xl border border-gray-light px-3 py-[7px] text-gray">
+        Loading...
       </button>
     </div>
   );
