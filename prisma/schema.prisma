@@ -11,9 +11,8 @@ datasource db {
 }
 
 model Account {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  createdById String
-  name        String
-  plan        String
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  name      String
+  plan      String
 }

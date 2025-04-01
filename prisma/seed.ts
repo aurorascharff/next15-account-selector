@@ -4,12 +4,14 @@ const prisma = new PrismaClient();
 
 const ACCOUNTS = [
   {
+    id: 'a833bc10-64dd-4069-8573-4bbb4b0065ed',
     name: 'John Doe',
     plan: 'free',
   },
   {
+    id: '9e525f6f-b60e-4258-8c30-c289619525d6',
     name: 'Jane Smith',
-    plan: 'paid',
+    plan: 'pro',
   },
 ];
 
@@ -18,6 +20,7 @@ async function seedAccounts() {
     ACCOUNTS.map(account => {
       return prisma.account.create({
         data: {
+          id: account.id,
           name: account.name,
           plan: account.plan,
         },
@@ -25,10 +28,10 @@ async function seedAccounts() {
     }),
   )
     .then(() => {
-      return console.info('[SEED] Successfully create message records');
+      return console.info('[SEED] Successfully create account records');
     })
     .catch(e => {
-      return console.error('[SEED] Failed to create message records', e);
+      return console.error('[SEED] Failed to create account records', e);
     });
 }
 
