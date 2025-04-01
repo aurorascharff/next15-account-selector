@@ -10,9 +10,11 @@ export default async function RootPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <Suspense fallback={<AccountSelectorSkeleton />}>
-        <AccountSelector accountsPromise={accounts} currentAccountPromise={currentAccount} />
-      </Suspense>
+      <div className="px-4">
+        <Suspense fallback={<AccountSelectorSkeleton />}>
+          <AccountSelector accountsPromise={accounts} currentAccountPromise={currentAccount} />
+        </Suspense>
+      </div>
       <div className="h-[1px] bg-primary" />
       <Suspense fallback={<Skeleton />}>
         <Dashboard />
