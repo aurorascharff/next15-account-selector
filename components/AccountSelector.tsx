@@ -17,7 +17,6 @@ type Props = {
 export default function AccountSelector({ accountsPromise, currentAccountPromise }: Props) {
   const accounts = use(accountsPromise);
   const currentAccount = use(currentAccountPromise);
-  console.log('currentAccount', currentAccount);
   const [optimisticAccount, setOptimisticAccount] = useOptimistic(currentAccount);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -93,7 +92,7 @@ export function AccountSelectorSkeleton() {
   return (
     <div className="flex w-fit flex-col">
       ACCOUNT
-      <button disabled className="rounded border border-gray-light px-3 py-2 text-gray">
+      <button disabled className="rounded-xl border border-gray-light px-3 py-2 text-gray">
         Loading accounts...
       </button>
     </div>
