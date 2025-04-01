@@ -19,7 +19,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <body className={cn(GeistSans.className, 'p-10 sm:p-40')}>
+      <body className={cn(GeistSans.className, 'p-10 sm:px-40 md:px-80 xl:px-96')}>
         {selectedAccount ? (
           children
         ) : (
