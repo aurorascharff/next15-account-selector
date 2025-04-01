@@ -13,7 +13,7 @@ export const button = cva('button', {
       primary: [
         'outline-none',
         'rounded',
-        'outline-white',
+        'focus:outline-white',
         'focus:outline',
         'focus:-outline-offset-4',
         'bg-primary',
