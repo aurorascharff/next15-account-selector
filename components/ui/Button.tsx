@@ -17,7 +17,7 @@ export const button = cva('button', {
         'focus:outline',
         'focus:-outline-offset-4',
         'bg-primary',
-        'px-3',
+        'px-4',
         'py-2',
         'text-white',
         'hover:enabled:bg-primary-dark',
