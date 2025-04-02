@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import AccountSelector, { AccountSelectorSkeleton } from '@/components/AccountSelector';
 import Dashboard, { DashboardSkeleton } from '@/components/Dashboard';
-
+import Divider from '@/components/ui/Divider';
 import { getAccounts, getCurrentAccount } from '@/data/services/account';
 
 export default async function RootPage() {
@@ -15,7 +15,7 @@ export default async function RootPage() {
           <AccountSelector accountsPromise={accounts} currentAccountPromise={currentAccount} />
         </Suspense>
       </div>
-      <div className="h-[1px] bg-primary" />
+      <Divider theme="primary" />
       <Suspense fallback={<DashboardSkeleton />}>
         <Dashboard />
       </Suspense>

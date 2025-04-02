@@ -14,6 +14,8 @@ export async function logOut() {
 }
 
 export async function logIn(name: string) {
+  await slow();
+
   if (name === 'John Doe') {
     (await cookies()).set('selectedAccountId', 'a833bc10-64dd-4069-8573-4bbb4b0065ed');
   }

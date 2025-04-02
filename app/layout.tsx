@@ -1,7 +1,7 @@
 import './globals.css';
 
 import { Geist } from 'next/font/google';
-import Button from '@/components/ui/Button';
+import SubmitButton from '@/components/ui/SubmitButton';
 import { logIn } from '@/data/actions/account';
 import { hasSelectedAccount } from '@/data/services/account';
 import { cn } from '@/utils/cn';
@@ -24,7 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           children
         ) : (
           <form className="place-self-center pt-20" action={logIn.bind(null, 'John Doe')}>
-            <Button>Log in as John Doe</Button>
+            <SubmitButton>Log in as John Doe</SubmitButton>
           </form>
         )}
       </body>

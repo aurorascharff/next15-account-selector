@@ -21,7 +21,7 @@ export const button = cva('button', {
         'py-2',
         'text-white',
         'hover:enabled:bg-primary-dark',
-        'disabled:bg-gray-dark',
+        'disabled:bg-primary-darker',
         shadow,
       ],
     },

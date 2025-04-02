@@ -33,7 +33,7 @@ function DashboardItem({ children, isPro }: { children: React.ReactNode; isPro?:
     <li>
       <Link
         href="#"
-        className="group flex w-full items-center justify-between gap-2 rounded bg-gray-light p-4 hover:bg-gray-300 focus:outline-2 focus:outline-primary dark:bg-gray-dark dark:hover:bg-gray-600"
+        className="group flex w-full items-center justify-between gap-2 rounded border-gray bg-primary-lighter p-4 hover:bg-primary-light focus:outline-2 focus:outline-primary dark:bg-primary-darker dark:hover:bg-primary-dark"
       >
         <span className="group-hover:underline">{children}</span>
         <span className="text-yellow-500">{isPro && '★'}</span>
