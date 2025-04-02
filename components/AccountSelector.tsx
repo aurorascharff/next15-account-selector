@@ -24,7 +24,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
 
   return (
     <div>
-      <Ariakit.SelectProvider defaultValue={currentAccount?.id}>
+      <Ariakit.SelectProvider value={optimisticAccount?.id}>
         <Ariakit.SelectLabel className="mb-2 font-bold">ACCOUNT</Ariakit.SelectLabel>
         <div className="flex items-center gap-4">
           <Ariakit.Select
