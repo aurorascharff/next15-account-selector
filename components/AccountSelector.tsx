@@ -49,7 +49,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 <span className="ml-2 text-yellow-500">{optimisticAccount?.plan === 'pro' ? '★' : ''}</span>
               </span>
             </div>
-            <Ariakit.SelectItem className="mt-2 rounded-full p-1 data-[active-item]:outline data-[active-item]:outline-primary">
+            <Ariakit.SelectItem className="mt-2 rounded-full p-1 outline-none data-[active-item]:outline data-[active-item]:outline-primary">
               <ActionIcon width={16} height={16} />
             </Ariakit.SelectItem>
           </div>
