@@ -4,9 +4,8 @@ import * as Ariakit from '@ariakit/react';
 import { useRouter } from 'next/navigation';
 import React, { use, useOptimistic, useTransition } from 'react';
 import { logOut, setCurrentAccount } from '@/data/actions/account';
-import { cn } from '@/utils/cn';
-import { button } from './ui/Button';
 import Divider from './ui/Divider';
+import SelectButton from './ui/SelectButton';
 import Spinner from './ui/Spinner';
 import { ActionIcon } from './ui/icons/ActionIcon';
 import type { Account } from '@prisma/client';
@@ -29,16 +28,13 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         <Ariakit.SelectLabel className="mb-2 font-bold">ACCOUNT</Ariakit.SelectLabel>
         <div className="flex items-center gap-4">
           <Ariakit.Select
-            className={cn(
-              button({
-                className:
-                  'group flex items-center gap-2 rounded-2xl border border-primary outline-offset-1 aria-expanded:bg-white aria-expanded:text-black aria-expanded:hover:bg-gray-light aria-expanded:focus:outline-2 aria-expanded:focus:-outline-offset-1 aria-expanded:focus:outline-primary aria-expanded:dark:bg-black aria-expanded:dark:text-white aria-expanded:dark:hover:bg-neutral-800',
-              }),
-            )}
-          >
-            {optimisticAccount?.name}
-            <Ariakit.SelectArrow className="transition-transform group-aria-expanded:rotate-180" />
-          </Ariakit.Select>
+            render={
+              <SelectButton className="group flex items-center gap-2 aria-expanded:bg-white aria-expanded:text-black">
+                {optimisticAccount?.name}
+                <Ariakit.SelectArrow className="transition-transform group-aria-expanded:rotate-180" />
+              </SelectButton>
+            }
+          />
           {isPending && <Spinner />}
         </div>
         <Ariakit.SelectPopover
@@ -53,15 +49,15 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 <span className="ml-2 text-yellow-500">{optimisticAccount?.plan === 'pro' ? '★' : ''}</span>
               </span>
             </div>
-            <button className="mt-2">
+            <Ariakit.SelectItem className="mt-2 rounded-full p-1 data-[active-item]:outline data-[active-item]:outline-primary">
               <ActionIcon width={16} height={16} />
-            </button>
+            </Ariakit.SelectItem>
           </div>
           <Divider />
           {accounts.map(account => {
             return (
               <Ariakit.SelectItem
-                className="mx-2 flex items-center gap-4 rounded-md px-4 py-2 outline-none outline outline-offset-0 data-[active-item]:bg-gray-light data-[active-item]:dark:bg-neutral-800"
+                className="mx-2 flex items-center gap-4 rounded-md px-4 py-2 data-[active-item]:bg-gray-light data-[active-item]:dark:bg-neutral-800"
                 key={account.id}
                 value={account.id}
                 onClick={() => {
@@ -84,11 +80,14 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             );
           })}
           <Divider />
-          <form className="self-end px-2 pb-2" action={logOut}>
-            <button className="hover:underline" type="submit">
-              Log out
-            </button>
-          </form>
+          <Ariakit.SelectItem
+            className="self-end px-2 pb-2 data-[active-item]:underline"
+            onClick={async () => {
+              await logOut();
+            }}
+          >
+            Log out
+          </Ariakit.SelectItem>
         </Ariakit.SelectPopover>
       </Ariakit.SelectProvider>
     </div>
