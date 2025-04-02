@@ -32,8 +32,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             className={cn(
               button({
                 className:
-                  'group flex items-center gap-2 rounded-xl outline-offset-1 aria-expanded:bg-white aria-expanded:text-black aria-expanded:outline-1 aria-expanded:-outline-offset-2 aria-expanded:outline-primary aria-expanded:hover:bg-gray-light aria-expanded:focus:-outline-offset-2 aria-expanded:dark:bg-black aria-expanded:dark:text-white aria-expanded:dark:hover:bg-gray-dark',
-                theme: 'primary',
+                  'group flex items-center gap-2 rounded-xl outline-offset-1 aria-expanded:bg-white aria-expanded:text-black aria-expanded:outline-1 aria-expanded:-outline-offset-2 aria-expanded:outline-primary aria-expanded:hover:bg-gray-light aria-expanded:focus:outline-2 aria-expanded:focus:-outline-offset-2 aria-expanded:dark:bg-black aria-expanded:dark:text-white aria-expanded:dark:hover:bg-gray-dark',
               }),
             )}
           >
@@ -44,7 +43,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         </div>
         <Ariakit.SelectPopover
           gutter={8}
-          className="flex flex-col gap-2 rounded border border-gray-light bg-white shadow-lg dark:border-gray-dark dark:bg-black"
+          className="flex flex-col gap-2 rounded border border-gray-light bg-white shadow-lg outline-none dark:border-gray-dark dark:bg-black"
         >
           <div className="flex items-start justify-between px-3 py-2 text-lg">
             <div className="flex flex-col gap-2">
@@ -61,7 +60,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           {accounts.map(account => {
             return (
               <Ariakit.SelectItem
-                className="mx-2 flex items-center gap-4 rounded-md px-4 py-2 outline-none outline-offset-0 hover:bg-gray-light focus:outline focus:outline-primary dark:hover:bg-gray-dark"
+                className="mx-2 flex items-center gap-4 rounded-md px-4 py-2 outline-none outline-offset-0 hover:bg-gray-light focus:outline data-[active-item]:outline-primary dark:hover:bg-gray-dark"
                 key={account.id}
                 value={account.id}
                 onClick={() => {
