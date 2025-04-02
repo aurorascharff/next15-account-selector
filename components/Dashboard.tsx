@@ -8,7 +8,7 @@ function DashboardItem({ children, isPro }: { children: React.ReactNode; isPro?:
     <li>
       <Link
         href="#"
-        className="group flex w-full items-center justify-between gap-2 rounded bg-gray-light p-4 dark:bg-gray-dark"
+        className="group flex w-full items-center justify-between gap-2 rounded bg-gray-light p-4 focus:outline-2 focus:outline-gray-dark dark:bg-gray-dark focus:dark:outline-gray-light"
       >
         <span className="group-hover:underline">{children}</span>
         <span>{isPro && '☆'}</span>
@@ -27,7 +27,7 @@ export default async function Dashboard() {
         <h1 className="text-3xl"> Welcome, {account?.name}!</h1>
         <h2 className="text-sm">What are you working on today?</h2>
       </div>
-      <ul className="flex grid-cols-2 flex-col gap-4 sm:grid dark:bg-gray-dark">
+      <ul className="flex grid-cols-2 flex-col gap-4 sm:grid">
         <DashboardItem>Feature 1</DashboardItem>
         <DashboardItem>Feature 2</DashboardItem>
         <DashboardItem>Feature 3</DashboardItem>
