@@ -61,7 +61,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           {accounts.map(account => {
             return (
               <Ariakit.SelectItem
-                className="mx-2 flex items-center gap-4 rounded-md px-4 py-2 no-underline outline-none outline outline-offset-0 data-[active-item]:bg-gray-light data-[active-item]:dark:bg-neutral-800"
+                className="mx-2 flex items-center gap-4 rounded-md px-4 py-2 outline-none outline outline-offset-0 data-[active-item]:bg-gray-light data-[active-item]:dark:bg-neutral-800"
                 key={account.id}
                 value={account.id}
                 onClick={() => {
