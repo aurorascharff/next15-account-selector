@@ -1,19 +1,18 @@
 import { cookies } from 'next/headers';
-
 import { unauthorized } from 'next/navigation';
 import { cache } from 'react';
 import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
 
-export const hasSelectedAccount = cache(async () => {
+export async function hasSelectedAccount() {
   const selectedAccountId = (await cookies()).get('selectedAccountId')?.value;
   if (!selectedAccountId) {
     return false;
   }
   return true;
-});
+}
 
-export const getAccounts = cache(async () => {
+export async function getAccounts() {
   await slow(2000);
 
   const accounts = await prisma.account.findMany();
@@ -23,7 +22,7 @@ export const getAccounts = cache(async () => {
   }
 
   return accounts;
-});
+}
 
 export const getCurrentAccount = cache(async () => {
   await slow(1000);
