@@ -3,20 +3,6 @@ import React from 'react';
 import { getCurrentAccount } from '@/data/services/account';
 import Skeleton from './ui/Skeleton';
 
-function DashboardItem({ children, isPro }: { children: React.ReactNode; isPro?: boolean }) {
-  return (
-    <li>
-      <Link
-        href="#"
-        className="group flex w-full items-center justify-between gap-2 rounded bg-gray-light p-4 focus:outline-2 focus:outline-gray-dark dark:bg-gray-dark focus:dark:outline-gray-light"
-      >
-        <span className="group-hover:underline">{children}</span>
-        <span>{isPro && '☆'}</span>
-      </Link>
-    </li>
-  );
-}
-
 export default async function Dashboard() {
   const account = await getCurrentAccount();
   const isPro = account?.plan === 'pro';
@@ -27,18 +13,32 @@ export default async function Dashboard() {
         <h1 className="text-3xl"> Welcome, {account?.name}!</h1>
         <h2 className="text-sm">What are you working on today?</h2>
       </div>
-      <ul className="flex grid-cols-2 flex-col gap-4 sm:grid">
-        <DashboardItem>Feature 1</DashboardItem>
-        <DashboardItem>Feature 2</DashboardItem>
-        <DashboardItem>Feature 3</DashboardItem>
+      <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 sm:grid">
+        <DashboardItem>View Reports</DashboardItem>
+        <DashboardItem>Manage Team</DashboardItem>
+        <DashboardItem>Update Settings</DashboardItem>
         {isPro && (
           <>
-            <DashboardItem isPro>Pro Feature 1 </DashboardItem>
-            <DashboardItem isPro>Pro Feature 2</DashboardItem>
+            <DashboardItem isPro>Access Advanced Analytics</DashboardItem>
+            <DashboardItem isPro>Priority Support</DashboardItem>
           </>
         )}
       </ul>
     </div>
+  );
+}
+
+function DashboardItem({ children, isPro }: { children: React.ReactNode; isPro?: boolean }) {
+  return (
+    <li>
+      <Link
+        href="#"
+        className="group flex w-full items-center justify-between gap-2 rounded bg-gray-light p-4 hover:bg-gray-300 focus:outline-2 focus:outline-primary dark:bg-gray-dark dark:hover:bg-gray-600"
+      >
+        <span className="group-hover:underline">{children}</span>
+        <span className="text-yellow-500">{isPro && '★'}</span>
+      </Link>
+    </li>
   );
 }
 

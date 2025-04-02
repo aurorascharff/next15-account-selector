@@ -32,7 +32,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             className={cn(
               button({
                 className:
-                  'group flex items-center gap-2 rounded-xl border border-primary outline-offset-1 aria-expanded:bg-white aria-expanded:text-black aria-expanded:hover:bg-gray-light aria-expanded:focus:outline-2 aria-expanded:focus:-outline-offset-1 aria-expanded:focus:outline-primary aria-expanded:dark:bg-black aria-expanded:dark:text-white aria-expanded:dark:hover:bg-gray-dark',
+                  'group flex items-center gap-2 rounded-2xl border border-primary outline-offset-1 aria-expanded:bg-white aria-expanded:text-black aria-expanded:hover:bg-gray-light aria-expanded:focus:outline-2 aria-expanded:focus:-outline-offset-1 aria-expanded:focus:outline-primary aria-expanded:dark:bg-black aria-expanded:dark:text-white aria-expanded:dark:hover:bg-gray-dark',
               }),
             )}
           >
@@ -49,7 +49,8 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             <div className="flex flex-col gap-2">
               {optimisticAccount?.name}
               <span className="text-sm capitalize italic">
-                {optimisticAccount?.plan} plan {optimisticAccount?.plan === 'pro' ? '☆' : ''}
+                {optimisticAccount?.plan} plan
+                <span className="ml-2 text-yellow-500">{optimisticAccount?.plan === 'pro' ? '★' : ''}</span>
               </span>
             </div>
             <button className="mt-2">
@@ -60,7 +61,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           {accounts.map(account => {
             return (
               <Ariakit.SelectItem
-                className="mx-2 flex items-center gap-4 rounded-md px-4 py-2 outline-none outline outline-offset-0 data-[active-item]:bg-gray-light dark:hover:bg-gray-dark"
+                className="mx-2 flex items-center gap-4 rounded-md px-4 py-2 outline-none outline outline-offset-0 data-[active-item]:bg-gray-light data-[active-item]:dark:bg-gray-dark"
                 key={account.id}
                 value={account.id}
                 onClick={() => {

@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {selectedAccount ? (
           children
         ) : (
-          <form className="place-self-center" action={logIn.bind(null, 'John Doe')}>
+          <form className="place-self-center pt-20" action={logIn.bind(null, 'John Doe')}>
             <Button>Log in as John Doe</Button>
           </form>
         )}
