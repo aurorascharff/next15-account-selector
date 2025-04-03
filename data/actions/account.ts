@@ -15,7 +15,7 @@ export async function logOut() {
   (await cookies()).delete('selectedAccountId');
 }
 
-export async function logIn(name: string) {
+export async function logIn(name: 'John Doe' | 'Jane Smith') {
   await slow();
 
   if (name === 'John Doe') {

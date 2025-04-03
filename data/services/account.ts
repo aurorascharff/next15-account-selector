@@ -4,7 +4,7 @@ import { cache } from 'react';
 import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
 
-export async function hasSelectedAccount() {
+export async function isAuthenticated() {
   const selectedAccountId = (await cookies()).get('selectedAccountId')?.value;
   if (!selectedAccountId) {
     return false;
