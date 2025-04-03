@@ -8,7 +8,7 @@ export default async function Dashboard() {
   const account = await getCurrentAccount();
 
   return (
-    <div className="flex flex-col gap-8 px-4">
+    <div className="flex flex-col gap-4 px-4">
       <div className="mt-4 flex flex-col gap-2">
         <h1 className="text-3xl"> Welcome, {account?.name}!</h1>
       </div>
