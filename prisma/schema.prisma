@@ -16,5 +16,7 @@ model Account {
   createdAt DateTime @default(now())
   name      String
   plan      String
+  type      String   @default("personal")
   email     String
+  inactive  Boolean  @default(false)
 }

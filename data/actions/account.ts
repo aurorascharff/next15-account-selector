@@ -15,13 +15,10 @@ export async function logOut() {
   (await cookies()).delete('selectedAccountId');
 }
 
-export async function logIn(name: 'John Doe' | 'Jane Smith') {
+export async function logIn(email: string) {
   await slow();
 
-  if (name === 'John Doe') {
+  if (email === 'jane.smith@personal.com') {
     (await cookies()).set('selectedAccountId', 'a833bc10-64dd-4069-8573-4bbb4b0065ed');
-  }
-  if (name === 'Jane Smith') {
-    (await cookies()).set('selectedAccountId', '9e525f6f-b60e-4258-8c30-c289619525d6');
   }
 }

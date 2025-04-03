@@ -4,6 +4,7 @@ import * as Ariakit from '@ariakit/react';
 
 import React, { use, useOptimistic, useTransition } from 'react';
 import { logOut, setCurrentAccount } from '@/data/actions/account';
+import { ProMarker } from './ProMarker';
 import Divider from './ui/Divider';
 import SelectButton from './ui/SelectButton';
 import Spinner from './ui/Spinner';
@@ -44,23 +45,24 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           <div className="flex items-start justify-between px-3 py-2 text-lg">
             <div className="flex flex-col gap-2">
               {optimisticAccount?.name}
-              <span className="text-sm capitalize italic">
-                {optimisticAccount?.plan} plan
-                <span className="ml-2 text-yellow-500">{optimisticAccount?.plan === 'pro' ? '★' : ''}</span>
+              <span className="flex gap-2 text-sm capitalize italic">
+                {optimisticAccount?.plan} plan ({optimisticAccount?.type})
+                <ProMarker plan={optimisticAccount?.plan} />
               </span>
             </div>
             <Ariakit.SelectItem className="data-active-item:outline-primary mt-2 cursor-pointer rounded-full p-1 data-active-item:outline">
               <Ariakit.VisuallyHidden>Account options</Ariakit.VisuallyHidden>
-              <ActionIcon width={16} height={16} />
+              <ActionIcon aria-hidden="true" width={16} height={16} />
             </Ariakit.SelectItem>
           </div>
           <Divider />
           {accounts.map(account => {
             return (
               <Ariakit.SelectItem
-                className="data-active-item:bg-gray-light mx-2 flex items-center gap-4 rounded-md px-4 py-2 dark:data-active-item:bg-neutral-800"
+                className="data-active-item:bg-gray-light aria-disabled:text-gray mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 dark:data-active-item:bg-neutral-800"
                 key={account.id}
                 value={account.id}
+                disabled={account.inactive}
                 onClick={() => {
                   if (optimisticAccount?.id === account.id) {
                     return;
@@ -72,9 +74,13 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 }}
               >
                 <div className="flex flex-col">
-                  <span>{account.name}</span>
+                  <div className="flex gap-2">
+                    <span>{account.name}</span>
+                    <ProMarker plan={account.plan} />
+                  </div>
                   <span className="text-sm">{account.email}</span>
                 </div>
+
                 <Ariakit.SelectItemCheck />
               </Ariakit.SelectItem>
             );

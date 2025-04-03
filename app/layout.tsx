@@ -23,8 +23,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {isAuth ? (
           children
         ) : (
-          <form className="place-self-center pt-20" action={logIn.bind(null, 'John Doe')}>
-            <SubmitButton>Log in as John Doe</SubmitButton>
+          <form className="place-self-center pt-20" action={logIn.bind(null, 'jane.smith@personal.com')}>
+            <SubmitButton>Log in as Jane Smith</SubmitButton>
           </form>
         )}
       </body>
