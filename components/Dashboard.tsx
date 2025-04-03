@@ -6,22 +6,21 @@ import Skeleton from './ui/Skeleton';
 
 export default async function Dashboard() {
   const account = await getCurrentAccount();
-  const isPro = account?.plan === 'pro';
 
   return (
     <div className="flex flex-col gap-8 px-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl"> Welcome, {account?.name}!</h1>
-        <h2 className="text-sm">What are you working on today?</h2>
+        <h2 className="text-sm">What would you like to manage today?</h2>
       </div>
       <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 sm:grid">
-        <DashboardItem>View Reports</DashboardItem>
-        <DashboardItem>Manage Team</DashboardItem>
-        <DashboardItem>Update Settings</DashboardItem>
-        {isPro && (
+        <DashboardItem>Create New Project</DashboardItem>
+        <DashboardItem>View Task Board</DashboardItem>
+        <DashboardItem>Manage Team Members</DashboardItem>
+        {account?.plan === 'pro' && (
           <>
-            <DashboardItem plan="pro">Access Advanced Analytics</DashboardItem>
-            <DashboardItem plan="pro">Priority Support</DashboardItem>
+            <DashboardItem plan="pro">Access Advanced Project Insights</DashboardItem>
+            <DashboardItem plan="pro">Set Custom Workflows</DashboardItem>
           </>
         )}
       </ul>
