@@ -40,7 +40,7 @@ export const selectButton = cva('selectButton', {
 
 export type Props = {
   type?: 'button' | 'submit' | 'reset';
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 };
 

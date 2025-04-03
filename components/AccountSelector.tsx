@@ -29,13 +29,12 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         <Ariakit.SelectLabel className="mb-2 font-bold">ACCOUNT</Ariakit.SelectLabel>
         <div className="flex items-center gap-4">
           <Ariakit.Select
-            render={
-              <SelectButton className="group flex items-center gap-2 aria-expanded:bg-white aria-expanded:text-black">
-                {optimisticAccount?.name}
-                <Ariakit.SelectArrow className="transition-transform group-aria-expanded:rotate-180" />
-              </SelectButton>
-            }
-          />
+            className="group flex items-center gap-2 aria-expanded:bg-white aria-expanded:text-black"
+            render={<SelectButton />}
+          >
+            {optimisticAccount?.name}
+            <Ariakit.SelectArrow className="transition-transform group-aria-expanded:rotate-180" />
+          </Ariakit.Select>
           {isPending && <Spinner />}
         </div>
         <Ariakit.SelectPopover
@@ -51,7 +50,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
               </span>
             </div>
             <Ariakit.SelectItem className="data-active-item:outline-primary mt-2 cursor-pointer rounded-full p-1 data-active-item:outline">
-              <Ariakit.VisuallyHidden>Account options</Ariakit.VisuallyHidden>
+              <span className="sr-only">Account options</span>
               <ActionIcon aria-hidden="true" width={16} height={16} />
             </Ariakit.SelectItem>
           </div>
