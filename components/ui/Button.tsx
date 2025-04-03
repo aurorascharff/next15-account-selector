@@ -2,7 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { cn } from '@/utils/cn';
 
-const shadow = 'shadow-sm active:enabled:shadow-xs disabled:shadow-xs';
+const shadow = 'shadow-xs active:enabled:shadow-2xs disabled:shadow-2xs';
 
 export const button = cva('button', {
   defaultVariants: {
@@ -11,8 +11,7 @@ export const button = cva('button', {
   variants: {
     theme: {
       primary: [
-        'outline-none',
-        'rounded',
+        'rounded-sm',
         'focus:outline-white',
         'focus:outline',
         'focus:-outline-offset-4',

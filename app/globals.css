@@ -1,6 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-accent-grayblue: #6a7dc2;
+  --color-accent-grayblue-dark: #4e62a5;
+
+  --color-accent-purple: #7c23fa;
+  --color-accent-purple-dark: #6a1bff;
+
+  --color-gray: #9ca3af;
+  --color-gray-dark: #374151;
+  --color-gray-light: #e5e7eb;
+
+  --color-primary: #2457fa;
+  --color-primary-dark: #1d47cf;
+  --color-primary-darker: #142f8b;
+  --color-primary-light: #becdff;
+  --color-primary-lighter: #dfe7ff;
+
+  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans);
+}
 
 @layer base {
   body {
@@ -9,7 +28,7 @@
 
   textarea,
   input {
-    @apply m-0 border border-gray bg-white p-2 px-3 shadow-sm outline-none focus:outline focus:-outline-offset-1 focus:outline-primary disabled:bg-gray-100 dark:bg-black disabled:dark:bg-neutral-800;
+    @apply border-gray focus:outline-primary m-0 border bg-white p-2 px-3 shadow-xs focus:outline focus:-outline-offset-1 disabled:bg-gray-100 dark:bg-black dark:disabled:bg-neutral-800;
   }
 
   h1 {
@@ -25,15 +44,15 @@
   }
 
   table {
-    @apply w-full border-collapse border-spacing-0 border border-gray-light dark:border-gray-dark;
+    @apply border-gray-light dark:border-gray-dark w-full border-collapse border-spacing-0 border;
   }
 
   tr {
-    @apply w-full border-b border-gray-light dark:border-gray-dark;
+    @apply border-gray-light dark:border-gray-dark w-full border-b;
   }
 
   th {
-    @apply text-nowrap border-b border-gray-light bg-gray-50 px-4 py-2 text-left font-medium uppercase dark:border-gray-dark dark:bg-neutral-800;
+    @apply border-gray-light dark:border-gray-dark border-b bg-gray-50 px-4 py-2 text-left font-medium text-nowrap uppercase dark:bg-neutral-800;
   }
 
   th:not(:first-child):not(:last-child) {

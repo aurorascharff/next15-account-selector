@@ -14,12 +14,11 @@
   },
   "dependencies": {
     "@ariakit/react": "^0.4.15",
-    "@prisma/client": "^6.0.1",
-    "@tailwindcss/postcss": "^4.0.17",
-    "@types/node": "22.13.17",
-    "@types/react": "19.0.12",
-    "@types/react-dom": "19.0.4",
-    "autoprefixer": "10.4.21",
+    "@prisma/client": "^6.5.0",
+    "@tailwindcss/postcss": "^4.1.1",
+    "@types/node": "22.14.0",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.1",
     "babel-plugin-react-compiler": "^19.0.0-beta-e993439-20250328",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -31,12 +30,12 @@
     "react-dom": "^19.1.0",
     "server-only": "^0.0.1",
     "tailwind-merge": "^3.1.0",
-    "tailwindcss": "3.4.17",
+    "tailwindcss": "^4.1.1",
     "tsx": "^4.19.3",
     "typescript": "5.8.2"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.2.7",
+    "@eslint/compat": "^1.2.8",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.23.0",
     "@tailwindcss/typography": "^0.5.16",
@@ -50,6 +49,6 @@
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "prisma": "^6.0.1"
+    "prisma": "^6.5.0"
   }
 }

@@ -39,7 +39,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         </div>
         <Ariakit.SelectPopover
           gutter={8}
-          className="flex flex-col gap-2 rounded border border-gray-light bg-white shadow-lg outline-none -outline-offset-1 focus-visible:outline-2 focus-visible:outline-primary dark:border-gray-dark dark:bg-black"
+          className="border-gray-light focus-visible:outline-primary dark:border-gray-dark flex flex-col gap-2 rounded-sm border bg-white shadow-lg -outline-offset-1 focus-visible:outline-2 dark:bg-black"
         >
           <div className="flex items-start justify-between px-3 py-2 text-lg">
             <div className="flex flex-col gap-2">
@@ -49,7 +49,8 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 <span className="ml-2 text-yellow-500">{optimisticAccount?.plan === 'pro' ? '★' : ''}</span>
               </span>
             </div>
-            <Ariakit.SelectItem className="mt-2 rounded-full p-1 outline-none data-[active-item]:outline data-[active-item]:outline-primary">
+            <Ariakit.SelectItem className="data-active-item:outline-primary mt-2 cursor-pointer rounded-full p-1 data-active-item:outline">
+              <Ariakit.VisuallyHidden>Account options</Ariakit.VisuallyHidden>
               <ActionIcon width={16} height={16} />
             </Ariakit.SelectItem>
           </div>
@@ -57,7 +58,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           {accounts.map(account => {
             return (
               <Ariakit.SelectItem
-                className="mx-2 flex items-center gap-4 rounded-md px-4 py-2 data-[active-item]:bg-gray-light data-[active-item]:dark:bg-neutral-800"
+                className="data-active-item:bg-gray-light mx-2 flex items-center gap-4 rounded-md px-4 py-2 dark:data-active-item:bg-neutral-800"
                 key={account.id}
                 value={account.id}
                 onClick={() => {
@@ -88,9 +89,9 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             }}
           >
             {logoutIsPending ? (
-              <span className="italic text-gray">Logging out...</span>
+              <span className="text-gray italic">Logging out...</span>
             ) : (
-              <span className="group-data-[active-item]:underline">Log out</span>
+              <span className="group-data-active-item:underline">Log out</span>
             )}
           </Ariakit.SelectItem>
         </Ariakit.SelectPopover>
@@ -103,7 +104,7 @@ export function AccountSelectorSkeleton() {
   return (
     <div className="flex w-fit flex-col">
       <span className="mb-2 font-bold">ACCOUNT</span>
-      <button disabled className="rounded-xl border border-gray px-4 py-2 text-gray">
+      <button disabled className="border-gray text-gray rounded-xl border px-4 py-2">
         Loading...
       </button>
     </div>

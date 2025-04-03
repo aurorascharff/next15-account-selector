@@ -2,7 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { cn } from '@/utils/cn';
 
-const shadow = 'shadow-sm active:enabled:shadow-xs disabled:shadow-xs';
+const shadow = 'shadow-xs active:enabled:shadow-2xs disabled:shadow-2xs';
 
 export const selectButton = cva('selectButton', {
   defaultVariants: {
@@ -11,8 +11,7 @@ export const selectButton = cva('selectButton', {
   variants: {
     theme: {
       primary: [
-        'outline-none',
-        'rounded',
+        'rounded-sm',
         'focus:outline-white',
         'focus:outline',
         'focus:-outline-offset-4',
@@ -27,13 +26,13 @@ export const selectButton = cva('selectButton', {
         'border',
         'border-primary',
         'outline-offset-1',
-        'aria-expanded:dark:bg-black',
-        'aria-expanded:dark:text-white',
+        'dark:aria-expanded:bg-black',
+        'dark:aria-expanded:text-white',
         'aria-expanded:hover:bg-gray-light',
         'aria-expanded:focus:outline-2',
         'aria-expanded:focus:-outline-offset-1',
         'aria-expanded:focus:outline-primary',
-        'aria-expanded:dark:hover:bg-neutral-800',
+        'dark:aria-expanded:hover:bg-neutral-800',
       ],
     },
   },
