@@ -15,7 +15,11 @@ export async function isAuthenticated() {
 export async function getAccounts() {
   await slow(2000);
 
-  const accounts = await prisma.account.findMany();
+  const accounts = await prisma.account.findMany({
+    orderBy: {
+      inactive: 'asc',
+    },
+  });
 
   if (accounts.length === 0) {
     throw new Error('No accounts found, run seed script');
