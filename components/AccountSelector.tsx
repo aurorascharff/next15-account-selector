@@ -74,7 +74,9 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
               >
                 <div className="flex flex-col">
                   <div className="flex gap-2">
-                    <span>{account.name}</span>
+                    <span>
+                      {account.name} {account.inactive && '(inactive)'}{' '}
+                    </span>
                     <ProMarker plan={account.plan} />
                   </div>
                   <span className="text-sm">{account.email}</span>
