@@ -1,7 +1,7 @@
 'use client';
 
 import * as Ariakit from '@ariakit/react';
-import { useRouter } from 'next/navigation';
+
 import React, { use, useOptimistic, useTransition } from 'react';
 import { logOut, setCurrentAccount } from '@/data/actions/account';
 import Divider from './ui/Divider';
@@ -20,7 +20,6 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
   const currentAccount = use(currentAccountPromise);
   const [optimisticAccount, setOptimisticAccount] = useOptimistic(currentAccount);
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
 
   return (
     <div>
@@ -67,7 +66,6 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                   startTransition(async () => {
                     setOptimisticAccount(account);
                     await setCurrentAccount(account.id);
-                    router.push('/');
                   });
                 }}
               >
