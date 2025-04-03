@@ -110,7 +110,7 @@ export function AccountSelectorSkeleton() {
   return (
     <div className="flex w-fit flex-col">
       <span className="mb-2 font-bold">ACCOUNT</span>
-      <button disabled className="border-gray text-gray rounded-xl border px-4 py-2">
+      <button disabled className="border-gray text-gray rounded-2xl border px-4 py-2">
         Loading...
       </button>
     </div>
