@@ -35,7 +35,7 @@ function DashboardItem({ children, plan }: { children: React.ReactNode; plan?: s
     <li>
       <Link
         href="#"
-        className="group border-gray hover:bg-gray-light focus-visible:outline-primary flex w-full items-center justify-between gap-2 rounded-sm border p-4 focus-visible:outline-2 dark:border-white dark:hover:bg-neutral-800"
+        className="group hover:bg-gray-light focus-visible:outline-primary flex w-full items-center justify-between gap-2 rounded-sm border border-black p-4 focus-visible:outline-2 dark:border-white dark:hover:bg-neutral-800"
       >
         <span className="group-hover:underline">{children}</span>
         <ProMarker plan={plan} />
