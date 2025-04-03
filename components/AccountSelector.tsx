@@ -20,6 +20,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
   const currentAccount = use(currentAccountPromise);
   const [optimisticAccount, setOptimisticAccount] = useOptimistic(currentAccount);
   const [isPending, startTransition] = useTransition();
+  const [logoutIsPending, startLogoutTransition] = useTransition();
 
   return (
     <div>
@@ -79,12 +80,18 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           })}
           <Divider />
           <Ariakit.SelectItem
-            className="self-end px-2 pb-2 data-[active-item]:underline"
-            onClick={async () => {
-              await logOut();
+            className="group self-end px-2 pb-2"
+            onClick={() => {
+              startLogoutTransition(async () => {
+                await logOut();
+              });
             }}
           >
-            Log out
+            {logoutIsPending ? (
+              <span className="italic text-gray">Logging out...</span>
+            ) : (
+              <span className="group-data-[active-item]:underline">Log out</span>
+            )}
           </Ariakit.SelectItem>
         </Ariakit.SelectPopover>
       </Ariakit.SelectProvider>

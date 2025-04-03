@@ -10,6 +10,8 @@ export async function setCurrentAccount(accountId: string) {
 }
 
 export async function logOut() {
+  await slow();
+
   (await cookies()).delete('selectedAccountId');
 }
 
