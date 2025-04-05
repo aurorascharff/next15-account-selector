@@ -58,7 +58,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           {accounts.map(account => {
             return (
               <Ariakit.SelectItem
-                className="data-active-item:bg-gray-light aria-disabled:text-gray py-2dark:data-active-item:bg-neutral-800 mx-2 flex items-center justify-between gap-4 rounded-md px-4"
+                className="data-active-item:bg-gray-light aria-disabled:text-gray mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 dark:data-active-item:bg-neutral-800"
                 key={account.id}
                 value={account.id}
                 disabled={account.inactive}
@@ -79,7 +79,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                     </span>
                     <ProMarker plan={account.plan} />
                   </div>
-                  <span className="text-sm no-underline!">{account.email}</span>
+                  <span className="text-sm">{account.email}</span>
                 </div>
 
                 <Ariakit.SelectItemCheck />
