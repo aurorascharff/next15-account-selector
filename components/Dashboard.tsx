@@ -40,11 +40,11 @@ function DashboardItem({ children, plan, heading }: { children: React.ReactNode;
     <li>
       <Link
         href="#"
-        className="group hover:bg-primary-light bg-primary-lighter focus-visible:outline-primary dark:bg-neutral-light dark:hover:bg-neutral flex h-full w-full items-center justify-between gap-4 rounded-sm px-8 py-4 focus-visible:outline-2"
+        className="group hover:bg-primary-light bg-primary-lighter focus-visible:outline-primary dark:bg-neutral dark:hover:bg-neutral-light flex h-full w-full items-center justify-between gap-4 rounded-sm px-8 py-4 focus-visible:outline-2"
       >
         <div className="flex flex-grow flex-col gap-2">
           <span>
-            <span className="mr-2 font-semibold group-hover:underline">{heading}</span>
+            <span className="mr-2 font-semibold uppercase group-hover:underline">{heading}</span>
             <ProMarker plan={plan} />
           </span>
           <span className="text-sm">{children}</span>
