@@ -11,11 +11,13 @@ type Props = {
   children: React.ReactNode;
   className?: string;
   loading?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 };
 
 export default function SubmitButton({
   children,
   loading,
+  type = 'submit',
   className,
   ...otherProps
 }: Props & React.HTMLProps<HTMLButtonElement>) {
@@ -25,7 +27,7 @@ export default function SubmitButton({
   return (
     <Ariakit.Button
       aria-disabled={isSubmitting || otherProps['aria-disabled']}
-      type="submit"
+      type={type}
       className={cn(
         className,
         'bg-primary hover:bg-primary-dark aria-disabled:bg-primary-darker rounded-sm px-4 py-2 text-white shadow-md focus:outline focus:-outline-offset-4 focus:outline-white',
