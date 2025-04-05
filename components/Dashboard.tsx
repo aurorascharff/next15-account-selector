@@ -61,9 +61,11 @@ function DashboardItem({ children, plan, heading }: { children: React.ReactNode;
 
 export function DashboardSkeleton() {
   return (
-    <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 @-lg:grid">
-      <Skeleton />
-      <Skeleton />
-    </ul>
+    <div className="@container">
+      <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 @-lg:grid">
+        <Skeleton />
+        <Skeleton />
+      </ul>
+    </div>
   );
 }
