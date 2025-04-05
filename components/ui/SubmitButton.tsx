@@ -1,7 +1,5 @@
 'use client';
 
-import * as Ariakit from '@ariakit/react';
-
 import React from 'react';
 import { useFormStatus } from 'react-dom';
 import { cn } from '@/utils/cn';
@@ -26,13 +24,12 @@ export default function SubmitButton({
   const isSubmitting = pending || loading;
 
   return (
-    <Ariakit.Button
+    <button
       disabled={isSubmitting || disabled}
-      accessibleWhenDisabled
       type={type}
       className={cn(
         className,
-        'bg-primary hover:bg-primary-dark aria-disabled:bg-primary-darker rounded-sm px-4 py-2 text-white shadow-md focus:-outline-offset-4 focus:aria-enabled:outline focus:aria-enabled:outline-white',
+        'bg-primary hover:bg-primary-dark disabled:bg-primary-darker rounded-sm px-4 py-2 text-white shadow-md focus:-outline-offset-4 enabled:focus:outline enabled:focus:outline-white',
       )}
       {...otherProps}
     >
@@ -46,6 +43,6 @@ export default function SubmitButton({
       ) : (
         children
       )}
-    </Ariakit.Button>
+    </button>
   );
 }
