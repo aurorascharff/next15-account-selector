@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 import { getCurrentAccount } from '@/data/services/account';
-import { ProMarker } from './ProMarker';
 import Skeleton from './ui/Skeleton';
+import { StarMarker } from './ui/StarMarker';
 import { ChevronIcon } from './ui/icons/ChevronIcon';
 
 export default async function Dashboard() {
@@ -49,7 +49,7 @@ function DashboardItem({ children, plan, heading }: { children: React.ReactNode;
         <div className="flex flex-grow flex-col gap-2">
           <span>
             <span className="mr-2 font-semibold uppercase group-hover:underline">{heading}</span>
-            <ProMarker plan={plan} />
+            {plan === 'pro' && <StarMarker />}
           </span>
           <span className="text-sm">{children}</span>
         </div>

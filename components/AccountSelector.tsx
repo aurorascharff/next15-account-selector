@@ -4,10 +4,10 @@ import * as Ariakit from '@ariakit/react';
 
 import React, { use, useOptimistic, useTransition } from 'react';
 import { logOut, setCurrentAccount } from '@/data/actions/account';
-import { ProMarker } from './ProMarker';
 import Divider from './ui/Divider';
 import SelectButton from './ui/SelectButton';
 import Spinner from './ui/Spinner';
+import { StarMarker } from './ui/StarMarker';
 import { ActionIcon } from './ui/icons/ActionIcon';
 import type { Account } from '@prisma/client';
 
@@ -47,7 +47,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
               <span className="font-semibold">{optimisticAccount?.name}</span>
               <span className="flex gap-2 text-sm capitalize italic">
                 {optimisticAccount?.plan} plan ({optimisticAccount?.type})
-                <ProMarker plan={optimisticAccount?.plan} />
+                {optimisticAccount?.plan === 'pro' && <StarMarker />}
               </span>
             </div>
             <Ariakit.SelectItem className="data-active-item:outline-primary mt-2 cursor-pointer rounded-full p-1 data-active-item:outline">
@@ -78,7 +78,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                     <span className="font-semibold">
                       {account.name} {account.inactive && '(inactive)'}{' '}
                     </span>
-                    <ProMarker plan={account.plan} />
+                    {account?.plan === 'pro' && <StarMarker />}
                   </div>
                   <span className="text-sm">{account.email}</span>
                 </div>
