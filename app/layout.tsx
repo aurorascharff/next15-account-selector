@@ -19,7 +19,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <body className={cn(GeistSans.className, 'flex h-[100dvh] grow flex-col p-4 sm:p-10 md:px-40 xl:px-96')}>
+      <body className={cn(GeistSans.className, 'flex grow flex-col p-4 sm:p-10 md:px-40 xl:px-96')}>
         {isAuth ? (
           children
         ) : (
