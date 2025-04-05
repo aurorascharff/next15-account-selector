@@ -89,18 +89,15 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           })}
           <Divider />
           <Ariakit.SelectItem
-            className="group self-end px-2 pb-2"
+            aria-disabled={logoutIsPending}
+            className="aria-disabled:text-gray self-end px-2 pb-2 aria-disabled:italic not-aria-disabled:data-active-item:underline"
             onClick={() => {
               startLogoutTransition(async () => {
                 await logOut();
               });
             }}
           >
-            {logoutIsPending ? (
-              <span className="text-gray italic">Logging out...</span>
-            ) : (
-              <span className="group-data-active-item:underline">Log out</span>
-            )}
+            {logoutIsPending ? 'Logging out...' : 'Log out'}
           </Ariakit.SelectItem>
         </Ariakit.SelectPopover>
       </Ariakit.SelectProvider>

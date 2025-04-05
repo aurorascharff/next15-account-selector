@@ -1,11 +1,11 @@
 'use client';
 
+import * as Ariakit from '@ariakit/react';
+
 import React from 'react';
 import { useFormStatus } from 'react-dom';
-import Button from './Button';
+import { cn } from '@/utils/cn';
 import { SpinnerIcon } from './icons/SpinnerIcon';
-import type { button } from './Button';
-import type { VariantProps } from 'class-variance-authority';
 
 type Props = {
   children: React.ReactNode;
@@ -16,16 +16,22 @@ type Props = {
 export default function SubmitButton({
   children,
   loading,
-  disabled,
   className,
-  theme,
   ...otherProps
-}: Props & React.HTMLProps<HTMLButtonElement> & VariantProps<typeof button>) {
+}: Props & React.HTMLProps<HTMLButtonElement>) {
   const { pending } = useFormStatus();
   const isSubmitting = pending || loading;
 
   return (
-    <Button aria-disabled={isSubmitting || disabled} theme={theme} {...otherProps} type="submit" className={className}>
+    <Ariakit.Button
+      aria-disabled={isSubmitting || otherProps['aria-disabled']}
+      type="submit"
+      className={cn(
+        className,
+        'bg-primary hover:bg-primary-dark aria-disabled:bg-primary-darker rounded-sm px-4 py-2 text-white shadow-md focus:outline focus:-outline-offset-4 focus:outline-white',
+      )}
+      {...otherProps}
+    >
       {isSubmitting ? (
         <div className="flex items-center justify-center gap-2">
           {children}
@@ -36,6 +42,6 @@ export default function SubmitButton({
       ) : (
         children
       )}
-    </Button>
+    </Ariakit.Button>
   );
 }
