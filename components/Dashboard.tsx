@@ -40,7 +40,7 @@ function DashboardItem({ children, plan, heading }: { children: React.ReactNode;
     <li>
       <Link
         href="#"
-        className="group hover:bg-primary-light bg-primary-lighter focus-visible:outline-primary flex h-full w-full items-center justify-between gap-4 rounded-sm px-8 py-4 focus-visible:outline-2 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+        className="group hover:bg-primary-light bg-primary-lighter focus-visible:outline-primary dark:bg-neutral-light dark:hover:bg-neutral flex h-full w-full items-center justify-between gap-4 rounded-sm px-8 py-4 focus-visible:outline-2"
       >
         <div className="flex flex-grow flex-col gap-2">
           <span>

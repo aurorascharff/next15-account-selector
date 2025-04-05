@@ -1,15 +1,11 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-accent-grayblue: #6a7dc2;
-  --color-accent-grayblue-dark: #4e62a5;
-
-  --color-accent-purple: #7c23fa;
-  --color-accent-purple-dark: #6a1bff;
-
   --color-gray: #9ca3af;
   --color-gray-dark: #374151;
   --color-gray-light: #e5e7eb;
+  --color-neutral: #374151;
+  --color-neutral-light: #e5e7eb;
 
   --color-primary: #2457fa;
   --color-primary-dark: #1d47cf;
@@ -26,11 +22,6 @@
     @apply bg-white font-sans text-black dark:bg-black dark:text-white;
   }
 
-  textarea,
-  input {
-    @apply border-gray focus:outline-primary m-0 border bg-white p-2 px-3 shadow-xs focus:outline focus:-outline-offset-1 disabled:bg-gray-100 dark:bg-black dark:disabled:bg-neutral-800;
-  }
-
   h1 {
     @apply font-sans text-4xl leading-[60px];
   }
@@ -41,26 +32,6 @@
 
   h3 {
     @apply text-xl;
-  }
-
-  table {
-    @apply border-gray-light dark:border-gray-dark w-full border-collapse border-spacing-0 border;
-  }
-
-  tr {
-    @apply border-gray-light dark:border-gray-dark w-full border-b;
-  }
-
-  th {
-    @apply border-gray-light dark:border-gray-dark border-b bg-gray-50 px-4 py-2 text-left font-medium text-nowrap uppercase dark:bg-neutral-800;
-  }
-
-  th:not(:first-child):not(:last-child) {
-    @apply border-l;
-  }
-
-  td {
-    @apply px-4 py-4 text-left;
   }
 }
 
