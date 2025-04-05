@@ -3,6 +3,7 @@
 import * as Ariakit from '@ariakit/react';
 
 import React, { use, useOptimistic, useTransition } from 'react';
+import toast from 'react-hot-toast';
 import { logOut, setCurrentAccount } from '@/data/actions/account';
 import Divider from './ui/Divider';
 import SelectButton from './ui/SelectButton';
@@ -69,7 +70,10 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                   }
                   startTransition(async () => {
                     setOptimisticAccount(account);
-                    await setCurrentAccount(account.id);
+                    const response = await setCurrentAccount(account.id);
+                    if (response?.error) {
+                      toast.error(response.error);
+                    }
                   });
                 }}
               >
@@ -82,7 +86,6 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                   </div>
                   <span className="text-sm">{account.email}</span>
                 </div>
-
                 <Ariakit.SelectItemCheck />
               </Ariakit.SelectItem>
             );

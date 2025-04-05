@@ -18,10 +18,10 @@ const ACCOUNTS = [
     type: 'business',
   },
   {
-    email: 'jane.smith@hotmail.com',
+    email: 'janesmith85@hotmail.com',
     id: 'd71ab200-18ed-4384-a4a7-a907bf169c9f',
     inactive: true,
-    name: 'Jane Smith',
+    name: 'Jane S.',
     plan: 'free',
     type: 'personal',
   },
