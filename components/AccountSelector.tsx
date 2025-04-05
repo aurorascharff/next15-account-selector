@@ -29,6 +29,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         <Ariakit.SelectLabel className="mb-2 font-bold">ACCOUNT</Ariakit.SelectLabel>
         <div className="flex items-center gap-4">
           <Ariakit.Select
+            aria-busy={isPending}
             className="group flex items-center gap-2 aria-expanded:bg-white aria-expanded:text-black"
             render={<SelectButton />}
           >

@@ -20,13 +20,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className={cn(GeistSans.className, 'mb-12 flex grow flex-col p-4 sm:p-10 md:px-40 xl:px-96')}>
-        {isAuth ? (
-          children
-        ) : (
-          <form className="place-self-center pt-20" action={logIn.bind(null, 'jane.smith@personal.com')}>
-            <SubmitButton>Log in as Jane Smith</SubmitButton>
-          </form>
-        )}
+        <main>
+          {isAuth ? (
+            children
+          ) : (
+            <form className="place-self-center pt-20" action={logIn.bind(null, 'jane.smith@personal.com')}>
+              <SubmitButton>Log in as Jane Smith</SubmitButton>
+            </form>
+          )}
+        </main>
       </body>
     </html>
   );

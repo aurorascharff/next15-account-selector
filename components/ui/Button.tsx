@@ -21,6 +21,7 @@ export const button = cva('button', {
         'text-white',
         'hover:enabled:bg-primary-dark',
         'disabled:bg-primary-darker',
+        'aria-disabled:bg-primary-darker',
         shadow,
       ],
     },

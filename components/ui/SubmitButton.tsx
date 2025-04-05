@@ -25,7 +25,7 @@ export default function SubmitButton({
   const isSubmitting = pending || loading;
 
   return (
-    <Button theme={theme} {...otherProps} disabled={isSubmitting || disabled} type="submit" className={className}>
+    <Button aria-disabled={isSubmitting || disabled} theme={theme} {...otherProps} type="submit" className={className}>
       {isSubmitting ? (
         <div className="flex items-center justify-center gap-2">
           {children}
