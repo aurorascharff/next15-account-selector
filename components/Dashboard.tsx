@@ -50,7 +50,7 @@ function DashboardItem({ children, plan, heading }: { children: React.ReactNode;
     <li>
       <Link
         href="#"
-        className="group hover:bg-gray-light focus-visible:outline-primary flex w-full items-center justify-between gap-2 rounded-sm border border-black px-8 py-4 focus-visible:outline-2 dark:border-white dark:hover:bg-neutral-800"
+        className="group hover:bg-primary-light bg-primary-lighter focus-visible:outline-primary flex w-full items-center justify-between gap-2 rounded-sm px-8 py-4 focus-visible:outline-2 dark:bg-neutral-900 dark:hover:bg-neutral-800"
       >
         <div className="flex flex-col gap-2">
           <span>
@@ -59,7 +59,7 @@ function DashboardItem({ children, plan, heading }: { children: React.ReactNode;
           </span>
           <span className="text-sm">{children}</span>
         </div>
-        <ChevronIcon width={16} height={16} className="-rotate-90" />
+        <ChevronIcon width={16} height={16} className="-rotate-90 text-black dark:text-white" />
       </Link>
     </li>
   );
