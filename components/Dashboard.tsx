@@ -9,29 +9,33 @@ export default async function Dashboard() {
   const account = await getCurrentAccount();
 
   return (
-    <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 @-lg:grid">
-      <DashboardItem heading="Create New Project">
-        Start a new project and organize your tasks efficiently.
-      </DashboardItem>
-      <DashboardItem heading="View Task Board">
-        Keep track of your tasks and monitor progress in one place.
-      </DashboardItem>
-      <DashboardItem heading="Manage Team Members">Add, remove, or update team members and their roles.</DashboardItem>
-      {account?.plan === 'pro' ? (
-        <>
-          <DashboardItem heading="Access Advanced Project Insights" plan="pro">
-            Gain deeper insights into your projects with advanced analytics.
-          </DashboardItem>
-          <DashboardItem heading="Set Custom Workflows" plan="pro">
-            Customize workflows to suit your team&apos;s unique needs.
-          </DashboardItem>
-        </>
-      ) : (
-        <DashboardItem heading="Upgrade to Pro" plan="pro">
-          Unlock advanced features and tools for better project management.
+    <div className="@container">
+      <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 @-lg:grid">
+        <DashboardItem heading="Create New Project">
+          Start a new project and organize your tasks efficiently.
         </DashboardItem>
-      )}
-    </ul>
+        <DashboardItem heading="View Task Board">
+          Keep track of your tasks and monitor progress in one place.
+        </DashboardItem>
+        <DashboardItem heading="Manage Team Members">
+          Add, remove, or update team members and their roles.
+        </DashboardItem>
+        {account?.plan === 'pro' ? (
+          <>
+            <DashboardItem heading="Access Advanced Project Insights" plan="pro">
+              Gain deeper insights into your projects with advanced analytics.
+            </DashboardItem>
+            <DashboardItem heading="Set Custom Workflows" plan="pro">
+              Customize workflows to suit your team&apos;s unique needs.
+            </DashboardItem>
+          </>
+        ) : (
+          <DashboardItem heading="Upgrade to Pro" plan="pro">
+            Unlock advanced features and tools for better project management.
+          </DashboardItem>
+        )}
+      </ul>
+    </div>
   );
 }
 
