@@ -79,7 +79,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                     </span>
                     <ProMarker plan={account.plan} />
                   </div>
-                  <span className="text-sm">{account.email}</span>
+                  <span className="text-sm no-underline!">{account.email}</span>
                 </div>
 
                 <Ariakit.SelectItemCheck />
