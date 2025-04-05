@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import AccountSelector, { AccountSelectorSkeleton } from '@/components/AccountSelector';
 import Dashboard, { DashboardSkeleton } from '@/components/Dashboard';
+import WelcomeMessage, { WelcomeMessageSkeleton } from '@/components/WelcomeMessage';
 import Divider from '@/components/ui/Divider';
 import { getAccounts, getCurrentAccount } from '@/data/services/account';
 
@@ -16,9 +17,19 @@ export default async function RootPage() {
         </Suspense>
       </div>
       <Divider theme="primary" />
-      <Suspense fallback={<DashboardSkeleton />}>
-        <Dashboard />
-      </Suspense>
+      <div className="flex flex-col gap-4 px-4">
+        <div className="mt-4 flex flex-col gap-2">
+          <Suspense fallback={<WelcomeMessageSkeleton />}>
+            <WelcomeMessage />
+          </Suspense>
+        </div>
+        <div className="@container flex flex-col gap-4">
+          <h2 className="text-base">What would you like to manage today?</h2>
+          <Suspense fallback={<DashboardSkeleton />}>
+            <Dashboard />
+          </Suspense>
+        </div>
+      </div>
     </div>
   );
 }
