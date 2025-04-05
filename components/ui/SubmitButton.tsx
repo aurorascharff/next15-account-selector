@@ -19,6 +19,7 @@ export default function SubmitButton({
   loading,
   type = 'submit',
   className,
+  disabled,
   ...otherProps
 }: Props & React.HTMLProps<HTMLButtonElement>) {
   const { pending } = useFormStatus();
@@ -26,11 +27,12 @@ export default function SubmitButton({
 
   return (
     <Ariakit.Button
-      aria-disabled={isSubmitting || otherProps['aria-disabled']}
+      disabled={isSubmitting || disabled}
+      accessibleWhenDisabled
       type={type}
       className={cn(
         className,
-        'bg-primary hover:bg-primary-dark aria-disabled:bg-primary-darker rounded-sm px-4 py-2 text-white shadow-md focus:outline focus:-outline-offset-4 focus:outline-white',
+        'bg-primary hover:bg-primary-dark aria-disabled:bg-primary-darker rounded-sm px-4 py-2 text-white shadow-md focus:-outline-offset-4 focus:aria-enabled:outline focus:aria-enabled:outline-white',
       )}
       {...otherProps}
     >
