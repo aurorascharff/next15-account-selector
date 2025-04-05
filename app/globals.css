@@ -23,7 +23,7 @@
   }
 
   h1 {
-    @apply font-sans text-4xl leading-[60px];
+    @apply font-sans text-4xl;
   }
 
   h2 {
