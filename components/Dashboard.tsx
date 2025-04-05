@@ -13,9 +13,9 @@ export default async function Dashboard() {
       <div className="mt-4 flex flex-col gap-2">
         <h1 className="text-3xl"> Welcome, {account?.name}!</h1>
       </div>
-      <div className="flex flex-col gap-4">
+      <div className="@container flex flex-col gap-4">
         <h2 className="text-base">What would you like to manage today?</h2>
-        <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 sm:grid">
+        <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 @-lg:grid">
           <DashboardItem heading="Create New Project">
             Start a new project and organize your tasks efficiently.
           </DashboardItem>
@@ -50,16 +50,16 @@ function DashboardItem({ children, plan, heading }: { children: React.ReactNode;
     <li>
       <Link
         href="#"
-        className="group hover:bg-primary-light bg-primary-lighter focus-visible:outline-primary flex w-full items-center justify-between gap-2 rounded-sm px-8 py-4 focus-visible:outline-2 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+        className="group hover:bg-primary-light bg-primary-lighter focus-visible:outline-primary flex h-full w-full items-center justify-between gap-4 rounded-sm px-8 py-4 focus-visible:outline-2 dark:bg-neutral-900 dark:hover:bg-neutral-800"
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-grow flex-col gap-2">
           <span>
             <span className="mr-2 font-semibold group-hover:underline">{heading}</span>
             <ProMarker plan={plan} />
           </span>
           <span className="text-sm">{children}</span>
         </div>
-        <ChevronIcon width={16} height={16} className="-rotate-90 text-black dark:text-white" />
+        <ChevronIcon width={16} height={16} className="flex-shrink-0 -rotate-90 text-black dark:text-white" />
       </Link>
     </li>
   );
