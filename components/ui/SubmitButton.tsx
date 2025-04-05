@@ -30,7 +30,7 @@ export default function SubmitButton({
       type={type}
       className={cn(
         className,
-        'bg-primary hover:bg-primary-dark aria-disabled:bg-primary-darker rounded-sm px-4 py-2 text-white uppercase shadow-md focus:outline focus:-outline-offset-4 focus:outline-white',
+        'bg-primary hover:bg-primary-dark aria-disabled:bg-primary-darker rounded-sm px-4 py-2 text-white shadow-md focus:outline focus:-outline-offset-4 focus:outline-white',
       )}
       {...otherProps}
     >
