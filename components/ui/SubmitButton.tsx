@@ -37,7 +37,7 @@ export default function SubmitButton({
         <div className="flex items-center justify-center gap-2">
           {children}
           <div className="h-fit w-fit animate-spin">
-            <SpinnerIcon width={16} height={16} className="text-white" />
+            <SpinnerIcon aria-hidden="true" width={16} height={16} className="text-white" />
           </div>
         </div>
       ) : (
