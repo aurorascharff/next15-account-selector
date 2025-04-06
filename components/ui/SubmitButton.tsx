@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useFormStatus } from 'react-dom';
+
 import { cn } from '@/utils/cn';
 import { SpinnerIcon } from './icons/SpinnerIcon';
 
@@ -20,8 +20,7 @@ export default function SubmitButton({
   disabled,
   ...otherProps
 }: Props & React.HTMLProps<HTMLButtonElement>) {
-  const { pending } = useFormStatus();
-  const isSubmitting = pending || loading;
+  const isSubmitting = loading;
 
   return (
     <button

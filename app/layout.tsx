@@ -3,7 +3,6 @@ import './globals.css';
 import { Geist } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import SubmitButton from '@/components/ui/SubmitButton';
-import { logIn } from '@/data/actions/account';
 import { isAuthenticated } from '@/data/services/account';
 import { cn } from '@/utils/cn';
 import type { Metadata } from 'next';
@@ -26,9 +25,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {isAuth ? (
             children
           ) : (
-            <form className="place-self-center pt-20" action={logIn.bind(null, 'jane.smith@personal.com')}>
+            <div className="place-self-center pt-20">
               <SubmitButton>Log in as Jane Smith</SubmitButton>
-            </form>
+            </div>
           )}
         </main>
       </body>
