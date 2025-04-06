@@ -8,6 +8,7 @@ import Divider from './ui/Divider';
 import Spinner from './ui/Spinner';
 import { StarMarker } from './ui/StarMarker';
 import { ActionIcon } from './ui/icons/ActionIcon';
+import { CheckmarkIcon } from './ui/icons/CheckmarkIcon';
 import { ChevronIcon } from './ui/icons/ChevronIcon';
 import type { Account } from '@prisma/client';
 
@@ -100,6 +101,12 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                   </div>
                   <span className="text-sm">{account.email}</span>
                 </div>
+                {account.id === currentAccount?.id && (
+                  <span>
+                    <span className="sr-only">Active account</span>
+                    <CheckmarkIcon aria-hidden="true" width={20} height={20} />
+                  </span>
+                )}
               </button>
             );
           })}
