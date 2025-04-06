@@ -43,7 +43,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             aria-hidden="true"
             width={10}
             height={10}
-            className={cn('transition-transform', expanded && 'rotate-180')}
+            className={cn('ml-1 transition-transform', expanded && 'rotate-180')}
           />
         </button>
         {isPending && <Spinner />}
