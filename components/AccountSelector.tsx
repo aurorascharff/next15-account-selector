@@ -70,6 +70,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 key={account.id}
                 className="hover:bg-gray-light disabled:text-gray dark:hover:bg-neutral focus-visible:bg-primary dark:focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 focus-visible:text-white"
                 onClick={async () => {
+                  setExpanded(false);
                   if (currentAccount?.id === account.id) {
                     return;
                   }

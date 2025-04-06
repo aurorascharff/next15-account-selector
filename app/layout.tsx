@@ -2,6 +2,7 @@ import './globals.css';
 
 import { Geist } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+import KeyPressed from '@/components/KeyPressed';
 import SubmitButton from '@/components/ui/SubmitButton';
 import { isAuthenticated } from '@/data/services/auth';
 import { cn } from '@/utils/cn';
@@ -30,6 +31,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           )}
         </main>
+        <KeyPressed />
       </body>
     </html>
   );
