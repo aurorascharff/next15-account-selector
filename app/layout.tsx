@@ -3,7 +3,7 @@ import './globals.css';
 import { Geist } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import SubmitButton from '@/components/ui/SubmitButton';
-import { isAuthenticated } from '@/data/services/account';
+import { isAuthenticated } from '@/data/services/auth';
 import { cn } from '@/utils/cn';
 import type { Metadata } from 'next';
 
