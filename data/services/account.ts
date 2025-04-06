@@ -1,16 +1,10 @@
+import 'server-only';
+
 import { cookies } from 'next/headers';
 import { unauthorized } from 'next/navigation';
 import { cache } from 'react';
 import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
-
-export async function isAuthenticated() {
-  const selectedAccountId = (await cookies()).get('selectedAccountId')?.value;
-  if (!selectedAccountId) {
-    return false;
-  }
-  return true;
-}
 
 export async function getAccounts() {
   await slow(2000);
