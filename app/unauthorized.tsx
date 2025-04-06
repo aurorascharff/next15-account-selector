@@ -1,5 +1,5 @@
 import React from 'react';
-import { logOut } from '@/data/actions/account';
+import { logOut } from '@/data/actions/auth';
 
 export default function Unauthorized() {
   return (

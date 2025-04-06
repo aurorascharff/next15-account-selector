@@ -4,7 +4,8 @@ import * as Ariakit from '@ariakit/react';
 
 import React, { use, useOptimistic, useTransition } from 'react';
 import toast from 'react-hot-toast';
-import { logOut, setCurrentAccount } from '@/data/actions/account';
+import { setCurrentAccount } from '@/data/actions/account';
+import { logOut } from '@/data/actions/auth';
 import Divider from './ui/Divider';
 import SelectButton from './ui/SelectButton';
 import Spinner from './ui/Spinner';
@@ -29,11 +30,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
       <Ariakit.SelectProvider value={optimisticAccount?.id}>
         <Ariakit.SelectLabel className="mb-2 font-bold">ACCOUNT</Ariakit.SelectLabel>
         <div className="flex items-center gap-4">
-          <Ariakit.Select
-            aria-busy={isPending}
-            className="group flex items-center gap-2 aria-expanded:bg-white aria-expanded:text-black"
-            render={<SelectButton />}
-          >
+          <Ariakit.Select aria-busy={isPending} className="group flex items-center gap-2" render={<SelectButton />}>
             {optimisticAccount?.name}
             <Ariakit.SelectArrow className="transition-transform group-aria-expanded:rotate-180" />
           </Ariakit.Select>
@@ -41,7 +38,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         </div>
         <Ariakit.SelectPopover
           gutter={8}
-          className="border-gray-light focus-visible:outline-primary dark:border-gray-dark flex min-w-[257px] flex-col gap-2 rounded-sm border bg-white shadow-lg -outline-offset-1 focus-visible:outline-2 dark:bg-black"
+          className="border-gray-light focus-visible:outline-primary dark:border-gray-dark flex w-[257px] flex-col gap-2 rounded-sm border bg-white shadow-lg -outline-offset-1 focus-visible:outline-2 dark:bg-black"
         >
           <div className="flex items-start justify-between px-3 py-2 text-lg">
             <div className="flex flex-col gap-2">
