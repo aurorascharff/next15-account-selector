@@ -8,6 +8,7 @@ import Divider from './ui/Divider';
 import Spinner from './ui/Spinner';
 import { StarMarker } from './ui/StarMarker';
 import { ActionIcon } from './ui/icons/ActionIcon';
+import { ChevronIcon } from './ui/icons/ChevronIcon';
 import type { Account } from '@prisma/client';
 
 type Props = {
@@ -38,6 +39,12 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           )}
         >
           {currentAccount?.name}
+          <ChevronIcon
+            aria-hidden="true"
+            width={10}
+            height={10}
+            className={cn('transition-transform', expanded && 'rotate-180')}
+          />
         </button>
         {isPending && <Spinner />}
       </div>
