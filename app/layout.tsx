@@ -1,8 +1,8 @@
 import './globals.css';
 
 import { Geist } from 'next/font/google';
-import { Toaster } from 'react-hot-toast';
 import KeyPressed from '@/components/KeyPressed';
+import { Toaster } from '@/components/toast/Toaster';
 import SubmitButton from '@/components/ui/SubmitButton';
 import { logIn } from '@/data/actions/auth';
 import { isAuthenticated } from '@/data/services/auth';
@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className={cn(GeistSans.className, 'mb-12 flex grow flex-col p-4 sm:p-10 md:px-40 xl:px-96')}>
         <main>
-          <Toaster position="top-right" />
+          <Toaster />
           {isAuth ? (
             children
           ) : (
