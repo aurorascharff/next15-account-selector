@@ -88,6 +88,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                     toast.error(body.error);
                     setCurrentAccount(previousAccount);
                   } else {
+                    toast.success('Account changed successfully!');
                     router.refresh();
                   }
                 }}
