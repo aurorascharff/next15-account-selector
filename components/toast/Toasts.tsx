@@ -1,20 +1,8 @@
 'use client';
 
-import { useOptimistic } from 'react';
+import { startTransition, useEffect, useOptimistic, useState } from 'react';
+import { Toaster as SonnerToaster, toast as sonnerToast } from 'sonner';
 import { dismissToast } from '@/data/actions/toast';
-import { cn } from '@/utils/cn';
-import { CloseIcon } from '../ui/icons/CloseIcon';
-
-const background = {
-  error: 'bg-red-500',
-  info: 'bg-yellow-400',
-  success: 'bg-green-500',
-};
-const text = {
-  error: 'text-white outline-white',
-  info: 'text-black outline-black',
-  success: 'text-white outline-white',
-};
 
 type Toast = {
   id: string;
@@ -28,40 +16,50 @@ export function Toasts({ toasts }: { toasts: Toast[] }) {
       return toast.id !== id;
     });
   });
+  const [sentToSonner, setSentToSonner] = useState<string[]>([]);
 
-  return (
-    <div className="fixed top-8 z-50 mx-4 flex w-[calc(100%-64px)] flex-col gap-4 sm:right-10 sm:mx-0 sm:w-fit sm:max-w-[700px]">
-      {optimisticToasts.map(toast => {
-        const toastBackground = background[toast.type];
-        const toastText = text[toast.type];
+  const localToasts = optimisticToasts.map(toast => {
+    return {
+      ...toast,
+      dismiss: async () => {
+        return startTransition(async () => {
+          dismissToastOptimistic(toast.id);
+          await dismissToast(toast.id);
+        });
+      },
+    };
+  });
 
-        return (
-          <div
-            role="alert"
-            aria-live="assertive"
-            key={toast.id}
-            className={cn(
-              toastBackground,
-              toastText,
-              'flex items-center justify-between gap-4 rounded-lg px-4 py-2 text-sm shadow-md',
-            )}
-          >
-            <span className="sr-only">{'Toast message ' + toast.type}</span>
-            <p>{toast.message}</p>
-            <form
-              action={async () => {
-                dismissToastOptimistic(toast.id);
-                await dismissToast(toast.id);
-              }}
-            >
-              <button className="rounded-full p-1 hover:outline" type="submit">
-                <span className="sr-only">Close</span>
-                <CloseIcon width={12} height={12} aria-hidden="true" className={toastText} />
-              </button>
-            </form>
-          </div>
-        );
-      })}
-    </div>
-  );
+  useEffect(() => {
+    localToasts
+      .filter(t => {
+        return !sentToSonner.includes(t.id);
+      })
+      .forEach(t => {
+        const toastOptions = {
+          id: t.id,
+          onAutoClose: () => {
+            return t.dismiss();
+          },
+          onDismiss: () => {
+            return t.dismiss();
+          },
+        };
+
+        setSentToSonner(prev => {
+          return [...prev, t.id];
+        });
+        if (t.type === 'error') {
+          return sonnerToast.error(t.message, toastOptions);
+        }
+        if (t.type === 'info') {
+          return sonnerToast(t.message, toastOptions);
+        }
+        if (t.type === 'success') {
+          return sonnerToast.success(t.message, toastOptions);
+        }
+      });
+  }, [localToasts, sentToSonner]);
+
+  return <SonnerToaster position="top-right" />;
 }

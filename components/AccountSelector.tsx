@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { use, useState } from 'react';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { cn } from '@/utils/cn';
 import Divider from './ui/Divider';
 import Spinner from './ui/Spinner';

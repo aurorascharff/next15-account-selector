@@ -1,7 +1,7 @@
 import './globals.css';
 
 import { Geist } from 'next/font/google';
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'sonner';
 import KeyPressed from '@/components/KeyPressed';
 import SubmitButton from '@/components/ui/SubmitButton';
 import { isAuthenticated } from '@/data/services/auth';
