@@ -22,17 +22,12 @@ export async function getAccounts() {
   return accounts;
 }
 
-export const getCurrentAccount = cache(async () => {
+export const getAccount = cache(async (accountId: string) => {
   await slow(1000);
-
-  const selectedAccountId = (await cookies()).get('selectedAccountId')?.value;
-  if (!selectedAccountId) {
-    unauthorized();
-  }
 
   const account = await prisma.account.findUnique({
     where: {
-      id: selectedAccountId,
+      id: accountId,
     },
   });
 
@@ -40,4 +35,13 @@ export const getCurrentAccount = cache(async () => {
     unauthorized();
   }
   return account;
+});
+
+export const getCurrentAccount = cache(async () => {
+  const selectedAccountId = (await cookies()).get('selectedAccountId')?.value;
+  if (!selectedAccountId) {
+    unauthorized();
+  }
+
+  return getAccount(selectedAccountId);
 });
