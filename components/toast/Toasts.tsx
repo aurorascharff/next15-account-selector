@@ -1,6 +1,6 @@
 'use client';
 
-import { startTransition, useEffect, useOptimistic } from 'react';
+import { useOptimistic } from 'react';
 import { dismissToast } from '@/data/actions/toast';
 import { cn } from '@/utils/cn';
 import { CloseIcon } from '../ui/icons/CloseIcon';
@@ -28,25 +28,6 @@ export function Toasts({ toasts }: { toasts: Toast[] }) {
       return toast.id !== id;
     });
   });
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      optimisticToasts
-        .filter(toast => {
-          return toast.type === 'success';
-        })
-        .forEach(toast => {
-          startTransition(async () => {
-            dismissToastOptimistic(toast.id);
-            await dismissToast(toast.id);
-          });
-        });
-    }, 3000);
-
-    return () => {
-      return clearTimeout(timer);
-    };
-  }, [optimisticToasts, dismissToastOptimistic]);
 
   return (
     <div className="fixed top-8 z-50 mx-4 flex w-[calc(100%-64px)] flex-col gap-4 sm:right-10 sm:mx-0 sm:w-fit sm:max-w-[700px]">
