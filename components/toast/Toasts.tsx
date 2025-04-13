@@ -1,33 +1,20 @@
 'use client';
 
-import { startTransition, useEffect, useOptimistic, useState } from 'react';
+import { useEffect, useOptimistic, useState } from 'react';
 import { Toaster as SonnerToaster, toast as sonnerToast } from 'sonner';
-import { dismissToast } from '@/data/actions/toast';
 import type { Toast as ToastType } from '@/types/toast';
 import { Toast } from './Toast';
 
 export function Toasts({ toasts }: { toasts: ToastType[] }) {
-  const [optimisticToasts, dismissToastOptimistic] = useOptimistic(toasts, (current, id) => {
+  const [optimisticToasts, dismissToastOptimistic] = useOptimistic(toasts, (current: ToastType[], id: string) => {
     return current.filter(toast => {
       return toast.id !== id;
     });
   });
   const [sentToSonner, setSentToSonner] = useState<string[]>([]);
 
-  const localToasts = optimisticToasts.map(toast => {
-    return {
-      ...toast,
-      dismiss: async () => {
-        return startTransition(async () => {
-          dismissToastOptimistic(toast.id);
-          await dismissToast(toast.id);
-        });
-      },
-    };
-  });
-
   useEffect(() => {
-    localToasts
+    optimisticToasts
       .filter(toast => {
         return !sentToSonner.includes(toast.id);
       })
@@ -35,22 +22,11 @@ export function Toasts({ toasts }: { toasts: ToastType[] }) {
         setSentToSonner(prev => {
           return [...prev, toast.id];
         });
-        return sonnerToast.custom(
-          id => {
-            return <Toast id={id} type={toast.type} message={toast.message} />;
-          },
-          {
-            id: toast.id,
-            onAutoClose: () => {
-              return toast.dismiss();
-            },
-            onDismiss: () => {
-              return toast.dismiss();
-            },
-          },
-        );
+        return sonnerToast.custom(id => {
+          return <Toast dismiss={dismissToastOptimistic} id={id as string} type={toast.type} message={toast.message} />;
+        });
       });
-  }, [localToasts, sentToSonner]);
+  }, [dismissToastOptimistic, optimisticToasts, sentToSonner]);
 
   return <SonnerToaster position="top-right" />;
 }

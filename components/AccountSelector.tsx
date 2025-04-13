@@ -29,7 +29,16 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
 
   const toast = (message: string, type: ToastType) => {
     sonnerToast.custom(id => {
-      return <Toast id={id} type={type} message={message} />;
+      return (
+        <Toast
+          dismiss={() => {
+            sonnerToast.dismiss(id);
+          }}
+          id={id as string}
+          type={type}
+          message={message}
+        />
+      );
     });
   };
 
