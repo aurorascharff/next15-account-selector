@@ -19,10 +19,9 @@ type Props = {
   message: string;
   id: string;
   type: ToastType;
-  dismiss: (id: string) => void;
 };
 
-export function Toast({ message, id, type, dismiss }: Props) {
+export function Toast({ message, id, type }: Props) {
   const toastBackground = background[type];
   const toastText = text[type];
 
@@ -39,7 +38,6 @@ export function Toast({ message, id, type, dismiss }: Props) {
       <form
         action={async () => {
           sonnerToast.dismiss(id);
-          dismiss(id);
           await dismissToast(id);
         }}
       >
