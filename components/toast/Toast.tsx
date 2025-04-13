@@ -1,4 +1,5 @@
 import { toast as sonnerToast } from 'sonner';
+import { dismissToast } from '@/data/actions/toast';
 import type { ToastType } from '@/types/toast';
 import { cn } from '@/utils/cn';
 import { CloseIcon } from '../ui/icons/CloseIcon';
@@ -16,11 +17,12 @@ const text = {
 
 type Props = {
   message: string;
-  id: string | number;
+  id: string;
   type: ToastType;
+  dismiss: (id: string) => void;
 };
 
-export function Toast({ message, id, type }: Props) {
+export function Toast({ message, id, type, dismiss }: Props) {
   const toastBackground = background[type];
   const toastText = text[type];
 
@@ -35,8 +37,10 @@ export function Toast({ message, id, type }: Props) {
       <span className="sr-only">{'Toast message ' + type}</span>
       <p>{message}</p>
       <form
-        action={() => {
+        action={async () => {
           sonnerToast.dismiss(id);
+          dismiss(id);
+          await dismissToast(id);
         }}
       >
         <button className="rounded-full p-1 hover:outline" type="submit">
