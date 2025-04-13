@@ -2,8 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 import React, { use, useState } from 'react';
-import { toast } from 'sonner';
+import { toast as sonnerToast } from 'sonner';
+import type { ToastType } from '@/types/toast';
 import { cn } from '@/utils/cn';
+import { Toast } from './toast/Toast';
 import Divider from './ui/Divider';
 import Spinner from './ui/Spinner';
 import { StarMarker } from './ui/StarMarker';
@@ -24,6 +26,12 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
   const [isPending, setIsPending] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const router = useRouter();
+
+  const toast = (message: string, type: ToastType) => {
+    sonnerToast.custom(id => {
+      return <Toast id={id} type={type} message={message} />;
+    });
+  };
 
   return (
     <div className="relative">
@@ -85,10 +93,10 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                   setIsPending(false);
                   if (!response.ok) {
                     const body = await response.json();
-                    toast.error(body.error);
+                    toast(body.error, 'error');
                     setCurrentAccount(previousAccount);
                   } else {
-                    toast.success('Account changed successfully!');
+                    toast('Account changed successfully!', 'success');
                     router.refresh();
                   }
                 }}

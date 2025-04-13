@@ -3,9 +3,10 @@
 import { startTransition, useEffect, useOptimistic, useState } from 'react';
 import { Toaster as SonnerToaster, toast as sonnerToast } from 'sonner';
 import { dismissToast } from '@/data/actions/toast';
-import type { Toast } from './Toaster';
+import type { Toast as ToastType } from '@/types/toast';
+import { Toast } from './Toast';
 
-export function Toasts({ toasts }: { toasts: Toast[] }) {
+export function Toasts({ toasts }: { toasts: ToastType[] }) {
   const [optimisticToasts, dismissToastOptimistic] = useOptimistic(toasts, (current, id) => {
     return current.filter(toast => {
       return toast.id !== id;
@@ -31,28 +32,23 @@ export function Toasts({ toasts }: { toasts: Toast[] }) {
         return !sentToSonner.includes(toast.id);
       })
       .forEach(toast => {
-        const toastOptions = {
-          id: toast.id,
-          onAutoClose: () => {
-            return toast.dismiss();
-          },
-          onDismiss: () => {
-            return toast.dismiss();
-          },
-        };
-
         setSentToSonner(prev => {
           return [...prev, toast.id];
         });
-        if (toast.type === 'error') {
-          return sonnerToast.error(toast.message, toastOptions);
-        }
-        if (toast.type === 'info') {
-          return sonnerToast(toast.message, toastOptions);
-        }
-        if (toast.type === 'success') {
-          return sonnerToast.success(toast.message, toastOptions);
-        }
+        return sonnerToast.custom(
+          id => {
+            return <Toast id={id} type={toast.type} message={toast.message} />;
+          },
+          {
+            id: toast.id,
+            onAutoClose: () => {
+              return toast.dismiss();
+            },
+            onDismiss: () => {
+              return toast.dismiss();
+            },
+          },
+        );
       });
   }, [localToasts, sentToSonner]);
 
