@@ -1,8 +1,9 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import type { ToastType } from '@/types/toast';
 
-export async function toastMessage(message: string, type: 'success' | 'error' | 'info') {
+export async function toastMessage(message: string, type: ToastType) {
   const cookieStore = await cookies();
   const id = crypto.randomUUID();
   cookieStore.set(`toast-${type}-${id}`, message, {
