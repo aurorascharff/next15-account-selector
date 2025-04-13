@@ -1,13 +1,6 @@
 import { cookies } from 'next/headers';
+import type { Toast, ToastType } from '@/types/toast';
 import { Toasts } from './Toasts';
-
-type ToastType = 'success' | 'error' | 'info';
-
-export type Toast = {
-  id: string;
-  message: string;
-  type: ToastType;
-};
 
 export async function Toaster() {
   const cookieStore = await cookies();
