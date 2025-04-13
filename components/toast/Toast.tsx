@@ -33,7 +33,7 @@ export function Toast({ message, id, type }: Props) {
         'flex items-center justify-between gap-4 rounded-lg px-4 py-2 text-sm shadow-md',
       )}
     >
-      <span className="sr-only">{'Toast message ' + type}</span>
+      <span className="sr-only">{type}</span>
       <p>{message}</p>
       <form
         action={async () => {
