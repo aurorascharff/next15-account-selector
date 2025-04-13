@@ -1,6 +1,7 @@
 import './globals.css';
 
 import { Geist } from 'next/font/google';
+import { Suspense } from 'react';
 import KeyPressed from '@/components/KeyPressed';
 import { Toaster } from '@/components/toast/Toaster';
 import SubmitButton from '@/components/ui/SubmitButton';
@@ -23,7 +24,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className={cn(GeistSans.className, 'mb-12 flex grow flex-col p-4 sm:p-10 md:px-40 xl:px-96')}>
         <main>
-          <Toaster />
+          <Suspense>
+            <Toaster />
+          </Suspense>
           {isAuth ? (
             children
           ) : (
