@@ -15,7 +15,7 @@ export default function Tile({ children, starred, href, heading, icon }: Props) 
   return (
     <Link
       href={href}
-      className="focus-visible:outline-primary dark:bg-neutral-light flex h-full w-full items-center justify-between gap-4 rounded-xl bg-white px-8 py-6 hover:underline focus-visible:outline-2"
+      className="focus-visible:outline-primary dark:bg-section flex h-full w-full items-center justify-between gap-4 rounded-xl bg-white px-8 py-6 hover:underline focus-visible:outline-2"
     >
       <div className="s-10">{icon}</div>
       <div className="flex flex-grow flex-col gap-3">

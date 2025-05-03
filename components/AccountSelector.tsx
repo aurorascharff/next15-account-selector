@@ -37,7 +37,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         </div>
         <Ariakit.SelectPopover
           gutter={8}
-          className="border-gray-light focus-visible:outline-primary dark:border-gray-dark flex w-[257px] flex-col gap-2 rounded-sm border bg-white shadow-lg -outline-offset-1 focus-visible:outline-2 dark:bg-black"
+          className="border-divider focus-visible:outline-primary dark:border-divider-dark flex w-[257px] flex-col gap-2 rounded-sm border bg-white shadow-lg -outline-offset-1 focus-visible:outline-2 dark:bg-black"
         >
           <div className="flex items-start justify-between px-3 py-2 text-lg">
             <div className="flex flex-col gap-2">
@@ -56,7 +56,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           {accounts.map(account => {
             return (
               <Ariakit.SelectItem
-                className="data-active-item:bg-gray-light aria-disabled:text-gray dark:data-active-item:bg-neutral data-focus-visible:bg-primary dark:data-focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 data-focus-visible:text-white"
+                className="data-active-item:bg-card aria-disabled:text-gray dark:data-active-item:bg-card-dark data-focus-visible:bg-primary dark:data-focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 data-focus-visible:text-white"
                 key={account.id}
                 value={account.id}
                 disabled={account.inactive}

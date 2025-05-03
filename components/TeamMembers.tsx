@@ -21,9 +21,9 @@ export default async function TeamMembers() {
         <ul className="flex gap-4 overflow-auto">
           <TeamMember className="text-primary-variant-1" />
           <TeamMember className="text-primary-variant-2" />
+          <TeamMember className="text-primary" />
+          <TeamMember className="text-primary-darker" />
           <TeamMember className="text-primary-variant-3" />
-          <TeamMember className="text-primary-variant-4" />
-          <TeamMember className="text-primary-variant-5" />
         </ul>
         <button className="hover:bg-gray size-12 cursor-pointer rounded-full bg-black p-1 text-white md:size-16 md:p-3 dark:bg-white dark:text-black">
           <span className="sr-only">Add team member</span>
