@@ -1,7 +1,10 @@
 import React, { Suspense } from 'react';
 import AccountSelector, { AccountSelectorSkeleton } from '@/components/AccountSelector';
 import Dashboard, { DashboardSkeleton } from '@/components/Dashboard';
-import WelcomeMessage, { WelcomeMessageSkeleton } from '@/components/WelcomeMessage';
+import FocusedProject, { FocusedProjectSkeleton } from '@/components/FocusedProject';
+import ProfilePicture, { ProfilePictureSkeleton } from '@/components/ProfilePicture';
+import UserActions from '@/components/UserActions';
+import Card from '@/components/ui/Card';
 import Divider from '@/components/ui/Divider';
 import { getAccounts, getCurrentAccount } from '@/data/services/account';
 
@@ -11,15 +14,27 @@ export default async function RootPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <Suspense fallback={<AccountSelectorSkeleton />}>
-        <AccountSelector accountsPromise={accounts} currentAccountPromise={currentAccount} />
-      </Suspense>
+      <div className="flex flex-col gap-4 md:flex-row">
+        <Card className="flex w-full flex-col items-center md:w-1/2 md:items-start">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-6 md:justify-start">
+            <Suspense fallback={<ProfilePictureSkeleton />}>
+              <ProfilePicture currentAccountPromise={currentAccount} />
+            </Suspense>
+            <Suspense fallback={<AccountSelectorSkeleton />}>
+              <AccountSelector accountsPromise={accounts} currentAccountPromise={currentAccount} />
+            </Suspense>
+          </div>
+          <UserActions />
+        </Card>
+        <Card className="flex w-full flex-col justify-start gap-4 md:w-1/2">
+          <h2>Focused project</h2>
+          <Suspense fallback={<FocusedProjectSkeleton />}>
+            <FocusedProject />
+          </Suspense>
+        </Card>
+      </div>
       <Divider theme="primary" />
-      <div className="mt-2 flex flex-col gap-4">
-        <Suspense fallback={<WelcomeMessageSkeleton />}>
-          <WelcomeMessage />
-        </Suspense>
-        <h2 className="dark:text-gray mt-4 text-base text-gray-500">What are you working on?</h2>
+      <div className="flex flex-col gap-4">
         <Suspense fallback={<DashboardSkeleton />}>
           <Dashboard />
         </Suspense>

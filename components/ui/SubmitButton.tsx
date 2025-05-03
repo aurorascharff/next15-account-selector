@@ -3,7 +3,7 @@
 import React from 'react';
 import { useFormStatus } from 'react-dom';
 import { cn } from '@/utils/cn';
-import { SpinnerIcon } from './icons/SpinnerIcon';
+import Spinner from './Spinner';
 
 type Props = {
   children: React.ReactNode;
@@ -36,9 +36,7 @@ export default function SubmitButton({
       {isSubmitting ? (
         <div className="flex items-center justify-center gap-2">
           {children}
-          <div className="h-fit w-fit animate-spin">
-            <SpinnerIcon aria-hidden="true" width={16} height={16} className="text-white" />
-          </div>
+          <Spinner className="text-white" width={16} height={16} />
         </div>
       ) : (
         children

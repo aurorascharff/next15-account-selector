@@ -1,68 +1,58 @@
-import Link from 'next/link';
+import { Calendar, LayoutDashboard, Plus, Users, Wrench } from 'lucide-react';
 import React from 'react';
 import { getCurrentAccount } from '@/data/services/account';
+import TeamMembers from './TeamMembers';
+import Card from './ui/Card';
 import Skeleton from './ui/Skeleton';
-import { StarMarker } from './ui/StarMarker';
-import { ChevronIcon } from './ui/icons/ChevronIcon';
+import Tile from './ui/Tile';
 
 export default async function Dashboard() {
   const account = await getCurrentAccount();
+  const isPro = account?.plan === 'pro';
 
   return (
-    <div className="@container">
-      <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 @-lg:grid">
-        <DashboardItem heading="Create New Project">
-          Start a new project and organize your tasks efficiently.
-        </DashboardItem>
-        <DashboardItem heading="View Task Board">
-          Keep track of your tasks and monitor progress in one place.
-        </DashboardItem>
-        <DashboardItem heading="Manage Team Members">
-          Add, remove, or update team members and their roles.
-        </DashboardItem>
-        {account?.plan === 'pro' ? (
-          <>
-            <DashboardItem heading="Access Advanced Project Insights" plan="pro">
-              Gain deeper insights into your projects with advanced analytics.
-            </DashboardItem>
-            <DashboardItem heading="Set Custom Workflows" plan="pro">
-              Customize workflows to suit your team&apos;s unique needs.
-            </DashboardItem>
-          </>
-        ) : (
-          <DashboardItem heading="Upgrade to Pro" plan="pro">
-            Unlock advanced features and tools for better project management.
-          </DashboardItem>
-        )}
-      </ul>
-    </div>
-  );
-}
-
-function DashboardItem({ children, plan, heading }: { children: React.ReactNode; plan?: string; heading: string }) {
-  return (
-    <li>
-      <Link
-        href="#"
-        className="group hover:bg-primary-light bg-primary-lighter focus-visible:outline-primary dark:bg-neutral dark:hover:bg-neutral-light flex h-full w-full items-center justify-between gap-4 rounded-sm px-8 py-4 focus-visible:outline-2"
-      >
-        <div className="flex flex-grow flex-col gap-2">
-          <span>
-            <span className="mr-2 font-semibold uppercase group-hover:underline">{heading}</span>
-            {plan === 'pro' && <StarMarker />}
-          </span>
-          <span className="text-sm">{children}</span>
-        </div>
-        <ChevronIcon width={16} height={16} className="flex-shrink-0 -rotate-90 text-black dark:text-white" />
-      </Link>
-    </li>
+    <>
+      {isPro && <TeamMembers />}
+      <Card className="@container flex flex-col">
+        <h2>Actions</h2>
+        <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 @-lg:grid">
+          <li>
+            <Tile href="#" icon={<Plus width={30} height={30} />} heading="Create New Project">
+              Start a new project and organize your tasks
+            </Tile>
+          </li>
+          <li>
+            <Tile href="#" icon={<Calendar width={30} height={30} />} heading="Schedule">
+              View your calendar
+            </Tile>
+          </li>
+          <li>
+            <Tile href="#" icon={<LayoutDashboard width={30} height={30} />} heading="View Task Board">
+              Keep track of your tasks and monitor progress in one place
+            </Tile>
+          </li>
+          {isPro && (
+            <li>
+              <Tile href="#" icon={<Users width={30} height={30} />} heading="Manage Team Members" starred>
+                Add, remove or update team members and their roles
+              </Tile>
+            </li>
+          )}
+          <li>
+            <Tile href="#" icon={<Wrench width={30} height={30} />} heading="Settings">
+              View and manage your account settings
+            </Tile>
+          </li>
+        </ul>
+      </Card>
+    </>
   );
 }
 
 export function DashboardSkeleton() {
   return (
-    <div className="@container">
-      <ul className="flex grid-cols-2 flex-col gap-x-8 gap-y-4 @-lg:grid">
+    <div className="@container px-10 py-20">
+      <ul className="flex grid-cols-2 flex-col gap-x-10 gap-y-4 @-lg:grid">
         <Skeleton />
         <Skeleton />
       </ul>

@@ -12,11 +12,21 @@ datasource db {
 }
 
 model Account {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  name      String
+  plan      String
+  type      String    @default("personal")
+  email     String
+  inactive  Boolean   @default(false)
+  Project   Project[]
+}
+
+model Project {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   name      String
-  plan      String
-  type      String   @default("personal")
-  email     String
-  inactive  Boolean  @default(false)
+  progress  Int
+  accountId String
+  account   Account? @relation(fields: [accountId], references: [id])
 }

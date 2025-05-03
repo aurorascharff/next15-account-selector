@@ -2,6 +2,7 @@
 
 import * as Ariakit from '@ariakit/react';
 
+import { EllipsisVertical } from 'lucide-react';
 import React, { use, useOptimistic, useTransition } from 'react';
 import { setCurrentAccount } from '@/data/actions/account';
 import { logOut } from '@/data/actions/auth';
@@ -9,7 +10,6 @@ import Divider from './ui/Divider';
 import SelectButton from './ui/SelectButton';
 import Spinner from './ui/Spinner';
 import { StarMarker } from './ui/StarMarker';
-import { ActionIcon } from './ui/icons/ActionIcon';
 import type { Account } from '@prisma/client';
 
 type Props = {
@@ -49,7 +49,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             </div>
             <Ariakit.SelectItem className="data-active-item:outline-primary mt-2 cursor-pointer rounded-full p-1 data-active-item:outline">
               <span className="sr-only">Account options</span>
-              <ActionIcon aria-hidden="true" width={16} height={16} />
+              <EllipsisVertical aria-hidden="true" width={16} height={16} />
             </Ariakit.SelectItem>
           </div>
           <Divider />
