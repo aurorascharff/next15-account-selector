@@ -6,7 +6,7 @@ import Card from './ui/Card';
 import Skeleton from './ui/Skeleton';
 import Tile from './ui/Tile';
 
-export default async function Dashboard() {
+export default async function Actions() {
   const account = await getCurrentAccount();
   const isPro = account?.plan === 'pro';
 
@@ -49,7 +49,7 @@ export default async function Dashboard() {
   );
 }
 
-export function DashboardSkeleton() {
+export function ActionsSkeleton() {
   return (
     <div className="@container px-10 py-20">
       <ul className="flex grid-cols-2 flex-col gap-x-10 gap-y-4 @-lg:grid">
