@@ -18,5 +18,5 @@ export default async function FocusedProject() {
 }
 
 export function FocusedProjectSkeleton() {
-  return <Skeleton className="p-6" />;
+  return <Skeleton className="p-[6px] md:p-6" />;
 }

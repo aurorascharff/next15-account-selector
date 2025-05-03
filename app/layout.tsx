@@ -30,7 +30,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {isAuth ? (
             children
           ) : (
-            <form className="place-self-center pt-20" action={logIn.bind(null, 'jane.smith@personal.com')}>
+            <form className="flex justify-self-center pt-20" action={logIn.bind(null, 'jane.smith@personal.com')}>
               <SubmitButton>Log in as Jane Smith</SubmitButton>
             </form>
           )}
