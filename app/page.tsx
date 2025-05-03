@@ -27,7 +27,7 @@ export default async function RootPage() {
           <UserActions />
         </Card>
         <Card className="flex w-full flex-col justify-start gap-4 md:w-1/2">
-          <h2>Focused project</h2>
+          <h1 className="text-xl md:text-2xl">Focused project</h1>
           <Suspense fallback={<FocusedProjectSkeleton />}>
             <FocusedProject />
           </Suspense>
