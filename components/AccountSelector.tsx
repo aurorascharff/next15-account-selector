@@ -1,5 +1,6 @@
 'use client';
 
+import { EllipsisVertical, ChevronDown, Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { use, useState } from 'react';
 import { toast as sonnerToast } from 'sonner';
@@ -9,9 +10,6 @@ import { Toast } from './toast/Toast';
 import Divider from './ui/Divider';
 import Spinner from './ui/Spinner';
 import { StarMarker } from './ui/StarMarker';
-import { ActionIcon } from './ui/icons/ActionIcon';
-import { CheckmarkIcon } from './ui/icons/CheckmarkIcon';
-import { ChevronIcon } from './ui/icons/ChevronIcon';
 import type { Account } from '@prisma/client';
 
 type Props = {
@@ -42,16 +40,16 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             return setExpanded(!expanded);
           }}
           className={cn(
-            'bg-primary hover:bg-primary-dark border-primary flex items-center gap-2 rounded-2xl border px-4 py-2 text-white shadow-md outline-offset-1 focus:outline focus:-outline-offset-4 focus:outline-white',
+            'bg-primary hover:bg-primary-dark border-primary flex items-center gap-2 rounded-2xl border px-4 py-2 text-nowrap text-white shadow-md outline-offset-1 focus:outline focus:-outline-offset-4 focus:outline-white',
             expanded &&
               'focus:outline-primary hover:bg-gray-light bg-white text-black focus:outline-2 focus:-outline-offset-1',
           )}
         >
           {currentAccount?.name}
-          <ChevronIcon
+          <ChevronDown
             aria-hidden="true"
-            width={10}
-            height={10}
+            width={16}
+            height={16}
             className={cn('ml-1 transition-transform', expanded && 'rotate-180')}
           />
         </button>
@@ -68,7 +66,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             </div>
             <div className="hover:outline-primary mt-2 cursor-pointer rounded-full p-1 hover:outline">
               <span className="sr-only">Account options</span>
-              <ActionIcon aria-hidden="true" width={16} height={16} />
+              <EllipsisVertical aria-hidden="true" width={16} height={16} />
             </div>
           </div>
           <Divider />
@@ -113,7 +111,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 {account.id === currentAccount?.id && (
                   <span>
                     <span className="sr-only">Active account</span>
-                    <CheckmarkIcon aria-hidden="true" width={20} height={20} />
+                    <Check aria-hidden="true" width={18} height={18} />
                   </span>
                 )}
               </button>

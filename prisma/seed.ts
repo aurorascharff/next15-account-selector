@@ -27,7 +27,22 @@ const ACCOUNTS = [
   },
 ];
 
-async function seedAccounts() {
+const PROJECTS = [
+  {
+    accountId: 'a833bc10-64dd-4069-8573-4bbb4b0065ed',
+    createdAt: new Date(),
+    name: 'Sweater knitting',
+    progress: 54,
+  },
+  {
+    accountId: '9e525f6f-b60e-4258-8c30-c289619525d6',
+    createdAt: new Date(),
+    name: 'Desktop release',
+    progress: 34,
+  },
+];
+
+async function seed() {
   await Promise.all(
     ACCOUNTS.map(account => {
       return prisma.account.create({
@@ -48,6 +63,24 @@ async function seedAccounts() {
     .catch(e => {
       return console.error('[SEED] Failed to create account records', e);
     });
+  await Promise.all(
+    PROJECTS.map(project => {
+      return prisma.project.create({
+        data: {
+          accountId: project.accountId,
+          createdAt: project.createdAt,
+          name: project.name,
+          progress: project.progress,
+        },
+      });
+    }),
+  )
+    .then(() => {
+      return console.info('[SEED] Successfully create project records');
+    })
+    .catch(e => {
+      return console.error('[SEED] Failed to create project records', e);
+    });
 }
 
-seedAccounts();
+seed();
