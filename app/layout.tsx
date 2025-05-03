@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {isAuth ? (
             children
           ) : (
-            <div className="place-self-center pt-20">
+            <div className="flex justify-self-center pt-20">
               <SubmitButton>Log in as Jane Smith</SubmitButton>
             </div>
           )}
