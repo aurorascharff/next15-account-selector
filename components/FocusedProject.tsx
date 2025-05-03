@@ -1,4 +1,4 @@
-import { Workflow } from 'lucide-react';
+import { BookmarkCheck } from 'lucide-react';
 import React from 'react';
 import { getProjects } from '@/data/services/project';
 import Skeleton from './ui/Skeleton';
@@ -9,7 +9,7 @@ export default async function FocusedProject() {
   const hasProjects = projects.length > 0;
 
   return hasProjects ? (
-    <Tile icon={<Workflow />} heading={projects[0].name} href="#">
+    <Tile icon={<BookmarkCheck width={30} height={30} />} heading={projects[0].name} href="#">
       <span className="text-xl font-semibold">{projects[0].progress}% complete</span>
     </Tile>
   ) : (
