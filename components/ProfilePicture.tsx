@@ -12,7 +12,7 @@ export default function ProfilePicture({ currentAccountPromise }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-4 md:gap-10">
-      <div className="bg-neutral-light size-[80px] rounded-full md:size-[150px]">
+      <div className="bg-section size-[80px] rounded-full md:size-[150px]">
         <Image
           src={'/' + currentAccount?.id + '.jpg'}
           alt="Profile Picture"
@@ -26,5 +26,5 @@ export default function ProfilePicture({ currentAccountPromise }: Props) {
 }
 
 export function ProfilePictureSkeleton() {
-  return <div className="dark:bg-neutral-light size-[80px] rounded-full bg-gray-300 md:size-[150px]" />;
+  return <div className="dark:bg-section size-[80px] rounded-full bg-gray-300 md:size-[150px]" />;
 }

@@ -42,7 +42,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           className={cn(
             'bg-primary hover:bg-primary-dark border-primary flex items-center gap-2 rounded-2xl border px-4 py-2 text-nowrap text-white shadow-md outline-offset-1 focus:outline focus:-outline-offset-4 focus:outline-white',
             expanded &&
-              'focus:outline-primary hover:bg-gray-light bg-white text-black focus:outline-2 focus:-outline-offset-1',
+              'focus:outline-primary hover:bg-card bg-white text-black focus:outline-2 focus:-outline-offset-1',
           )}
         >
           {currentAccount?.name}
@@ -56,7 +56,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         {isPending && <Spinner />}
       </div>
       {expanded && (
-        <div className="border-gray-light focus-visible:outline-primary dark:border-gray-dark absolute top-20 flex w-[257px] flex-col gap-2 rounded-sm border bg-white shadow-lg -outline-offset-1 focus-visible:outline-2 dark:bg-black">
+        <div className="border-divider focus-visible:outline-primary dark:border-divider-dark absolute top-20 flex w-[257px] flex-col gap-2 rounded-sm border bg-white shadow-lg -outline-offset-1 focus-visible:outline-2 dark:bg-black">
           <div className="flex items-start justify-between px-3 py-2 text-lg">
             <div className="flex flex-col gap-2">
               <span className="font-semibold">{currentAccount?.name}</span>
@@ -75,7 +75,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
               <button
                 disabled={account.inactive}
                 key={account.id}
-                className="hover:bg-gray-light disabled:text-gray dark:hover:bg-neutral focus-visible:bg-primary dark:focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 focus-visible:text-white"
+                className="hover:bg-card disabled:text-gray dark:hover:bg-card-dark focus-visible:bg-primary dark:focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 focus-visible:text-white"
                 onClick={async () => {
                   setExpanded(false);
                   if (currentAccount?.id === account.id) {
