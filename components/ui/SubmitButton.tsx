@@ -27,7 +27,7 @@ export default function SubmitButton({
       type={type}
       className={cn(
         className,
-        'bg-primary hover:bg-primary-dark disabled:bg-primary-darker rounded-sm px-4 py-2 text-white shadow-md focus:-outline-offset-4 enabled:focus:outline enabled:focus:outline-white',
+        'bg-primary hover:bg-primary-dark disabled:bg-primary-darker rounded-lg px-4 py-2 text-white shadow-md focus:-outline-offset-4 enabled:focus:outline enabled:focus:outline-white',
       )}
       {...otherProps}
     >
