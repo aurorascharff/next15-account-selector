@@ -17,17 +17,19 @@ export default async function TeamMembers() {
       <h2>
         Team members <StarMarker />
       </h2>
-      <ul className="flex gap-4 overflow-auto">
-        <TeamMember className="text-primary-variant-1" />
-        <TeamMember className="text-primary-variant-2" />
-        <TeamMember className="text-primary-variant-3" />
-        <TeamMember className="text-primary-variant-4" />
-        <TeamMember className="text-primary-variant-5" />
+      <div className="flex gap-4 overflow-auto">
+        <ul className="flex gap-4 overflow-auto">
+          <TeamMember className="text-primary-variant-1" />
+          <TeamMember className="text-primary-variant-2" />
+          <TeamMember className="text-primary-variant-3" />
+          <TeamMember className="text-primary-variant-4" />
+          <TeamMember className="text-primary-variant-5" />
+        </ul>
         <button className="hover:bg-gray size-12 cursor-pointer rounded-full bg-black p-1 text-white md:size-16 md:p-3 dark:bg-white dark:text-black">
           <span className="sr-only">Add team member</span>
           <Plus aria-hidden="true" width={40} height={40} />
         </button>
-      </ul>
+      </div>
     </Card>
   );
 }
