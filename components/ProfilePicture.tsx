@@ -14,7 +14,7 @@ export default function ProfilePicture({ currentAccountPromise }: Props) {
     <div className="flex flex-col items-center gap-4 md:gap-10">
       <div className="bg-neutral-light size-[80px] rounded-full md:size-[150px]">
         <Image
-          src={'/' + currentAccount?.id + '.png'}
+          src={'/' + currentAccount?.id + '.jpg'}
           alt="Profile Picture"
           width={150}
           height={150}

@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import AccountSelector, { AccountSelectorSkeleton } from '@/components/AccountSelector';
-import Dashboard, { DashboardSkeleton } from '@/components/Dashboard';
+import Actions, { ActionsSkeleton } from '@/components/Actions';
 import FocusedProject, { FocusedProjectSkeleton } from '@/components/FocusedProject';
 import ProfilePicture, { ProfilePictureSkeleton } from '@/components/ProfilePicture';
 import UserActions from '@/components/UserActions';
@@ -27,7 +27,7 @@ export default async function RootPage() {
           <UserActions />
         </Card>
         <Card className="flex w-full flex-col justify-start gap-4 md:w-1/2">
-          <h2>Focused project</h2>
+          <h1 className="text-xl md:text-2xl">Focused project</h1>
           <Suspense fallback={<FocusedProjectSkeleton />}>
             <FocusedProject />
           </Suspense>
@@ -35,8 +35,8 @@ export default async function RootPage() {
       </div>
       <Divider theme="primary" />
       <div className="flex flex-col gap-4">
-        <Suspense fallback={<DashboardSkeleton />}>
-          <Dashboard />
+        <Suspense fallback={<ActionsSkeleton />}>
+          <Actions />
         </Suspense>
       </div>
     </div>
