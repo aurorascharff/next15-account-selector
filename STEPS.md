@@ -36,7 +36,7 @@
 - Replace chevron icon inside with Ariakit.SelectArrow
 - Replace "absolute" div Ariakit.SelectPopover
 - Remove expanded useState for expanded state, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState, showcase aria-expanded inside a component SelectButton
-- Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, the active item functionality is built in to Ariakit and stylable with data-active-item, replace focus with data-focus-visible to differentiate between the mouse and keyboard focus correctly
+- Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, the active item functionality is built in to Ariakit and stylable with data-active-item, replace focus with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled:
 - Replace the account buttons with Ariakit.SelectItem as well, replace hover: with data-active-item:, the disabled={} prop now is correctly implemented behind the scenes by Ariakit, use aria-disabled to style it
 - Replace the selected item check with Ariakit.SelectItemCheck
 
@@ -45,6 +45,7 @@
 - Now lets get to work on the mutation. This is a lot of boilerplate code. We can use the new react 19 Server Functions to simplify this.
 - Create new file account.ts with "use server", copy the API code
 - Delete api code and api layer
+- Call the server function inside the onClick
 
 ## Add useTransition for the loading state
 
@@ -54,6 +55,7 @@
 
 ## Add useOptimistic for the optimistic update
 
+- We deleted the naive optimistic update code, setting state on error. Lets add it back in a better way.
 - To avoid the delayed update on the select depending on the server, let's use the new useOptimistic hook from React 19. It allows us to create an optimistic update, which is a temporary state that is shown while an async action is running.
 - Add useOptimistic hook and wrap the server function with it. Use the optimistic value for all the existing account variables.
 - Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background. The spinner is shown on the button, and the select is disabled while loading.
@@ -64,6 +66,7 @@
 - Now, we need to add back the toast that we had before. I would need to return something from this server function, and trigger toasts based on that or even use something like useActionState. Problem is, that doesn't work across page navigations. For example if i want a success toast after deleting a contact, that would be a problem.
 - I'm gonna use an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
 - Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation.
+- Delete toast code from AccountSelector
 - Trigger toast from the server function. This is sweet because it's here on the server we know what the result of the action is. Showcase what it looks like, now in sync with the action.
 
 ## Add logout item in menu
