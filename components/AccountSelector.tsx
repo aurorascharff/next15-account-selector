@@ -1,7 +1,7 @@
 'use client';
 
 import { EllipsisVertical, ChevronDown, Check } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+
 import React, { use, useState } from 'react';
 import { toast as sonnerToast } from 'sonner';
 import type { ToastType } from '@/types/toast';
@@ -23,7 +23,6 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
   const [currentAccount, setCurrentAccount] = useState<Account | null>(currentAccountResolved);
   const [isPending, setIsPending] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const router = useRouter();
 
   const toast = (message: string, type: ToastType) => {
     sonnerToast.custom(id => {
