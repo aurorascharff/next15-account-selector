@@ -73,9 +73,9 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           {accounts.map(account => {
             return (
               <button
+                className="hover:bg-card disabled:text-gray dark:hover:bg-card-dark focus-visible:bg-primary dark:focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 focus-visible:text-white"
                 disabled={account.inactive}
                 key={account.id}
-                className="hover:bg-card disabled:text-gray dark:hover:bg-card-dark focus-visible:bg-primary dark:focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 focus-visible:text-white"
                 onClick={async () => {
                   setExpanded(false);
                   if (currentAccount?.id === account.id) {
