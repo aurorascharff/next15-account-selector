@@ -1,4 +1,4 @@
-import React, { Suspense, unstable_ViewTransition as ViewTransition } from 'react';
+import React, { Suspense } from 'react';
 import AccountSelector, { AccountSelectorSkeleton } from '@/components/AccountSelector';
 import Actions, { ActionsSkeleton } from '@/components/Actions';
 import FocusedProject, { FocusedProjectSkeleton } from '@/components/FocusedProject';
@@ -35,11 +35,9 @@ export default async function RootPage() {
       </div>
       <Divider theme="primary" />
       <div className="flex flex-col gap-4">
-        <ViewTransition>
-          <Suspense fallback={<ActionsSkeleton />}>
-            <Actions />
-          </Suspense>
-        </ViewTransition>
+        <Suspense fallback={<ActionsSkeleton />}>
+          <Actions />
+        </Suspense>
       </div>
     </div>
   );
