@@ -11,7 +11,7 @@ import type { Metadata } from 'next';
 const GeistSans = Geist({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  description: 'Account Selector using Server Functions, React 19 and Ariakit',
+  description: 'Next.js 15 Account Selector using Server Functions, React 19 and Ariakit',
   title: 'Next.js 15 Account Selector',
 };
 
