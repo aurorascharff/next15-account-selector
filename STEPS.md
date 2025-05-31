@@ -28,7 +28,7 @@
 
 ## Replace all divs with Ariakit equivalents and update styles
 
-- Lets step by step replace all the divs with Ariakit equivalents
+- Lets step by step replace all the divs with Ariakit equivalents, declarative components that are accessible by default and have all the functionality we need built in
 - Remove "relative" from parent div
 - Add ariakit Ariakit.SelectProvider between
 - Replace label div with Ariakit.SelectLabel
