@@ -1,7 +1,6 @@
 'use client';
 
 import { EllipsisVertical, ChevronDown, Check } from 'lucide-react';
-
 import React, { use, useState } from 'react';
 import { toast as sonnerToast } from 'sonner';
 import type { ToastType } from '@/types/toast';
