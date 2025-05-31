@@ -51,11 +51,8 @@ export default async function Actions() {
 
 export function ActionsSkeleton() {
   return (
-    <div className="@container px-10 py-20">
-      <ul className="flex grid-cols-2 flex-col gap-x-10 gap-y-4 @-lg:grid">
-        <Skeleton />
-        <Skeleton />
-      </ul>
-    </div>
+    <Card className="@container flex flex-col">
+      <Skeleton />
+    </Card>
   );
 }

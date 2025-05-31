@@ -1,7 +1,8 @@
 'use client';
 
 import { EllipsisVertical, ChevronDown, Check } from 'lucide-react';
-import React, { use, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { startTransition, use, useState } from 'react';
 import { toast as sonnerToast } from 'sonner';
 import type { ToastType } from '@/types/toast';
 import { cn } from '@/utils/cn';
@@ -22,6 +23,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
   const [currentAccount, setCurrentAccount] = useState<Account | null>(currentAccountResolved);
   const [isPending, setIsPending] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const router = useRouter();
 
   const toast = (message: string, type: ToastType) => {
     sonnerToast.custom(id => {
@@ -74,7 +76,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 className="hover:bg-card disabled:text-gray dark:hover:bg-card-dark focus-visible:bg-primary dark:focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 focus-visible:text-white"
                 key={account.id}
                 disabled={account.inactive}
-                onClick={async () => {
+                onClick={() => {
                   setExpanded(false);
                   if (currentAccount?.id === account.id) {
                     return;
@@ -82,18 +84,21 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                   setIsPending(true);
                   const previousAccount = currentAccount;
                   setCurrentAccount(account);
-                  const response = await fetch('/api/account', {
-                    body: JSON.stringify(account.id),
-                    method: 'POST',
+                  startTransition(async () => {
+                    const response = await fetch('/api/account', {
+                      body: JSON.stringify(account.id),
+                      method: 'POST',
+                    });
+                    setIsPending(false);
+                    if (!response.ok) {
+                      const body = await response.json();
+                      toast(body.error, 'error');
+                      setCurrentAccount(previousAccount);
+                    } else {
+                      toast('Account changed successfully!', 'success');
+                      router.refresh();
+                    }
                   });
-                  setIsPending(false);
-                  if (!response.ok) {
-                    const body = await response.json();
-                    toast(body.error, 'error');
-                    setCurrentAccount(previousAccount);
-                  } else {
-                    toast('Account changed successfully!', 'success');
-                  }
                 }}
               >
                 <div className="flex flex-col">

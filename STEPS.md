@@ -28,7 +28,7 @@
 
 ## Replace all divs with Ariakit equivalents and update styles
 
-- Lets step by step replace all the divs with Ariakit equivalents.
+- Lets step by step replace all the divs with Ariakit equivalents
 - Remove "relative" from parent div
 - Add ariakit Ariakit.SelectProvider between
 - Replace label div with Ariakit.SelectLabel
@@ -37,6 +37,7 @@
 - Replace "absolute" div Ariakit.SelectPopover
 - Remove expanded useState for expanded state, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState, showcase aria-expanded inside a component SelectButton
 - Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, the active item functionality is built in to Ariakit and stylable with data-active-item, replace focus with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled:
+- All of this is in the documentation! And there are docs for non-tailwind users as well.
 - Replace the account buttons with Ariakit.SelectItem as well, replace hover: with data-active-item:, the disabled={} prop now is correctly implemented behind the scenes by Ariakit, use aria-disabled to style it
 - Replace the selected item check with Ariakit.SelectItemCheck
 
