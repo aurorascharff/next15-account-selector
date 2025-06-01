@@ -6,7 +6,7 @@ import Card from './ui/Card';
 import Skeleton from './ui/Skeleton';
 import Tile from './ui/Tile';
 
-export default async function Actions() {
+export default async function Dashboard() {
   const account = await getCurrentAccount();
   const isPro = account?.plan === 'pro';
 
@@ -28,7 +28,7 @@ export default async function Actions() {
           </li>
           <li>
             <Tile href="#" icon={<LayoutDashboard width={30} height={30} />} heading="View Task Board">
-              Keep track of your tasks and monitor progress in one place
+              Keep track of your projects and monitor progress in one place
             </Tile>
           </li>
           {isPro && (
@@ -49,7 +49,7 @@ export default async function Actions() {
   );
 }
 
-export function ActionsSkeleton() {
+export function DashboardSkeleton() {
   return (
     <Card className="@container flex flex-col">
       <Skeleton />
