@@ -28,7 +28,7 @@
 
 ## Replace all divs with Ariakit equivalents and update styles
 
-- Lets step by step replace all the divs with Ariakit equivalents
+- Lets step by step replace all the divs with Ariakit equivalents, declarative components that are accessible by default and have all the functionality we need built in
 - Remove "relative" from parent div
 - Add ariakit Ariakit.SelectProvider between
 - Replace label div with Ariakit.SelectLabel
@@ -44,9 +44,10 @@
 ## Use Server Function for the mutation
 
 - Now lets get to work on the mutation. This is a lot of boilerplate code. We can use the new react 19 Server Functions to simplify this.
-- Create new file account.ts with "use server", copy the API code
-- Delete api code and api layer
-- Call the server function inside the onClick
+- (Create new file account.ts with "use server", copy the API code)
+- Showcase server function in account.ts
+- Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
+- Call the server function inside the onClick. Type safe.
 
 ## Add useTransition for the loading state
 
