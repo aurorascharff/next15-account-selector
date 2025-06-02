@@ -30,7 +30,7 @@
 - Let's begin with the accessibility.
 - Lets step by step replace all the divs with Ariakit equivalents, declarative components that are accessible by default and have all the functionality we need built in. Import ariakit.
 - Remove "relative" from parent div
-- Provider: Add ariakit Ariakit.SelectProvider between with value={currentAccount?.id}
+- Provider: Add ariakit Ariakit.SelectProvider between with value={account?.id}
 - Label: Replace label div with Ariakit.SelectLabel
 - Select: Replace open button with Ariakit.Select and remove setExpanded
 - SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState
@@ -42,22 +42,26 @@
 - All of this is in the documentation! And there are docs for non-tailwind users as well.
 - Remove setExpanded from handleSwitchAccount, remove expanded useState
 
-## Use Server Function for the mutation
-
-- Now lets get to work on the mutation. This is a lot of boilerplate code. We can use the new react 19 Server Functions to simplify this.
-- (Create new file account.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
-- Call the server function inside the onClick instead of API. Type safe.Showcase server function in account.ts.
-- Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
-
 ## Add useTransition for the loading state
 
-- To track the loading state now, lets use the new useTransition hook from React 19. It let's use create Actions, which are a different type of event handling. It runs in the background and does not block the main thread, like a deferred update.
-- Wrap server function with useTransition, get pending state isPending and replace the old one
-- Use pending state to set aria-busy on the select and notice the spinner using the new variable
+- Now lets get to work on the mutation. This is a lot of boilerplate code. We can use the new react 19 to simplify this.
+- To track the loading state, lets use the new useTransition hook from React 19. It let's use create Actions, which are a different type of event handling. It runs in the background and does not block the main thread, like a deferred update. Returns pending state isPending and a startTransition function.
+- Remove pending state useState.
+- Wrap server function with useTransition, remove setPending, get pending state isPending. Move async keyword.
+- Use pending state to set aria-busy on the select and notice the spinner using the new variable.
+- Test that it works. Now we are getting the toast too early rather than too late, let's fix that later.
+
+## Use Server Function for the mutation
+
+- Now the API call.
+- (Create new file account.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
+- Call the server function inside the onClick instead of API. Showcase server function in account.ts. Type safe.
+- Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
+- Delete the optimistic code based on the res, we don't need it anymore. Let's again save toast for last.
 
 ## Add useOptimistic for the optimistic update
 
-- We deleted the naive optimistic update code, setting state on error. Lets add it back in a better way.
+- We deleted the naive optimistic update code. Lets add it back in a better way.
 - To avoid the delayed update on the select depending on the server, let's use the new useOptimistic hook from React 19. It allows us to create an optimistic update, which is a temporary state that is shown while an async action is running.
 - Add useOptimistic hook and wrap the server function with it. Use the optimistic value for all the existing account variables.
 - Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background. The spinner is shown on the button, and the select is disabled while loading.

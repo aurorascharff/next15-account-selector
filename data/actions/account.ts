@@ -16,5 +16,4 @@ export async function setCurrentAccount(accountId: string) {
   }
 
   (await cookies()).set('selectedAccountId', accountId);
-  await toast.success('Account changed successfully!');
 }
