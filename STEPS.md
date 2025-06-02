@@ -3,7 +3,7 @@
 ## Starting point
 
 - This is a account dashboard demo app. Again this is inspired by that feature I showed in the slides.
-- The setup is the Next.js App Router, Prisma ORM and an Prisma Postgres DB, and Tailwind CSS.
+- The setup is the Next.js App Router, Prisma ORM and an Prisma Postgres DB, and Tailwind CSS v4.
 - I already completed all the data fetching here.
 - Layout.tsx: Since app Router, using Server components fetching data based on a cookie value, fetched through this data access layer, caching everything with cache() to avoid duplicate requests. When loading the page, the server components are streamed in and suspense fallbacks are used to show loading states.
 - And a bonus: using Next.js unauthorized.tsx error boundary to catch a thrown 401 forbidden(9) error if the account cookie is not a valid account.
@@ -77,18 +77,19 @@
 ## (Add logout item in menu)
 
 - Let's add another custom UI element to the select. A logout button, showcasing the customizability of Ariakit.
-- Await a new promise, track its loading state with another useTransition, creating a React Action.
-- Style it with aria-disabled and not:data-active-item underline. Showcase the result when focusing it and clicking it.
-- We're gonna call another Server Function, which deleted our account cookie. Log out.
+- Replace with Ariakit.SelectItem, styled with aria-disabled and not-aria-disabled:data-active-item underline.
+- Showcase the result when focusing it and hovering it.
+- We're gonna onClick call another Server Function, which deletes our account cookie (showcase). Track its loading state with another useTransition, creating a React Action. Log out and showcase the loading state and the styling with ariakit.
 
 ## (Update login form to login again)
 
-- Here logged out, let's complete the app with a functional login button. Use .bind to directly bind the server function to the button. Don't need to create a client component for this.
+- Here logged out, let's complete the app with a functional login button. Use .bind to directly bind the server function to the button. Don't need to create a client component for this, just use the React 19 form component that let's us call a function in the action property.
 - Let's also create some final interactivity on this form using a SubmitButton. Head over to it, make it a client component, and use the React 19 useFormStatus hook to track the loading state of the nearest parent form.
+- Log in again and view the pending state.
 
 ## Final demo using only the keyboard
 
 - Alright, let's do a final demo using only the keyboard. You can see my pressed keys on the screen.
-- Pending state on login, view data right away and prepare out actions with a stable UX, navigate with tabs, and use the menu with the arrow keys, switch them quickly, open/close menu with enter with good focus, have optimistic updates, and get an in sync toast. And trust me the screen reader experience is good as well! Open menu and log out again with pending state.
+- View data right away and prepare out actions with a stable UX, navigate with tabs, and use the menu with the arrow keys, switch them quickly, open/close menu with enter with good focus, have optimistic updates, and get an in sync toast. And trust me the screen reader experience is good as well! Open menu and log out again with pending state.
 - Review our changes: ariakit for nameless divs, react 19 hooks, less code!
 - Ending point: Were done. Accessible, interactive, custom, account selector, without becoming an accessibility expert. Lets go back and summarize.
