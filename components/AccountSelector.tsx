@@ -56,8 +56,10 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
 
   return (
     <div className="relative">
+      {/* Label */}
       <div className="mb-2 font-bold">ACCOUNT</div>
       <div className="flex items-center gap-4">
+        {/* Open button */}
         <button
           onClick={() => {
             return setExpanded(!expanded);
@@ -70,6 +72,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           )}
         >
           {currentAccount?.name}
+          {/* Toggle chevron */}
           <ChevronDown
             aria-hidden="true"
             width={16}
@@ -79,6 +82,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         </button>
         {isPending && <Spinner />}
       </div>
+      {/* Popover */}
       {expanded && (
         <div className="border-divider focus-visible:outline-primary dark:border-divider-dark absolute top-20 flex w-[257px] flex-col gap-2 rounded-sm border bg-white shadow-lg -outline-offset-1 focus-visible:outline-2 dark:bg-black">
           <div className="flex items-start justify-between px-3 py-2 text-lg">
@@ -89,11 +93,13 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
               </span>
             </div>
             <div className="hover:outline-primary mt-2 cursor-pointer rounded-full p-1 hover:outline">
+              {/* Options item */}
               <span className="sr-only">Account options</span>
               <EllipsisVertical aria-hidden="true" width={16} height={16} />
             </div>
           </div>
           <Divider />
+          {/* Account items */}
           {accounts.map(account => {
             return (
               <button
@@ -113,6 +119,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                   </div>
                   <span className="text-sm">{account.email}</span>
                 </div>
+                {/* Active account check */}
                 {account.id === currentAccount?.id && (
                   <span>
                     <span className="sr-only">Active account</span>
