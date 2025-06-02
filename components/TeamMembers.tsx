@@ -25,7 +25,7 @@ export default async function TeamMembers() {
           <TeamMember className="text-primary-darker" />
           <TeamMember className="text-primary-variant-3" />
         </ul>
-        <button className="hover:bg-gray size-12 cursor-pointer rounded-full bg-black p-1 text-white md:size-16 md:p-3 dark:bg-white dark:text-black">
+        <button className="hover:bg-gray focus-visible:outline-primary size-12 cursor-pointer rounded-full bg-black p-1 text-white focus-visible:outline-2 focus-visible:-outline-offset-3 md:size-16 md:p-3 dark:bg-white dark:text-black">
           <span className="sr-only">Add team member</span>
           <Plus aria-hidden="true" width={40} height={40} />
         </button>
