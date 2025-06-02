@@ -75,21 +75,28 @@
             "  };",
             "}, [expanded]);"
         ]
-    }
-    ,
+    },
     "optimisticAccount": {
         "scope": "typescriptreact",
         "prefix": "optimisticAccount",
         "body": [
             "optimisticAccount, setOptimisticAccount"
         ]
-    }
-    ,
+    },
     "logoutTransition": {
         "scope": "typescriptreact",
         "prefix": "logoutTransition",
         "body": [
             "const [logoutIsPending, startLogoutTransition] = useTransition();"
+        ]
+    },
+    "logoutButton": {
+        "scope": "typescriptreact",
+        "prefix": "logoutButton",
+        "body": [
+            "<button className=\"aria-disabled:text-gray self-end px-2 pb-2 aria-disabled:italic not-aria-disabled:data-active-item:underline\">",
+            "  Log out",
+            "</button>;"
         ]
     }
 }
