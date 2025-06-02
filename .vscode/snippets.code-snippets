@@ -84,4 +84,12 @@
             "optimisticAccount, setOptimisticAccount"
         ]
     }
+    ,
+    "logoutTransition": {
+        "scope": "typescriptreact",
+        "prefix": "logoutTransition",
+        "body": [
+            "const [logoutIsPending, startLogoutTransition] = useTransition();"
+        ]
+    }
 }
