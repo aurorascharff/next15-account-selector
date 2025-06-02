@@ -2,7 +2,7 @@
 
 import { EllipsisVertical, ChevronDown, Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import React, { startTransition, use, useState } from 'react';
+import React, { use, useState } from 'react';
 import { toast as sonnerToast } from 'sonner';
 import type { ToastType } from '@/types/toast';
 import { cn } from '@/utils/cn';
@@ -39,21 +39,19 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
     setIsPending(true);
     const previousAccount = currentAccount;
     setCurrentAccount(account);
-    startTransition(async () => {
-      const response = await fetch('/api/account', {
-        body: JSON.stringify(account.id),
-        method: 'POST',
-      });
-      setIsPending(false);
-      if (!response.ok) {
-        const body = await response.json();
-        toast(body.error, 'error');
-        setCurrentAccount(previousAccount);
-      } else {
-        toast('Account changed successfully!', 'success');
-        router.refresh();
-      }
+    const response = await fetch('/api/account', {
+      body: JSON.stringify(account.id),
+      method: 'POST',
     });
+    setIsPending(false);
+    if (!response.ok) {
+      const body = await response.json();
+      toast(body.error, 'error');
+      setCurrentAccount(previousAccount);
+    } else {
+      toast('Account changed successfully!', 'success');
+      router.refresh();
+    }
   };
 
   return (
