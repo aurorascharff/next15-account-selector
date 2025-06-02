@@ -92,8 +92,8 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 {currentAccount?.plan} plan ({currentAccount?.type}){currentAccount?.plan === 'pro' && <StarMarker />}
               </span>
             </div>
+            {/* Options item */}
             <div className="hover:outline-primary mt-2 cursor-pointer rounded-full p-1 hover:outline">
-              {/* Options item */}
               <span className="sr-only">Account options</span>
               <EllipsisVertical aria-hidden="true" width={16} height={16} />
             </div>
