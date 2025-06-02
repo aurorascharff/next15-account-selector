@@ -15,7 +15,7 @@
 - Now, thats the setup, but our demo is the AccountSelector component. So it has this nice custom UI that doesn't exist in any library.
 - Demo the selection of the account and the loading state. Looks good right? But wait. Let's look at the code.
 - Showcase the code using isLoading, expanded, and states. Mutation through endpoint contains lots of boilerplate code. Hard to read the divs and spans. Probably I should have used lists anyways.
-- Now let's get into the problems here. Our loading state is not entirely in sync with the dashboard update, since the toast and the loading state fires after the request but not after the new page has loaded and the account is actually switched visually.
+- Now let's get into the problems here. The select is tied to the server update. Our loading state is not entirely in sync with the dashboard update, since the toast and the loading state fires after the request but not after the new page has loaded and the account is actually switched visually.
 - The keyboard navigation is incorrectly implemented, I have to use tabs when I should be using the arrow keys. It does not close on escape click or on click outside, or moving to next element. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality. I'm using state variables to define styles which is not optimal nor easy.
 - Who has tried to implement some of this stuff correctly? Who has failed? I know I have. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
 
@@ -57,13 +57,13 @@
 - (Create new file account.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
 - Call the server function inside the onClick instead of API. Showcase server function in account.ts. Type safe.
 - Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
-- Delete the optimistic code based on the res, we don't need it anymore. Let's again save toast for last.
+- Delete the toast code based on the res, let's again save toast for last.
 
 ## Add useOptimistic for the optimistic update
 
-- We deleted the naive optimistic update code. Lets add it back in a better way.
+- Now we want optimistic update in the select. We could start messing around with useState, but let's use more React 19 hooks to make this easier.
 - To avoid the delayed update on the select depending on the server, let's use the new useOptimistic hook from React 19. It allows us to create an optimistic update, which is a temporary state that is shown while an async action is running.
-- Add useOptimistic hook and wrap the server function with it. Use the optimistic value for all the existing account variables.
+- Add useOptimistic hook and wrap the server function with it. Use the optimistic value for all the existing account variables. Needs to be called inside a transition, but we already have that.
 - Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background. The spinner is shown on the button, and the select is disabled while loading.
 - Showcase failure state by removing the disabled prop. We get automatic "rollback" because the optimistic value is not the same as the server value, it's just a temporary state.
 
