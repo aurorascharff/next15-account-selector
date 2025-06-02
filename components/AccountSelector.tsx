@@ -63,25 +63,25 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             </Ariakit.SelectItem>
           </div>
           <Divider />
-          {accounts.map(a => {
+          {accounts.map(account => {
             return (
               <Ariakit.SelectItem
                 className="data-active-item:bg-card aria-disabled:text-gray dark:data-active-item:bg-card-dark data-focus-visible:bg-primary dark:data-focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 data-focus-visible:text-white"
-                key={a.id}
-                value={a.id}
-                disabled={a.inactive}
+                key={account.id}
+                value={account.id}
+                disabled={account.inactive}
                 onClick={() => {
-                  handleSwitchAccount(a);
+                  handleSwitchAccount(account);
                 }}
               >
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <span className="font-semibold">
-                      {a.name} {a.inactive && '(inactive)'}{' '}
+                      {account.name} {account.inactive && '(inactive)'}{' '}
                     </span>
-                    {a?.plan === 'pro' && <StarMarker />}
+                    {account?.plan === 'pro' && <StarMarker />}
                   </div>
-                  <span className="text-sm">{a.email}</span>
+                  <span className="text-sm">{account.email}</span>
                 </div>
                 <Ariakit.SelectItemCheck />
               </Ariakit.SelectItem>
