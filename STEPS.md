@@ -90,6 +90,7 @@
 ## Final demo using only the keyboard
 
 - Alright, let's do a final demo using only the keyboard. You can see my pressed keys on the screen.
-- View data right away and prepare out actions with a stable UX, navigate with tabs, and use the menu with the arrow keys, switch them quickly, open/close menu with enter with good focus, have optimistic updates, and get an in sync toast. And trust me the screen reader experience is good as well! Open menu and log out again with pending state.
+- Load page and view data right away, get this stable loading state with suspense fallback using server components.
+- Navigate with tabs, and use the menu with the arrow keys, switch them quickly, open/close menu with enter with good focus, have optimistic updates, and get an in sync toast. And trust me the screen reader experience is good as well! Open menu and log out again with pending state.
 - Review our changes: ariakit for nameless divs, react 19 hooks, less code!
 - Ending point: Were done. Accessible, interactive, custom, account selector, without becoming an accessibility expert. Lets go back and summarize.
