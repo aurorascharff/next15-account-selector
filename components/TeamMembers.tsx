@@ -36,7 +36,7 @@ export default async function TeamMembers() {
 
 function TeamMember({ className, ...otherProps }: { className?: string }) {
   return (
-    <li>
+    <li tabIndex={-1}>
       <span className="sr-only">Team member</span>
       <svg
         {...otherProps}
