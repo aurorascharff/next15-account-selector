@@ -76,4 +76,12 @@
             "}, [expanded]);"
         ]
     }
+    ,
+    "optimisticAccount": {
+        "scope": "typescriptreact",
+        "prefix": "optimisticAccount",
+        "body": [
+            "optimisticAccount, setOptimisticAccount"
+        ]
+    }
 }

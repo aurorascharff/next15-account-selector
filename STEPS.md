@@ -47,7 +47,7 @@
 - Now lets get to work on the mutation. This is a lot of boilerplate code. We can use the new react 19 to simplify this.
 - To track the loading state, lets use the new useTransition hook from React 19. It let's use create Actions, which are a different type of event handling. It runs in the background and does not block the main thread, like a deferred update. Returns pending state isPending and a startTransition function.
 - Remove pending state useState.
-- Wrap server function with useTransition, remove setPending, get pending state isPending. Move async keyword.
+- Wrap everything after the == check with useTransition, remove setPending, get pending state isPending. Move async keyword.
 - Use pending state to set aria-busy on the select and notice the spinner using the new variable.
 - Test that it works. Now we are getting the toast too early rather than too late, let's fix that later.
 
@@ -55,34 +55,33 @@
 
 - Now the API call.
 - (Create new file account.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
-- Call the server function inside the onClick instead of API. Showcase server function in account.ts. Type safe.
+- Call the server function inside the onClick instead of API. Showcase server function in account.ts. We can with server functions call server code from the client as a function, it creates a hidden API endpoint. Type safe with RPC.
 - Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
-- Delete the toast code based on the res, let's again save toast for last.
+- Delete the toast code based on the res, let's again save toast for last. All we need is this server fn. Test it.
 
 ## Add useOptimistic for the optimistic update
 
 - Now we want optimistic update in the select. We could start messing around with useState, but let's use more React 19 hooks to make this easier.
-- To avoid the delayed update on the select depending on the server, let's use the new useOptimistic hook from React 19. It allows us to create an optimistic update, which is a temporary state that is shown while an async action is running.
-- Add useOptimistic hook and wrap the server function with it. Use the optimistic value for all the existing account variables. Needs to be called inside a transition, but we already have that.
-- Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background. The spinner is shown on the button, and the select is disabled while loading.
+- To avoid the delayed update on the select depending on the server, let's use the new useOptimistic hook from React 19. It takes in a state to show when no transition is pending, which is our server truth of the currentAccount, and returns a optimistic state and a function to update it.
+- Add useOptimistic hook above the server function, needs to be called inside a transition, but we already have that. Use the optimistic value for all the existing account variables.
+- Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background. The spinner is shown on the button. UseOptimistic creates a temporary state that is shown while an async action is running, then throws it away when the action is done and settles to the passed value.
 - Showcase failure state by removing the disabled prop. We get automatic "rollback" because the optimistic value is not the same as the server value, it's just a temporary state.
 
 ## Showcase and use new toast implementation
 
 - Now, we need to add back the toast that we had before. I would need to return something from this server function, and trigger toasts based on that or even use something like useActionState. Problem is, that doesn't work across page navigations. For example if i want a success toast after deleting a contact, that would be a problem.
 - I'm gonna use an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
-- Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation.
-- Delete toast code from AccountSelector
-- Trigger toast from the server function. This is sweet because it's here on the server we know what the result of the action is. Showcase what it looks like, now in sync with the action.
+- Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation. Server side. I'm still testing this, so it might change in the future. This is just a demo.
+- Delete toast code from AccountSelector, trigger toast from the server function, error and success. This is sweet because it's here on the server we know what the result of the action is. Showcase what it looks like, now in sync with the action.
 
-## Add logout item in menu
+## (Add logout item in menu)
 
 - Let's add another custom UI element to the select. A logout button, showcasing the customizability of Ariakit.
 - Await a new promise, track its loading state with another useTransition, creating a React Action.
 - Style it with aria-disabled and not:data-active-item underline. Showcase the result when focusing it and clicking it.
 - We're gonna call another Server Function, which deleted our account cookie. Log out.
 
-## Update login form to login again
+## (Update login form to login again)
 
 - Here logged out, let's complete the app with a functional login button. Use .bind to directly bind the server function to the button. Don't need to create a client component for this.
 - Let's also create some final interactivity on this form using a SubmitButton. Head over to it, make it a client component, and use the React 19 useFormStatus hook to track the loading state of the nearest parent form.
