@@ -5,49 +5,49 @@
 - This is a account dashboard demo app. Again this is inspired by that feature I showed in the slides.
 - The setup is the Next.js App Router, Prisma ORM and an Prisma Postgres DB, and Tailwind CSS.
 - I already completed all the data fetching here.
-- Since app Router, using Server components fetching data based on a cookie value, fetched through this data access layer, caching everything with cache() to avoid duplicate requests. When loading the page, the server components are streamed in and suspense fallbacks are used to show loading states.a
-- And a bonus: using Next.js unauthorized.tsx error boundary to throw a 401 error if the user is not logged in. This is a great way to handle authentication in Next.js. specific unauthorized error if the accountId in the cookie is not valid.
+- Layout.tsx: Since app Router, using Server components fetching data based on a cookie value, fetched through this data access layer, caching everything with cache() to avoid duplicate requests. When loading the page, the server components are streamed in and suspense fallbacks are used to show loading states.
+- And a bonus: using Next.js unauthorized.tsx error boundary to catch a thrown 401 forbidden(9) error if the account cookie is not a valid account.
 - Everything is dynamic since we are using cookies.
-- All of this is covered in detail in a previous talk of mine if you're interested!
-- Goal: Create a  interactive, accessible, custom account dashboard using these tools
+- All of this is covered in detail in a previous talk of mine if you're interested! Or just check out the code on GitHub later.
 
 ## Initial implementation of AccountSelector
 
-- Now, thats the setup, but our task is the AccountSelector component. So it has this nice custom UI that doesn't exist in any library.
-- Demo the selection of the account and the loading state. Looks good right? But wait.
+- Now, thats the setup, but our demo is the AccountSelector component. So it has this nice custom UI that doesn't exist in any library.
+- Demo the selection of the account and the loading state. Looks good right? But wait. Let's look at the code.
 - Showcase the code using isLoading, expanded, and states. Mutation through endpoint contains lots of boilerplate code. Hard to read the divs and spans. Probably I should have used lists anyways.
-- Now let's get into the problems here. Our loading state is not entirely in sync with the backend, since the toast and the loading state fires after the request but not after the new page has loaded and the account is actually switched visually. The keyboard navigation is incorrectly implemented, I have to use tabs when I should be using the arrow keys. It does not close on escape click or on click outside. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality. I'm using state variables to define styles which is not optimal nor easy.
+- Now let's get into the problems here. Our loading state is not entirely in sync with the dashboard update, since the toast and the loading state fires after the request but not after the new page has loaded and the account is actually switched visually.
+- The keyboard navigation is incorrectly implemented, I have to use tabs when I should be using the arrow keys. It does not close on escape click or on click outside, or moving to next element. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality. I'm using state variables to define styles which is not optimal nor easy.
 - Who has tried to implement some of this stuff correctly? Who has failed? I know I have. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
 
-## Add example implementation of accessibility
-
 - Let's do a trial on one of these features. Let's try to implement the keyboard navigation correctly.
-- Add snippet for escape key, add snippet for arrow keys and focus trap. Not up to standard. These are just two of the many things we need to implement for a menu. Don't even get me started on screen reader support, like adding aria-expanded and roles, activedescentant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert, and it's a a lot!
+- Add snippet for escape key, add snippet for arrow keys and focus trap. Not up to standard.
+- These are just two of the many things we need to implement for a menu. Don't even get me started on screen reader support, like adding aria-expanded and roles, activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert, and it's a a lot!
 - Phew! So. We don't want to do this. Delete the snippet code.
-- Let's use the solutions we covered in the slides.
+- Let's use the solutions we covered in the slides. Goal: Create an interactive, accessible, custom account dashboard using our tools: Tailwind, Ariakit, and React 19.
 
 ## Replace all divs with Ariakit equivalents and update styles
 
-- Lets step by step replace all the divs with Ariakit equivalents, declarative components that are accessible by default and have all the functionality we need built in
+- Let's begin with the accessibility.
+- Lets step by step replace all the divs with Ariakit equivalents, declarative components that are accessible by default and have all the functionality we need built in. Import ariakit.
 - Remove "relative" from parent div
-- Add ariakit Ariakit.SelectProvider between
-- Replace label div with Ariakit.SelectLabel
-- Replace open button with Ariakit.SelectButton
-- Replace chevron icon inside with Ariakit.SelectArrow
-- Replace "absolute" div Ariakit.SelectPopover
-- Remove expanded useState for expanded state, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState, showcase aria-expanded inside a component SelectButton
-- Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, the active item functionality is built in to Ariakit and stylable with data-active-item, replace focus with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled:
+- Provider: Add ariakit Ariakit.SelectProvider between with value={currentAccount?.id}
+- Label: Replace label div with Ariakit.SelectLabel
+- Select: Replace open button with Ariakit.Select and remove setExpanded
+- SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState
+- SelectButton: Replace all styles and render SelectButton and showcase aria-expanded
+- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover
+- SelectItem: Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
+- SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
+- SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}
 - All of this is in the documentation! And there are docs for non-tailwind users as well.
-- Replace the account buttons with Ariakit.SelectItem as well, replace hover: with data-active-item:, the disabled={} prop now is correctly implemented behind the scenes by Ariakit, use aria-disabled to style it
-- Replace the selected item check with Ariakit.SelectItemCheck
+- Remove setExpanded from handleSwitchAccount, remove expanded useState
 
 ## Use Server Function for the mutation
 
 - Now lets get to work on the mutation. This is a lot of boilerplate code. We can use the new react 19 Server Functions to simplify this.
-- (Create new file account.ts with "use server", copy the API code)
-- Showcase server function in account.ts
+- (Create new file account.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
+- Call the server function inside the onClick instead of API. Type safe.Showcase server function in account.ts.
 - Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
-- Call the server function inside the onClick. Type safe.
 
 ## Add useTransition for the loading state
 
