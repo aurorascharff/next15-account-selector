@@ -31,6 +31,31 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
     });
   };
 
+  const handleSwitchAccount = async (account: Account) => {
+    setExpanded(false);
+    if (currentAccount?.id === account.id) {
+      return;
+    }
+    setIsPending(true);
+    const previousAccount = currentAccount;
+    setCurrentAccount(account);
+    startTransition(async () => {
+      const response = await fetch('/api/account', {
+        body: JSON.stringify(account.id),
+        method: 'POST',
+      });
+      setIsPending(false);
+      if (!response.ok) {
+        const body = await response.json();
+        toast(body.error, 'error');
+        setCurrentAccount(previousAccount);
+      } else {
+        toast('Account changed successfully!', 'success');
+        router.refresh();
+      }
+    });
+  };
+
   return (
     <div className="relative">
       <div className="mb-2 font-bold">ACCOUNT</div>
@@ -77,28 +102,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 key={account.id}
                 disabled={account.inactive}
                 onClick={() => {
-                  setExpanded(false);
-                  if (currentAccount?.id === account.id) {
-                    return;
-                  }
-                  setIsPending(true);
-                  const previousAccount = currentAccount;
-                  setCurrentAccount(account);
-                  startTransition(async () => {
-                    const response = await fetch('/api/account', {
-                      body: JSON.stringify(account.id),
-                      method: 'POST',
-                    });
-                    setIsPending(false);
-                    if (!response.ok) {
-                      const body = await response.json();
-                      toast(body.error, 'error');
-                      setCurrentAccount(previousAccount);
-                    } else {
-                      toast('Account changed successfully!', 'success');
-                      router.refresh();
-                    }
-                  });
+                  return handleSwitchAccount(account);
                 }}
               >
                 <div className="flex flex-col">
