@@ -20,7 +20,7 @@ type Props = {
 export default function AccountSelector({ accountsPromise, currentAccountPromise }: Props) {
   const accounts = use(accountsPromise);
   const currentAccountResolved = use(currentAccountPromise);
-  const [currentAccount, setCurrentAccount] = useState<Account | null>(currentAccountResolved);
+  const [account, setAccount] = useState<Account | null>(currentAccountResolved);
   const [isPending, setIsPending] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const router = useRouter();
@@ -33,12 +33,12 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
 
   const handleSwitchAccount = async (account: Account) => {
     setExpanded(false);
-    if (currentAccount?.id === account.id) {
+    if (account?.id === account.id) {
       return;
     }
     setIsPending(true);
-    const previousAccount = currentAccount;
-    setCurrentAccount(account);
+    const previousAccount = account;
+    setAccount(account);
     const response = await fetch('/api/account', {
       body: JSON.stringify(account.id),
       method: 'POST',
@@ -47,7 +47,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
     if (!response.ok) {
       const body = await response.json();
       toast(body.error, 'error');
-      setCurrentAccount(previousAccount);
+      setAccount(previousAccount);
     } else {
       toast('Account changed successfully!', 'success');
       router.refresh();
@@ -71,7 +71,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
               'focus-visible:outline-primary hover:bg-card bg-white text-black focus-visible:outline-2 focus-visible:-outline-offset-1',
           )}
         >
-          {currentAccount?.name}
+          {account?.name}
           {/* Toggle chevron */}
           <ChevronDown
             aria-hidden="true"
@@ -87,9 +87,9 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         <div className="border-divider focus-visible:outline-primary dark:border-divider-dark absolute top-20 flex w-[257px] flex-col gap-2 rounded-sm border bg-white shadow-lg -outline-offset-1 focus-visible:outline-2 dark:bg-black">
           <div className="flex items-start justify-between px-3 py-2 text-lg">
             <div className="flex flex-col gap-2">
-              <span className="font-semibold">{currentAccount?.name}</span>
+              <span className="font-semibold">{account?.name}</span>
               <span className="flex gap-2 text-sm capitalize italic">
-                {currentAccount?.plan} plan ({currentAccount?.type}){currentAccount?.plan === 'pro' && <StarMarker />}
+                {account?.plan} plan ({account?.type}){account?.plan === 'pro' && <StarMarker />}
               </span>
             </div>
             {/* Options item */}
@@ -100,27 +100,27 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           </div>
           <Divider />
           {/* Account items */}
-          {accounts.map(account => {
+          {accounts.map(a => {
             return (
               <button
                 className="hover:bg-card disabled:text-gray dark:hover:bg-card-dark focus-visible:bg-primary dark:focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 focus-visible:text-white"
-                key={account.id}
-                disabled={account.inactive}
+                key={a.id}
+                disabled={a.inactive}
                 onClick={() => {
-                  return handleSwitchAccount(account);
+                  return handleSwitchAccount(a);
                 }}
               >
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <span className="font-semibold">
-                      {account.name} {account.inactive && '(inactive)'}{' '}
+                      {a.name} {a.inactive && '(inactive)'}{' '}
                     </span>
-                    {account?.plan === 'pro' && <StarMarker />}
+                    {a?.plan === 'pro' && <StarMarker />}
                   </div>
-                  <span className="text-sm">{account.email}</span>
+                  <span className="text-sm">{a.email}</span>
                 </div>
                 {/* Active account check */}
-                {account.id === currentAccount?.id && (
+                {a.id === a?.id && (
                   <span>
                     <span className="sr-only">Active account</span>
                     <Check aria-hidden="true" width={18} height={18} />
