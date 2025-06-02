@@ -24,6 +24,16 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
   const [isPending, startTransition] = useTransition();
   const [logoutIsPending, startLogoutTransition] = useTransition();
 
+  const handleSwitchAccount = async (account: Account) => {
+    if (optimisticAccount?.id === account.id) {
+      return;
+    }
+    startTransition(async () => {
+      setOptimisticAccount(account);
+      await setCurrentAccount(account.id);
+    });
+  };
+
   return (
     <div>
       <Ariakit.SelectProvider value={optimisticAccount?.id}>
@@ -61,13 +71,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 value={account.id}
                 disabled={account.inactive}
                 onClick={() => {
-                  if (optimisticAccount?.id === account.id) {
-                    return;
-                  }
-                  startTransition(async () => {
-                    setOptimisticAccount(account);
-                    await setCurrentAccount(account.id);
-                  });
+                  handleSwitchAccount(account);
                 }}
               >
                 <div className="flex flex-col">
