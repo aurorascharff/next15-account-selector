@@ -31,16 +31,16 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
     });
   };
 
-  const handleSwitchAccount = async (account: Account) => {
+  const handleSwitchAccount = async (newAccount: Account) => {
     setExpanded(false);
-    if (account?.id === account.id) {
+    if (account?.id === newAccount.id) {
       return;
     }
     setIsPending(true);
     const previousAccount = account;
     setAccount(account);
     const response = await fetch('/api/account', {
-      body: JSON.stringify(account.id),
+      body: JSON.stringify(newAccount.id),
       method: 'POST',
     });
     setIsPending(false);
