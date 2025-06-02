@@ -18,6 +18,7 @@
 - Now let's get into the problems here. Our loading state is not entirely in sync with the dashboard update, since the toast and the loading state fires after the request but not after the new page has loaded and the account is actually switched visually.
 - The keyboard navigation is incorrectly implemented, I have to use tabs when I should be using the arrow keys. It does not close on escape click or on click outside, or moving to next element. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality. I'm using state variables to define styles which is not optimal nor easy.
 - Who has tried to implement some of this stuff correctly? Who has failed? I know I have. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
+
 - Let's do a trial on one of these features. Let's try to implement the keyboard navigation correctly.
 - Add snippet for escape key, add snippet for arrow keys and focus trap. Not up to standard.
 - These are just two of the many things we need to implement for a menu. Don't even get me started on screen reader support, like adding aria-expanded and roles, activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert, and it's a a lot!
@@ -26,27 +27,27 @@
 
 ## Replace all divs with Ariakit equivalents and update styles
 
+- Let's begin with the accessibility.
 - Lets step by step replace all the divs with Ariakit equivalents, declarative components that are accessible by default and have all the functionality we need built in. Import ariakit.
 - Remove "relative" from parent div
-- Add ariakit Ariakit.SelectProvider between with value={currentAccount?.id}
-- Replace label div with Ariakit.SelectLabel
-- Replace open button with Ariakit.Select and remove setExpanded
-- Replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState
-- Replace all styles and render SelectButton and showcase aria-expanded
-- Replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8}, remove expanded wrapper
-- Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
-- Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
-- Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}
+- Provider: Add ariakit Ariakit.SelectProvider between with value={currentAccount?.id}
+- Label: Replace label div with Ariakit.SelectLabel
+- Select: Replace open button with Ariakit.Select and remove setExpanded
+- SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState
+- SelectButton: Replace all styles and render SelectButton and showcase aria-expanded
+- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover
+- SelectItem: Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
+- SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
+- SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}
 - All of this is in the documentation! And there are docs for non-tailwind users as well.
 - Remove setExpanded from handleSwitchAccount, remove expanded useState
 
 ## Use Server Function for the mutation
 
 - Now lets get to work on the mutation. This is a lot of boilerplate code. We can use the new react 19 Server Functions to simplify this.
-- (Create new file account.ts with "use server", copy the API code)
-- Showcase server function in account.ts
+- (Create new file account.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
+- Call the server function inside the onClick instead of API. Type safe.Showcase server function in account.ts.
 - Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
-- Call the server function inside the onClick. Type safe.
 
 ## Add useTransition for the loading state
 
