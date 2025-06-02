@@ -28,14 +28,15 @@
 
 - Lets step by step replace all the divs with Ariakit equivalents, declarative components that are accessible by default and have all the functionality we need built in. Import ariakit.
 - Remove "relative" from parent div
-- Add ariakit Ariakit.SelectProvider between
+- Add ariakit Ariakit.SelectProvider between with value={currentAccount?.id}
 - Replace label div with Ariakit.SelectLabel
 - Replace open button with Ariakit.Select and remove setExpanded
-- Replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState, replace all styles and render SelectButton and showcase aria-expanded
-- Replace "absolute" div Ariakit.SelectPopover, remove expanded wrapper
+- Replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState
+- Replace all styles and render SelectButton and showcase aria-expanded
+- Replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8}, remove expanded wrapper
 - Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
-- Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
-- Replace the selected item check with Ariakit.SelectItemCheck
+- Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
+- Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}
 - All of this is in the documentation! And there are docs for non-tailwind users as well.
 - Remove setExpanded from handleSwitchAccount, remove expanded useState
 
