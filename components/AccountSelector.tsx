@@ -63,6 +63,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             return setExpanded(!expanded);
           }}
           className={cn(
+            'flex items-center gap-2',
             'bg-primary hover:bg-primary-dark border-primary flex items-center gap-2 rounded-2xl border px-4 py-2 text-nowrap text-white shadow-md outline-offset-1 focus-visible:outline focus-visible:-outline-offset-4 focus-visible:outline-white',
             expanded &&
               'focus-visible:outline-primary hover:bg-card bg-white text-black focus-visible:outline-2 focus-visible:-outline-offset-1',
@@ -96,7 +97,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
           {accounts.map(account => {
             return (
               <button
-                className="hover:bg-card disabled:text-gray dark:hover:bg-card-dark focus-visible:bg-primary dark:focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 focus-visible:text-white"
+                className="hover:bg-card disabled:text-gray dark:hover:bg-card-dark focus-visible:bg-primary mx-2 flex items-center justify-between gap-4 rounded-md px-4 py-2 focus-visible:text-white"
                 key={account.id}
                 disabled={account.inactive}
                 onClick={() => {
