@@ -41,5 +41,5 @@ export function Toasts({ toasts }: { toasts: ToastType[] }) {
       });
   }, [toasts, sentToSonner]);
 
-  return <SonnerToaster position="top-right" />;
+  return <SonnerToaster position="bottom-right" />;
 }

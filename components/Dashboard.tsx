@@ -28,7 +28,7 @@ export default async function Dashboard() {
           </li>
           <li>
             <Tile href="#" icon={<LayoutDashboard width={30} height={30} />} heading="View Task Board">
-              Keep track of your projects and monitor progress in one place
+              Keep track of your tasks and monitor progress in one place
             </Tile>
           </li>
           {isPro && (
