@@ -16,7 +16,7 @@ export default async function RootPage() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4 md:flex-row">
-        <Card className="flex w-full flex-col items-center md:w-1/2 md:items-start">
+        <Card className="flex w-full flex-col items-start md:w-1/2">
           <div className="flex flex-row flex-wrap items-center justify-center gap-6 md:justify-start">
             <Suspense fallback={<AccountCircleSkeleton />}>
               <AccountCircle />
