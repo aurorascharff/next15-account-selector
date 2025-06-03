@@ -4,8 +4,8 @@ import { Geist } from 'next/font/google';
 import { Toaster } from 'sonner';
 import SubmitButton from '@/components/ui/SubmitButton';
 import KeyPressed from '@/components/utils/KeyPressed';
-import { logIn } from '@/data/actions/auth';
-import { isAuthenticated } from '@/data/services/auth';
+
+import { isAuthenticated } from '@/data/services/account';
 import { cn } from '@/utils/cn';
 import type { Metadata } from 'next';
 
@@ -28,9 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             children
           ) : (
             <div className="flex flex-col items-center justify-center pt-20">
-              <form action={logIn.bind(null, 'jane.smith@work.com')}>
-                <SubmitButton>Log in as Jane Smith</SubmitButton>
-              </form>
+              <SubmitButton>Log in as Jane Smith</SubmitButton>
             </div>
           )}
         </main>
