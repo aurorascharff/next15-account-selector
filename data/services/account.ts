@@ -45,3 +45,11 @@ export const getCurrentAccount = cache(async () => {
 
   return getAccount(selectedAccountId);
 });
+
+export const isAuthenticated = cache(async () => {
+  const selectedAccountId = (await cookies()).get('selectedAccountId')?.value;
+  if (!selectedAccountId) {
+    return false;
+  }
+  return true;
+});

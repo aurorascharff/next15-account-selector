@@ -56,7 +56,7 @@
 ## Use Server Function for the mutation
 
 - Now the API call.Let's replace this with a function call to the server.
-- (Create new file account.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
+- (Create new file auth.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
 - Call the server function inside the onClick instead of API. Showcase server function in account.ts. We can with server functions call server code from the client as a function, it creates a hidden API endpoint. Here setting the cookie simulating switching accounts. Erroring if the account is not active.
 - Type safe with RPC.
 - Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
