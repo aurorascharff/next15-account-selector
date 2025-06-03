@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { unstable_ViewTransition as ViewTransition } from 'react';
-import { getCurrentAccount } from '@/data/services/account';
+import { getCurrentAccount } from '@/data/services/auth';
 
 export default async function AccountCircle() {
   const currentAccount = await getCurrentAccount();

@@ -1,7 +1,25 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
+import { getAccount } from '../services/auth';
+import { toast } from '../utils/toast';
+
+export async function setCurrentAccount(accountId: string) {
+  const account = await getAccount(accountId);
+
+  if (account.inactive) {
+    const error = 'The selected account is currently inactive.';
+    await toast.error(error);
+    return {
+      error,
+    };
+  }
+
+  (await cookies()).set('selectedAccountId', accountId);
+  await toast.success('Account changed successfully!');
+}
 
 export async function logOut() {
   await slow();
@@ -12,7 +30,16 @@ export async function logOut() {
 export async function logIn(email: string) {
   await slow();
 
-  if (email === 'jane.smith@personal.com') {
-    (await cookies()).set('selectedAccountId', 'a833bc10-64dd-4069-8573-4bbb4b0065ed');
+  const account = await prisma.account.findFirst({
+    where: {
+      email: email,
+    },
+  });
+
+  if (!account) {
+    const error = 'No account found with this email address.';
+    return toast.error(error);
   }
+
+  (await cookies()).set('selectedAccountId', account?.id);
 }
