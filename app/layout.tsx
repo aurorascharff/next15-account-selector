@@ -31,7 +31,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             children
           ) : (
             <div className="flex flex-col items-center justify-center pt-20">
-              <form action={logIn.bind(null, 'jane.smith@personal.com')}>
+              <form action={logIn.bind(null, 'jane.smith@work.com')}>
                 <SubmitButton>Log in as Jane Smith</SubmitButton>
               </form>
             </div>
