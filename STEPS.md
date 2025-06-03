@@ -88,7 +88,7 @@
 ## (Update login form to login again)
 
 - Here logged out, let's complete the app with a functional login button. Use .bind to directly bind the server function to the button. Don't need to create a client component for this, just use the React 19 form component that let's us call a function in the action property.
-- We also have interactivity on this form by using a SubmitButton. It uses the React 19 useFormStatus hook to track the loading state of the nearest parent form.
+- We also want some interactivity on this form by extending our SubmitButton. Use the React 19 useFormStatus hook to track the loading state of the nearest parent form, and add use client. Composable interactive button that can be used in any form.
 - Log in again and view the pending state.
 
 ## Final demo using only the keyboard
