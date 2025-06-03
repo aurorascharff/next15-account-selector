@@ -3,12 +3,12 @@
 ## Starting point
 
 - What you're looking at is an project dashboard demo app with an account selector. This is inspired by a real feature I built for my current consultancy project, where I'm actively using Next.js App Router with Server Components and React 19.
-- Let’s pretend your designer gave this nice custom UI, a custom select that doesn't exist in any library. And you built it. And all is well.
-- Demo the selection of the account and the loading state. Switch account, spinner, toast, updated dashboard. Looks good right? But wait.
+- Let’s pretend your designer gave this nice custom UI, with a custom account select that doesn't exist in your component library. So you built it yourself. And all is well, right?
+- Demo the selection of the account and the loading state. Switch account, spinner, toast, updated dashboard. Looks okay right? But wait.
 - There are some UX problems here. The select is tied to the server update. Our loading state is not entirely in sync with the dashboard update, since the toast and the loading state fires after the request but not after the new page has loaded and the account is actually switched visually.
 - What about accessibility? The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality.
-- I have some problems: I'm trying to build a custom UI, yet I want it to be accessible. I also want to smoothly handle async operations with a good UX. But I'm not an accessibility expert, and I don't want to write a lot this boilerplate code to get all this right.
-- This situation was me not long ago. Who else has been in a similar situation? Who has tried to implement some of this stuff correctly? Who has failed? I did multiple times as well. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
+- I have some problems: I'm trying to build a custom UI component, yet I want it to be accessible. I also want to smoothly handle async operations with a good UX. But I'm not an accessibility expert, and I don't want to write a lot this boilerplate code to get all this right.
+- This situation was me not long ago. Who else has been in a similar situation?
 - Goal: Make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
 
 ## Setup
@@ -22,11 +22,15 @@
 
 ## Initial implementation of AccountSelector
 
-- Now, thats the setup, but our problems are is the AccountSelector component. So it has this nice custom UI that doesn't exist in any library.
-- Showcase the typical React code using isLoading, expanded states. Mutation through endpoint contains lots of boilerplate code. For the select, it's hard to read the divs and spans. Probably I should have used lists anyways. I'm using state variables to define styles which is not optimal nor easy.
-- Let's do a trial on one of these features. Let's try to implement the keyboard navigation correctly.
+- Now, thats the setup, but our problems are is the AccountSelector component.
+- Showcase the typical React code using isLoading, expanded states. Mutation through endpoint contains lots of boilerplate code. For the select, it's hard to read the divs and spans, I even marked them so I can find them. I should maybe have extracted this to components. And probably I should have used different elements. I'm using state variables to define styles which is not optimal nor easy.
+
+## Try to fix the accessibility issues
+
+- Let's try to fix the accessibility issues. Let's try to implement the keyboard navigation correctly.
 - Add snippet for escape key, add snippet for arrow keys and focus trap. Not up to standard.
 - These are just two of the many things we need to implement for a menu. Don't even get me started on screen reader support, like adding aria-expanded and roles, aria-activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert, and it's a lot!
+- Who has tried to implement some of this stuff correctly? Who has failed? I did multiple times as well. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
 - So. We don't want to do this. Delete the snippet code.
 
 ## Replace all divs with Ariakit equivalents and update styles
