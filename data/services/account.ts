@@ -6,21 +6,14 @@ import { cache } from 'react';
 import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
 
-export async function getAccounts() {
-  await slow(2000);
-
-  const accounts = await prisma.account.findMany({
-    orderBy: {
-      inactive: 'asc',
-    },
-  });
-
-  if (accounts.length === 0) {
-    throw new Error('No accounts found, run seed script');
+export const getCurrentAccount = cache(async () => {
+  const selectedAccountId = (await cookies()).get('selectedAccountId')?.value;
+  if (!selectedAccountId) {
+    unauthorized();
   }
 
-  return accounts;
-}
+  return getAccount(selectedAccountId);
+});
 
 export const getAccount = cache(async (accountId: string) => {
   await slow(1000);
@@ -37,11 +30,18 @@ export const getAccount = cache(async (accountId: string) => {
   return account;
 });
 
-export const getCurrentAccount = cache(async () => {
-  const selectedAccountId = (await cookies()).get('selectedAccountId')?.value;
-  if (!selectedAccountId) {
-    unauthorized();
+export async function getAccounts() {
+  await slow(2000);
+
+  const accounts = await prisma.account.findMany({
+    orderBy: {
+      inactive: 'asc',
+    },
+  });
+
+  if (accounts.length === 0) {
+    throw new Error('No accounts found, run seed script');
   }
 
-  return getAccount(selectedAccountId);
-});
+  return accounts;
+}

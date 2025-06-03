@@ -2,17 +2,17 @@
 
 ## Starting point
 
-- This is a account dashboard demo app. Again this is inspired by that feature I showed in the slides.
+- This is an project dashboard demo app with an account selector. Again this is inspired by that feature I showed in the slides.
 - The setup is the Next.js App Router, Prisma ORM and an Prisma Postgres DB, and Tailwind CSS v4.
 - I already completed all the data fetching here.
-- Layout.tsx: Since app Router, using Server components fetching data based on a cookie value, fetched through this data access layer, caching everything with cache() to avoid duplicate requests. When loading the page, the server components are streamed in and suspense fallbacks are used to show loading states.
+- Page.tsx: Since app Router, using Server components fetching data through this data access layer, getCurrentAccount based on a cookie value simulating auth, getting that account and all accounts from the database, caching everything with cache() to avoid duplicate requests. When loading the page, the server components are streamed in and suspense fallbacks are used to show loading states.
 - And a bonus: using Next.js unauthorized.tsx error boundary to catch a thrown 401 forbidden(9) error if the account cookie is not a valid account.
 - Everything is dynamic since we are using cookies.
 - All of this is covered in detail in a previous talk of mine if you're interested! Or just check out the code on GitHub later.
 
 ## Initial implementation of AccountSelector
 
-- Now, thats the setup, but our demo is the AccountSelector component. So it has this nice custom UI that doesn't exist in any library.
+- Now, thats the setup, but our demo is the AccountSelector component. So it has this nice custom UI that doesn't exist in any library, pretend your designer gave this to you.
 - Demo the selection of the account and the loading state. Looks good right? But wait. Let's look at the code.
 - Showcase the code using isLoading, expanded, and states. Mutation through endpoint contains lots of boilerplate code. Hard to read the divs and spans. Probably I should have used lists anyways.
 - Now let's get into the problems here. The select is tied to the server update. Our loading state is not entirely in sync with the dashboard update, since the toast and the loading state fires after the request but not after the new page has loaded and the account is actually switched visually.
