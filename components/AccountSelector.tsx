@@ -4,8 +4,7 @@ import * as Ariakit from '@ariakit/react';
 
 import { EllipsisVertical } from 'lucide-react';
 import React, { use, useOptimistic, useTransition } from 'react';
-import { setCurrentAccount } from '@/data/actions/account';
-import { logOut } from '@/data/actions/auth';
+import { logOut, setCurrentAccount } from '@/data/actions/auth';
 import Divider from './ui/Divider';
 import SelectButton from './ui/SelectButton';
 import Spinner from './ui/Spinner';
