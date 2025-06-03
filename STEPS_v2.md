@@ -9,7 +9,7 @@
 - What about accessibility? The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality.
 - I have three problems: I'm trying to build a custom UI, yet I want it to be accessible, and I also want it to smoothly update the UI with async operations. But I'm not an accessibility expert, and I don't want to write all this boilerplate code to get it right.
 - This situation was me not long ago. Who else has been in a similar situation? Who has tried to implement some of this stuff correctly? Who has failed? I did multiple times as well. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
-- Goal: Create an interactive and accessible and user friendly account selector using some tools: Tailwind, Ariakit, and React 19. Let's get to the code!
+- Goal: Make this custom account selector interactive and accessible, and improve the UX using certain tools: Ariakit and React 19. Let's get to the code!
 
 ## Setup
 
