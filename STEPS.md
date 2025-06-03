@@ -5,7 +5,7 @@
 - This is an project dashboard demo app with an account selector. Again this is inspired by that feature I showed in the slides.
 - The setup is the Next.js App Router, Prisma ORM and an Prisma Postgres DB, and Tailwind CSS v4.
 - I already completed all the data fetching here.
-- Page.tsx: Since app Router, using Server components fetching data through this data access layer, getCurrentAccount based on a cookie value simulating auth, getting that account and all accounts from the database, caching everything with cache() to avoid duplicate requests. When loading the page, the server components are streamed in and suspense fallbacks are used to show loading states.
+- Page.tsx: Since app Router, can use Server components fetching data through this data access layer, getCurrentAccount based on a cookie value simulating auth, getting that account and all accounts from the database, caching everything with cache() to avoid duplicate requests. When loading the page, the server components are streamed in and suspense fallbacks are used to show loading states.
 - And a bonus: using Next.js unauthorized.tsx error boundary to catch a thrown 401 forbidden(9) error if the account cookie is not a valid account.
 - Everything is dynamic since we are using cookies.
 - All of this is covered in detail in a previous talk of mine if you're interested! Or just check out the code on GitHub later.
