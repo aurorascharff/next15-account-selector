@@ -7,7 +7,7 @@ import FocusedProject, { FocusedProjectSkeleton } from '@/components/FocusedProj
 import Card from '@/components/ui/Card';
 import Divider from '@/components/ui/Divider';
 import IconButton from '@/components/ui/IconButton';
-import { getAccounts, getCurrentAccount } from '@/data/services/account';
+import { getAccounts, getCurrentAccount } from '@/data/services/auth';
 
 export default async function RootPage() {
   const accounts = getAccounts();

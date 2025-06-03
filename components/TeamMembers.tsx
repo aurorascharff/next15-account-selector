@@ -1,6 +1,6 @@
 import { Plus } from 'lucide-react';
 import React from 'react';
-import { getCurrentAccount } from '@/data/services/account';
+import { getCurrentAccount } from '@/data/services/auth';
 import { cn } from '@/utils/cn';
 import Card from './ui/Card';
 import { StarMarker } from './ui/StarMarker';

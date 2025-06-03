@@ -4,8 +4,7 @@ import { Geist } from 'next/font/google';
 import { Toaster } from 'sonner';
 import SubmitButton from '@/components/ui/SubmitButton';
 import KeyPressed from '@/components/utils/KeyPressed';
-
-import { isAuthenticated } from '@/data/services/account';
+import { isAuthenticated } from '@/data/services/auth';
 import { cn } from '@/utils/cn';
 import type { Metadata } from 'next';
 

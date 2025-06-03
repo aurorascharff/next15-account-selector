@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { getAccount } from '@/data/services/account';
+import { getAccount } from '@/data/services/auth';
 import { slow } from '@/utils/slow';
 import type { NextRequest } from 'next/server';
 

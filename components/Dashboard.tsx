@@ -1,6 +1,6 @@
 import { Calendar, LayoutDashboard, Plus, Users, Wrench } from 'lucide-react';
 import React from 'react';
-import { getCurrentAccount } from '@/data/services/account';
+import { getCurrentAccount } from '@/data/services/auth';
 import TeamMembers from './TeamMembers';
 import Card from './ui/Card';
 import Skeleton from './ui/Skeleton';

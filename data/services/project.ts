@@ -1,6 +1,6 @@
 import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
-import { getCurrentAccount } from './account';
+import { getCurrentAccount } from './auth';
 
 export async function getProjects() {
   await slow(1500);

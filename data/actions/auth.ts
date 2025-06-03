@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
-import { getAccount } from '../services/account';
+import { getAccount } from '../services/auth';
 import { toast } from '../utils/toast';
 
 export async function setCurrentAccount(accountId: string) {
