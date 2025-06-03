@@ -7,7 +7,7 @@
 - I already completed all the data fetching here.
 - Page.tsx: Since app Router, can use Server components fetching data through this data access layer, getting all accounts from the database, getCurrentAccount based on a cookie value simulating auth, getting that account and, caching everything with cache() to avoid duplicate requests. When loading the page, the server components are completed on the server then streamed in and suspense fallbacks are used to create loading states.
 - (And a bonus: using Next.js unauthorized.tsx error boundary to catch a thrown 401 forbidden(9) error if the account cookie is not a valid account).
-- Everything is dynamically rendered since we are using cookies.
+- Everything is dynamically rendered since we are using cookies. And it's artifically slowed down so we can see the loading states.
 - All of this is covered in detail in a previous talk of mine if you're interested! Or just check out the code on GitHub later.
 
 ## Initial implementation of AccountSelector
