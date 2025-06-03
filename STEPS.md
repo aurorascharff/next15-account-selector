@@ -42,7 +42,7 @@
 - All of this is in the documentation! And there are docs for non-tailwind users as well.
 - Remove setExpanded from handleSwitchAccount, remove expanded useState.
 - Showcase the result. Keyboard nav, focus trap, arrow keys, escape to close, click outside to close, open/close with enter, and the menu is now accessible by default. The screen reader reads the select and the items correctly.
-- No longer have nameless divs, rather used declarative components with Ariakit.
+- No longer have nameless divs, rather used declarative components with Ariakit without compromising on the customizability.
 
 ## Add useTransition for the loading state
 
@@ -76,7 +76,7 @@
 - I'm gonna try an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
 - Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation. Server side. I'm still testing this, so it might change in the future. This is just a demo.
 - Delete toast code from AccountSelector, trigger toast from the server function, error and success. This is sweet because it's here on the server we know what the result of the action is and have all the information. Showcase what it looks like, now in sync with the action.
-- A lot less code here using the React 19 hooks and the server function.
+- A lot less code here using the React 19 hooks and the server function, and improved UX.
 
 ## (Add logout item in menu)
 
