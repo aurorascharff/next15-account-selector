@@ -64,7 +64,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             'flex items-center gap-2',
             'bg-primary hover:bg-primary-dark border-primary flex items-center gap-2 rounded-2xl border px-4 py-2 text-nowrap text-white shadow-md outline-offset-1 focus-visible:outline focus-visible:-outline-offset-4 focus-visible:outline-white',
             expanded &&
-              'focus-visible:outline-primary hover:bg-card bg-white text-black focus-visible:outline-2 focus-visible:-outline-offset-1',
+              'focus-visible:outline-primary hover:bg-card dark:hover:bg-card-dark bg-white text-black focus-visible:outline-2 focus-visible:-outline-offset-1 dark:bg-black dark:text-white',
           )}
         >
           {currentAccount?.name}
