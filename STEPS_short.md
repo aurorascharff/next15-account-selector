@@ -54,7 +54,7 @@
 
 ## Add useTransition for the loading state
 
-- Now lets get to work on the mutation. This is a lot of boilerplate code. We can use the new react 19 to simplify this.
+- Now lets get to work on the async operation, the account switching. This is a lot of boilerplate code. We can use the new react 19 to simplify this.
 - To track the loading state, lets use the improved useTransition hook from React 19. It let's use create Actions, which are a different type of event handling. It runs in the background and does not block the main thread, like a deferred update. Returns pending state isPending and a startTransition function.
 - Remove pending state useState.
 - Wrap everything after the == check with useTransition, remove setPending, get pending state isPending. Move async keyword.
@@ -113,5 +113,4 @@
 - Customization was straightforward, letting us style everything with Tailwind CSS using data- and aria-attributes.
 - With React 19, we streamlined server communication using server functions, eliminating the need for a separate API layer.
 - We replaced common patterns like `useState` and `useEffect` with new hooks like `useTransition`, `useFormStatus`, and `useOptimistic`, resulting in smoother interactions and simplified loading states.
-- Instant user feedback and automatic error rollback were achieved with optimistic updates.
 - The result: a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.
