@@ -2,14 +2,14 @@
 
 ## Starting point
 
-- What you're looking at is an project dashboard demo app with an account selector. This is based on by a real feature I built for my current project, the inspiration behind this talk.
-- Let’s pretend your designer gave this nice custom UI, with a custom account select that doesn't exist in your component library. So you built it yourself. And all is well, right? Let's try this out.
+- What you're looking at is an project dashboard demo app with an account selector. This is based on a real feature I built for my current project, the inspiration behind this talk.
+- Let’s pretend your designer gave this nice custom UI, with a custom account select that didn't exist in your component library. So you built it yourself. And all is well, right? Let's try this out.
 - This account select allows me to switch account, get a loading state spinner, a toast, and see the updated dashboard. There was a strange interaction there, the loading state was not entirely in sync with the visual update. Oh well, let's also try interacting with this dropdown.
 - (My toast is also out of sync, it shows the success message before the dashboard has updated.)
 - The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu popover placement isn't smart and doe not have any smart auto positioning functionality (show with console).
-- I have these challenges: I'm trying to build a custom UI component, yet I want it to be accessible. But I'm not an accessibility expert. I also want to smoothly handle async operations with a good UX. Wnd I don't want to write lot's of code to get all this right.
+- I have these challenges: I'm trying to build a custom UI component, yet I want it to be accessible. But I'm not an accessibility expert. I also want to smoothly handle async operations with a good UX. But I don't want to write lot's of code to get all this right.
 - This situation was me not long ago. Who else has been in a similar situation?
-- Goal of this demo: show you how to make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
+- That's why, the goal of this demo: show you how to make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
 
 ## Setup
 
@@ -31,14 +31,14 @@
 - Let's try to fix the accessibility issues. Let's try to implement the keyboard navigation correctly. It's not up to standard, though.
 - Add snippet for escape key. Looks familiar?
 - Add snippet for arrow keys and focus trap, don't complete it. Let's not go there.
-- These are just one(two) of the many things we need to implement for a menu. Don't even get me started on screen reader support, by adding roles and things like aria-expanded and aria-activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert!
-- Who has tried to implement some of this stuff correctly? Who has failed? I did multiple times as well. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
+- These are just one(two) of the many things we need to implement for a select. Don't even get me started on screen reader support, by adding roles and things like aria-expanded and aria-activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert!
+- (Who has tried to implement some of this stuff correctly? Who has failed? I did multiple times as well. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend).
 - So. We don't want to do this. Delete the snippet code.
 
 ## Replace all divs with Ariakit equivalents and update styles
 
 - Let's use Ariakit to solve this problem. Import ariakit.
-- Ariakit is a React library that provides unstyled, primitive components and hooks for building interactive UIs. Provides declarative components that are accessible by default and have all the functionality we need built in, and can compose together.
+- Ariakit is a React library that provides unstyled, primitive components and hooks for building interactive UIs. Provides declarative components that are accessible by default following WCAG-standard and have all the functionality we need built in, and can compose together.
 - Lets step by step replace all the divs with Ariakit equivalents.
 - Remove "relative" from parent div
 - Provider: Add ariakit Ariakit.SelectProvider between with value={currentAccount?.id}
