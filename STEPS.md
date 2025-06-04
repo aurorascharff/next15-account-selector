@@ -55,8 +55,8 @@
 
 ## Add useTransition for the loading state
 
-- Now lets get to work on the async operation, the account switching. This is a lot of boilerplate code. We can use the new react 19 to simplify this.
-- To track the loading state, lets use the improved useTransition hook from React 19. It let's use create Actions, which are a different type of event handling. It runs in the background as a lower priority update, like a deferred update. Returns pending state isPending and a startTransition function.
+- Now lets get to work on the async operation, the account switching. This is a lot of boilerplate code. We can use the new react 19 to simplify this, and fix the out of sync spinner.
+- To track the loading state, lets use the improved useTransition hook from React 19. It let's use mark a state update as non-urgent, abd commits all the state updates once they are all done. Returns pending state isPending which is true for as long as a transition runs, and a startTransition function.
 - Remove pending state useState.
 - Wrap everything after the == check with useTransition, remove setPending, get pending state isPending. Move async keyword.
 - Use pending state to set aria-busy on the select and notice the spinner using the new variable.
@@ -85,7 +85,7 @@
 - I want to improve the out of sync toast. It's actually triggering when the response comes back but before the UI has updated in the dashboard. And in addition, this toast doesn't work across page navigations. For example if I want a success toast after deleting an item, that would be a problem.
 - I'm gonna try an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
 - Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation. Server side. I'm still testing this, so it might change in the future. This is just a demo.
-- Delete toast code from AccountSelector, trigger toast from the server function, error and success. This is sweet because it's here on the server we know what the result of the action is and have all the information. Showcase what it looks like, now in sync with the action.
+- Delete toast code from AccountSelector, trigger toast from the server function, error and success. This is nice because it's here on the server we know what the result of the action is and have all the information. Showcase what it looks like, now in sync with the action.
 - A lot less code here using the React 19 hooks and the server function, and improved UX.
 
 ## Add logout item in menu
@@ -116,6 +116,5 @@
 - We were able to easily customize the UI and style it with our normal tailwind CSS flow using data- and aria-attributes provided.
 - We also got clean, declarative, composable component code without boilerplate.
 - With React 19, we streamlined server communication using server functions, eliminating the need for a separate API layer.
-- We utilized alternatives to common solutions like useState and useEffect and got smooth interactions and simplified loading states with useFormStatus and Actions through useTransition.
-- And we achieved instant user feedback and "error rollback" with useOptimistic.
+- We utilized alternatives to common solutions like useState and useEffect with useTransition, useOptimistic and useFormStatus, and got smooth interactions, achieved instant user feedback and "error rollback", and simplified loading states.
 - The result: a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.
