@@ -23,7 +23,7 @@
 
 ## Initial implementation of AccountSelector
 
-- Now, thats the setup, but our problems are is the AccountSelector component.
+- Now, thats the setup, but our problems are is the AccountSelector component. It's reading a promise from the server of the current account with React 19 use().
 - Showcase the typical React code using isLoading, expanded states. Mutation through endpoint contains lots of boilerplate code. A sort of naive optimistic update here using setState. Quite a lot of code, probably prone to bugs. Let's say I just coded this up without thinking too much about it, and it works, but it could be better.
 - For the select, it's hard to read the divs and spans, I even marked them so I can find them. I should maybe have extracted this to components. And probably I should have used different elements. I'm using state variables to define styles which is not optimal nor easy.
 
