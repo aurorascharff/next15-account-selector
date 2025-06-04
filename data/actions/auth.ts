@@ -6,7 +6,7 @@ import { slow } from '@/utils/slow';
 import { getAccount } from '../services/auth';
 import { toast } from '../utils/toast';
 
-export async function setCurrentAccount(accountId: string) {
+export async function switchAccount(accountId: string) {
   const account = await getAccount(accountId);
 
   if (account.inactive) {

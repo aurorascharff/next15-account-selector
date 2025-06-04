@@ -21,7 +21,7 @@ export default function SubmitButton({
   ...otherProps
 }: Props & React.HTMLProps<HTMLButtonElement>) {
   const { pending } = useFormStatus();
-  const isSubmitting = pending || loading;
+  const isSubmitting = loading || pending;
 
   return (
     <button
