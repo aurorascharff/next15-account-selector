@@ -5,8 +5,8 @@
 - What you're looking at is an project dashboard demo app with an account selector. This is inspired by a real feature I built for my current  project.
 - Let’s pretend your designer gave this nice custom UI, with a custom account select that doesn't exist in your component library. So you built it yourself. And all is well, right? Let's try this out.
 - Demo the selection of the account and the loading state. Switch account, spinner, toast, updated dashboard. Looks okay right? But wait.
-- There are some UX problems here. The select is tied to the server update. Our loading state is not entirely in sync with the dashboard update, since the toast and the loading state fires after the request but not after the new page has loaded and the account is actually switched visually.
-- What about accessibility? The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality.
+- There are some UX problems here. The select is tied to the server update. Our loading state is not entirely in sync with the dashboard update, since loading state settles after the request but not after the new page has loaded and the account is actually switched visually.
+- What about accessibility? The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality (show with console).
 - I have some problems: I'm trying to build a custom UI component, yet I want it to be accessible. I also want to smoothly handle async operations with a good UX. But I'm not an accessibility expert, and I don't want to write lot's of code to get all this right.
 - This situation was me not long ago. Who else has been in a similar situation?
 - Goal: Make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
@@ -28,7 +28,7 @@
 ## Try to fix the accessibility issues
 
 - Let's try to fix the accessibility issues. Let's try to implement the keyboard navigation correctly.
-- Add snippet for escape key, add snippet for arrow keys and focus trap.
+- (Add snippet for escape key, add snippet for arrow keys and focus trap.)
 - These are just two of the many things we need to implement for a menu. Don't even get me started on screen reader support, like adding aria-expanded and roles, aria-activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert!
 - Who has tried to implement some of this stuff correctly? Who has failed? I did multiple times as well. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
 - So. We don't want to do this. Delete the snippet code.
@@ -69,6 +69,7 @@
 - Type safe with RPC.
 - Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
 - Update the toast code to use response.error. Test it. It still works!
+- Replace router.refresh with revalidatePath inside the server function, so that the page is revalidated and the new account and data is fetched from the server.
 
 ## Add useOptimistic for the optimistic update
 
