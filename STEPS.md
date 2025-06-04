@@ -29,8 +29,9 @@
 ## Try to fix the accessibility issues
 
 - Let's try to fix the accessibility issues. Let's try to implement the keyboard navigation correctly. It's not up to standard, though.
-- (Add snippet for escape key, add snippet for arrow keys and focus trap.)
-- These are just two of the many things we need to implement for a menu. Don't even get me started on screen reader support, by adding roles and things like aria-expanded and aria-activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert!
+- Add snippet for escape key. Looks familiar?
+- (Add snippet for arrow keys and focus trap.)
+- These are just one(two) of the many things we need to implement for a menu. Don't even get me started on screen reader support, by adding roles and things like aria-expanded and aria-activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert!
 - Who has tried to implement some of this stuff correctly? Who has failed? I did multiple times as well. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
 - So. We don't want to do this. Delete the snippet code.
 
