@@ -7,7 +7,7 @@
 - Demo the selection of the account and the loading state. Switch account, spinner, toast, updated dashboard. Looks okay right? But wait.
 - There are some UX problems here. The select is tied to the server update. Our loading state is not entirely in sync with the dashboard update, since loading state settles after the request but not after the new page has loaded and the account is actually switched visually.
 - What about accessibility? The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality (show with console).
-- I have some problems: I'm trying to build a custom UI component, yet I want it to be accessible. I also want to smoothly handle async operations with a good UX. But I'm not an accessibility expert, and I don't want to write lot's of code to get all this right.
+- I have these challenges: I'm trying to build a custom UI component, yet I want it to be accessible. I also want to smoothly handle async operations with a good UX. But I'm not an accessibility expert, and I don't want to write lot's of code to get all this right.
 - This situation was me not long ago. Who else has been in a similar situation?
 - Goal: Make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
 
