@@ -81,7 +81,7 @@
 
 ## Move toast code to server function
 
-- (I'm actually using an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.)
+- I'm actually using an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
 - We can actually move the toast code from AccountSelector, trigger toast from the server function, error and success. This is nice because it's here on the server we know what the result of the action is and have all the information. And it works across page navigations.
 - We simplified the handleSwitchAccount function greatly with less code and less risk of bugs.
 
