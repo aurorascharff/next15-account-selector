@@ -2,12 +2,11 @@
 
 ## Starting point
 
-- What you're looking at is an project dashboard demo app with an account selector. This is inspired by a real feature I built for my current  project.
-- Let’s pretend your designer gave this nice custom UI, with a custom account select that doesn't exist in your component library. So you built it yourself. And all is well, right? Let's try this out.
-- Demo the selection of the account and the loading state. Switch account, spinner, toast, updated dashboard. Looks okay right? But wait. What about accessibility?
-- The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality (show with console).
-- (There are some UX problems here. The select is tied to the server update. Our loading state is not entirely in sync with the dashboard update, since loading state settles after the request but not after the new page has loaded and the account is actually switched visually.)
+- What you're looking at is an project dashboard demo app with an account selector. This is inspired by a real feature I built for my current project, the inspiration behind this talk.
+- Let’s pretend your designer gave this nice custom UI, with a custom account select that doesn't exist in your component library. So you built it yourself. And all is well, right?  Let's try this out.
+- This account select allows me to switch account, get a loading state spinner, a toast, and see the updated dashboard. Well, the loading state was not entirely in sync with the dashboard update, since it settled after the switch but not after the new page has loaded and the account is actually switched visually. Let's also try interacting with this dropdown.
 - (My toast is also out of sync, it shows the success message before the dashboard has updated.)
+- The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu popover placement isn't smart and doe not have any smart auto positioning functionality (show with console).
 - I have these challenges: I'm trying to build a custom UI component, yet I want it to be accessible. I also want to smoothly handle async operations with a good UX. But I'm not an accessibility expert, and I don't want to write lot's of code to get all this right.
 - This situation was me not long ago. Who else has been in a similar situation?
 - Goal: Make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
@@ -65,7 +64,7 @@
 
 ## Use Server Function for the mutation
 
-- Now the API call.Let's replace this with a function call to the server, switchAccount.
+- Now the API call. Let's replace this with a function call to the server, switchAccount.
 - (Create new file auth.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
 - Call the server function inside the onClick instead of API. Showcase server function in account.ts. We can with server functions call server code from the client as a function, it creates a hidden API endpoint. Here setting the cookie simulating switching accounts. Erroring if the account is not active.
 - Type safe with RPC.
