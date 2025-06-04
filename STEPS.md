@@ -24,7 +24,8 @@
 ## Initial implementation of AccountSelector
 
 - Now, thats the setup, but our problems are is the AccountSelector component.
-- Showcase the typical React code using isLoading, expanded states. Mutation through endpoint contains lots of boilerplate code. A sort of naive optimistic update here using setState. Quite a lot of code, probably prone to bugs. For the select, it's hard to read the divs and spans, I even marked them so I can find them. I should maybe have extracted this to components. And probably I should have used different elements. I'm using state variables to define styles which is not optimal nor easy.
+- Showcase the typical React code using isLoading, expanded states. Mutation through endpoint contains lots of boilerplate code. A sort of naive optimistic update here using setState. Quite a lot of code, probably prone to bugs.
+- For the select, it's hard to read the divs and spans, I even marked them so I can find them. I should maybe have extracted this to components. And probably I should have used different elements. I'm using state variables to define styles which is not optimal nor easy.
 
 ## Try to fix the accessibility issues
 
