@@ -120,7 +120,6 @@
 ## Conclusion
 
 - What is the bottom line? What did we achieve?
-- Review the diff in github to remind ourselves of the changes.
 - With ariakit, we were able to build fully accessible UI, rather than nameless divs we also got clean, declarative, composable component code without boilerplate.
 - We were able to easily customize the UI and style it with our normal tailwind CSS flow using data- and aria-attributes provided.
 - With React 19, we streamlined server communication using server functions, eliminating the need for a separate API layer.
