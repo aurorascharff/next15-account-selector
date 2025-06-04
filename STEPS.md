@@ -101,17 +101,17 @@
 - We also want some interactivity on this button by extending our reusable SubmitButton. Use the React 19 useFormStatus hook to track the loading state of the nearest parent form, and add use client. Composable interactive button that can be used in any form.
 - Log in again and view the pending state.
 
-## Final demo using only the keyboard
+## Final demo
 
 - Alright, let's do a final demo. You can see my pressed keys on the screen.
 - Load page and view the UI right away, get this stable loading state with suspense fallback using server components.
-- Navigate with tabs, open menu and use the menu with the arrow keys, all my styling is applied accordingly with wither hover or focus, open/close menu with enter with good focus, escape close, click outside. And trust me the screen reader experience is good as well!
+- Navigate with tabs, open menu and use the menu with the arrow keys, all my styling is applied accordingly with hover or focus, open/close menu with enter with good focus, escape close, click outside. And trust me the screen reader experience is good as well, provided by Ariakit.
 - Execute the switch, we have optimistic updates, and get an in sync loading state. Open menu and log out again with pending state.
-- Review the diff in github.
 
 ## Conclusion
 
 - What is the bottom line? What did we achieve?
+- Review the diff in github to remind ourselves of the changes.
 - With ariakit, we were able to build fully accessible UI, including keyboard management, click outside functionality, focus management, and screenreader support.
 - We were able to easily customize the UI and style it with our normal tailwind CSS flow using data- and aria-attributes provided.
 - We also got clean, declarative, composable component code without boilerplate.
