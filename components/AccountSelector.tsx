@@ -19,8 +19,9 @@ type Props = {
 
 export default function AccountSelector({ accountsPromise, currentAccountPromise }: Props) {
   const accounts = use(accountsPromise);
-  const currentAccount = use(currentAccountPromise);
+  const currentAccountResolved = use(currentAccountPromise);
   const [isPending, setIsPending] = useState(false);
+  const [currentAccount, setCurrentAccount] = useState(currentAccountResolved);
   const [expanded, setExpanded] = useState(false);
   const router = useRouter();
 
@@ -35,19 +36,21 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
     if (currentAccount?.id === account.id) {
       return;
     }
+    setCurrentAccount(account);
     setIsPending(true);
     const response = await fetch('/api/account', {
       body: JSON.stringify(account.id),
       method: 'POST',
     });
-    setIsPending(false);
     if (!response.ok) {
+      setCurrentAccount(currentAccountResolved);
       const body = await response.json();
       toast(body.error, 'error');
     } else {
       toast('Account changed successfully!', 'success');
       router.refresh();
     }
+    setIsPending(false);
   };
 
   return (
