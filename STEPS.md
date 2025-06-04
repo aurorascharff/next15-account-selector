@@ -73,6 +73,18 @@
 - Update the toast code to use response.error. Test it. It still works!
 - Replace router.refresh with revalidatePath inside the server function, so that the page is revalidated and the new account and data is fetched from the server. Remove router.
 
+## (Showcase and use new toast implementation)
+
+- I want to improve the out of sync toast. It's actually triggering when the response comes back but before the UI has updated in the dashboard. And in addition, this toast doesn't work across page navigations. For example if I want a success toast after deleting an item, that would be a problem.
+- I'm gonna try an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
+- Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation. Server side. I'm still testing this, so it might change in the future. This is just a demo.
+
+## Move toast code to server function
+
+- (I'm actually using an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.)
+- We can actually move the toast code from AccountSelector, trigger toast from the server function, error and success. This is nice because it's here on the server we know what the result of the action is and have all the information. And it works across page navigations.
+- We simplified the handleSwitchAccount function greatly with less code and less risk of bugs.
+
 ## Add useOptimistic for the optimistic update
 
 - Let's use more React 19 to make this easier.
@@ -81,14 +93,6 @@
 - Call useOptimistic hook above the server function inside the transition. Use the optimistic value for all the existing account variables (remember inside handleSwitchAccount).
 - Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background. UseOptimistic creates a temporary state that is shown while the transition is running, then throws it away and settles to the passed value.
 - Showcase failure state by removing the disabled prop. We get automatic "rollback" because the optimistic value is not the same as the server value, it's just a temporary state.
-
-## (Showcase and use new toast implementation)
-
-- I want to improve the out of sync toast. It's actually triggering when the response comes back but before the UI has updated in the dashboard. And in addition, this toast doesn't work across page navigations. For example if I want a success toast after deleting an item, that would be a problem.
-- I'm gonna try an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
-- Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation. Server side. I'm still testing this, so it might change in the future. This is just a demo.
-- Delete toast code from AccountSelector, trigger toast from the server function, error and success. This is nice because it's here on the server we know what the result of the action is and have all the information. Showcase what it looks like, now in sync with the action.
-- A lot less code here using the React 19 hooks and the server function, and improved UX.
 
 ## Add logout item in menu
 
