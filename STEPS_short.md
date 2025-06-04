@@ -2,12 +2,12 @@
 
 ## Starting point
 
-- What you're looking at is an project dashboard demo app with an account selector. This is inspired by a real feature I built for my current consultancy project, where I'm actively using Next.js App Router with Server Components and React 19.
-- Let’s pretend your designer gave this nice custom UI, with a custom account select that doesn't exist in your component library. So you built it yourself. And all is well, right?
+- What you're looking at is an project dashboard demo app with an account selector. This is inspired by a real feature I built for my current  project.
+- Let’s pretend your designer gave this nice custom UI, with a custom account select that doesn't exist in your component library. So you built it yourself. And all is well, right? Let's try this out.
 - Demo the selection of the account and the loading state. Switch account, spinner, toast, updated dashboard. Looks okay right? But wait.
 - There are some UX problems here. The select is tied to the server update. Our loading state is not entirely in sync with the dashboard update, since the toast and the loading state fires after the request but not after the new page has loaded and the account is actually switched visually.
 - What about accessibility? The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu dropdown placement isn't customizable and doe not have any smart auto positioning functionality.
-- I have some problems: I'm trying to build a custom UI component, yet I want it to be accessible. I also want to smoothly handle async operations with a good UX. But I'm not an accessibility expert, and I don't want to write a lot this boilerplate code to get all this right.
+- I have some problems: I'm trying to build a custom UI component, yet I want it to be accessible. I also want to smoothly handle async operations with a good UX. But I'm not an accessibility expert, and I don't want to write lot's of code to get all this right.
 - This situation was me not long ago. Who else has been in a similar situation?
 - Goal: Make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
 
@@ -16,8 +16,8 @@
 - The setup is the Next.js App Router, Prisma ORM and an Prisma Postgres DB, and Tailwind CSS v4.
 - I already completed all the data fetching here.
 - Page.tsx: Since app Router, can use Server components fetching data through this data access layer, getting all accounts from the database, getCurrentAccount based on a cookie value simulating auth, getting that account and, caching everything with cache() to avoid duplicate requests. When loading the page, the server components are completed on the server then streamed in and suspense fallbacks are used to create loading states.
-- (And a bonus: using Next.js unauthorized.tsx error boundary to catch a thrown 401 forbidden(9) error if the account cookie is not a valid account).
 - Everything is dynamically rendered since we are using cookies. And it's artificially slowed down so we can see the loading states.
+- (And a bonus: using Next.js unauthorized.tsx error boundary to catch a thrown 401 forbidden(9) error if the account cookie is not a valid account).
 - All of this is covered in detail in a previous talk of mine if you're interested! Or just check out the code on GitHub later.
 
 ## Initial implementation of AccountSelector
@@ -28,14 +28,14 @@
 ## Try to fix the accessibility issues
 
 - Let's try to fix the accessibility issues. Let's try to implement the keyboard navigation correctly.
-- Add snippet for escape key, add snippet for arrow keys and focus trap. Not up to standard.
-- These are just two of the many things we need to implement for a menu. Don't even get me started on screen reader support, like adding aria-expanded and roles, aria-activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert, and it's a lot!
+- Add snippet for escape key, add snippet for arrow keys and focus trap.
+- These are just two of the many things we need to implement for a menu. Don't even get me started on screen reader support, like adding aria-expanded and roles, aria-activedescendant, so that the screen reader user even knows that this is a select! Again, I'm not an a11y expert!
 - Who has tried to implement some of this stuff correctly? Who has failed? I did multiple times as well. It's a lot of work to get this right. And even if you do, it will be hard to maintain and extend.
 - So. We don't want to do this. Delete the snippet code.
 
 ## Replace all divs with Ariakit equivalents and update styles
 
-- Let's use Ariakit to solve this problem. Ariakit is a React library that provides accessible UI components and hooks for building interactive UIs. It has a lot of built-in functionality for accessibility, keyboard navigation, and more.
+- Let's use Ariakit to solve this problem. Ariakit is a React library that provides unstyled, primitive UI components and hooks for building interactive UIs. It has a lot of built-in functionality for accessibility, keyboard navigation, and more.
 - Lets step by step replace all the divs with Ariakit equivalents, declarative components that are accessible by default and have all the functionality we need built in, and can compose together. Import ariakit.
 - Remove "relative" from parent div
 - Provider: Add ariakit Ariakit.SelectProvider between with value={account?.id}
@@ -55,7 +55,7 @@
 ## Add useTransition for the loading state
 
 - Now lets get to work on the async operation, the account switching. This is a lot of boilerplate code. We can use the new react 19 to simplify this.
-- To track the loading state, lets use the improved useTransition hook from React 19. It let's use create Actions, which are a different type of event handling. It runs in the background and does not block the main thread, like a deferred update. Returns pending state isPending and a startTransition function.
+- To track the loading state, lets use the improved useTransition hook from React 19. It let's use create Actions, which are a different type of event handling. It runs in the background as a lower priority update, like a deferred update. Returns pending state isPending and a startTransition function.
 - Remove pending state useState.
 - Wrap everything after the == check with useTransition, remove setPending, get pending state isPending. Move async keyword.
 - Use pending state to set aria-busy on the select and notice the spinner using the new variable.
@@ -72,13 +72,13 @@
 
 ## Add useOptimistic for the optimistic update
 
-- Notice again we are synced to the server with our select value. We want optimistic update here. We could start messing around with useState and keeping it in sync, but let's use more React 19 to make this easier.
+- Notice again we are synced to the server with our select value. We want optimistic update here. We could start messing around with useState and keeping it in up to date and handle potential errors, but let's use more React 19 to make this easier.
 - To avoid the delayed update on the select depending on the server, let's use the new useOptimistic hook from React 19. It takes in a state to show when no transition is pending, which is our server truth of the currentAccount, and returns a optimistic account state and a function to update it.
-- Call useOptimistic hook above the server function, needs to be called inside a transition, but we already have that. Use the optimistic value for all the existing account variables (remember inside handleSwitchAccount).
-- Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background. UseOptimistic creates a temporary state that is shown while an async action is running, then throws it away when the transition is done and settles to the passed value.
+- Call useOptimistic hook above the server function inside the transition. Use the optimistic value for all the existing account variables (remember inside handleSwitchAccount).
+- Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background. UseOptimistic creates a temporary state that is shown while the transition is running, then throws it away and settles to the passed value.
 - Showcase failure state by removing the disabled prop. We get automatic "rollback" because the optimistic value is not the same as the server value, it's just a temporary state.
 
-## Showcase and use new toast implementation
+## (Showcase and use new toast implementation)
 
 - I want to improve the out of sync toast. It's actually triggering when the response comes back but before the UI has updated in the dashboard. And in addition, this toast doesn't work across page navigations. For example if I want a success toast after deleting an item, that would be a problem.
 - I'm gonna try an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
@@ -95,22 +95,24 @@
 
 ## Update login form to login again
 
-- Here logged out, let's complete the app with a functional login button. Use .bind to directly bind the server function to the button. Don't need to create a client component for this, just use the React 19 form component that let's us call a function in the action property.
-- We also want some interactivity on this form by extending our SubmitButton. Use the React 19 useFormStatus hook to track the loading state of the nearest parent form, and add use client. Composable interactive button that can be used in any form.
+- Here logged out, let's complete the app with a functional login button. Let's use a React 19 improved form that let's us call a function in the action property. Need a parameter, instead of creating a client component with a callback function, let's use bind to directly bind the server function to the button.
+- We also want some interactivity on this button by extending our reusable SubmitButton. Use the React 19 useFormStatus hook to track the loading state of the nearest parent form, and add use client. Composable interactive button that can be used in any form.
 - Log in again and view the pending state.
 
 ## Final demo using only the keyboard
 
-- Alright, let's do a final demo using only the keyboard. You can see my pressed keys on the screen.
-- Load page and view data right away, get this stable loading state with suspense fallback using server components.
-- Navigate with tabs, and use the menu with the arrow keys, switch them quickly, open/close menu with enter with good focus, escape close, click outside. And trust me the screen reader experience is good as well!
-- Execute the switch, we have optimistic updates, and get an in sync toast. Open menu and log out again with pending state.
+- Alright, let's do a final demo. You can see my pressed keys on the screen.
+- Load page and view the UI right away, get this stable loading state with suspense fallback using server components.
+- Navigate with tabs, open menu and use the menu with the arrow keys, all my styling is applied accordingly with wither hover or focus, open/close menu with enter with good focus, escape close, click outside. And trust me the screen reader experience is good as well!
+- Execute the switch, we have optimistic updates, and get an in sync loading state. Open menu and log out again with pending state.
 
 ## Conclusion
 
-- What did we achieve through this process?
-- With Ariakit, we built a fully accessible UI: keyboard navigation, click outside to close, focus management, and screen reader support—all handled out of the box.
-- Customization was straightforward, letting us style everything with Tailwind CSS using data- and aria-attributes.
+- What is the bottom line? What did we achieve?
+- With ariakit, we were able to build fully accessible UI, including keyboard management, click outside functionality, focus management, and screenreader support.
+- We were able to easily customize the UI and style it with our normal tailwind CSS flow using data- and aria-attributes provided.
+- We also got clean, declarative, composable component code without boilerplate.
 - With React 19, we streamlined server communication using server functions, eliminating the need for a separate API layer.
-- We replaced common patterns like `useState` and `useEffect` with new hooks like `useTransition`, `useFormStatus`, and `useOptimistic`, resulting in smoother interactions and simplified loading states.
+- We utilized alternatives to common solutions like useState and useEffect and got smooth interactions and simplified loading states with useFormStatus and Actions through useTransition.
+- And we achieved instant user feedback and "error rollback" with useOptimistic.
 - The result: a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.
