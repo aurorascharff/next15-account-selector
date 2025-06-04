@@ -117,5 +117,5 @@
 - We were able to easily customize the UI and style it with our normal tailwind CSS flow using data- and aria-attributes provided.
 - We also got clean, declarative, composable component code without boilerplate.
 - With React 19, we streamlined server communication using server functions, eliminating the need for a separate API layer.
-- We utilized alternatives to common solutions like useState and useEffect with useTransition, useOptimistic and useFormStatus, and got smooth interactions, achieved instant user feedback and "error rollback", and simplified loading states.
+- We utilized alternatives to common solutions like useState and useEffect with useTransition, useOptimistic and useFormStatus, and got smooth interactions, achieved instant user feedback and "error rollback", and simplified loading states and code.
 - The result: a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.
