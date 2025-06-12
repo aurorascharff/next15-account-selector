@@ -1,4 +1,5 @@
 import React from 'react';
+import { LiquidButton } from '../LiquidButton';
 
 type Props = {
   children: React.ReactNode;
@@ -7,9 +8,9 @@ type Props = {
 
 export default function IconButton({ children, name }: Props) {
   return (
-    <button className="hover:bg-gray focus-visible:outline-primary cursor-pointer rounded-full bg-black p-2 text-white focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-white dark:text-black">
+    <LiquidButton variant="ghost" size="sm" className="!rounded-full !p-2">
       <span className="sr-only">{name}</span>
       <div aria-hidden="true">{children}</div>
-    </button>
+    </LiquidButton>
   );
 }

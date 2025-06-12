@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --liquid-glass-bg: rgba(255, 255, 255, 0.1);
+  --liquid-glass-border: rgba(255, 255, 255, 0.2);
+  --liquid-glass-shadow: rgba(0, 0, 0, 0.1);
+}
+
 @theme {
   --color-gray: #9ca3af;
   --color-divider-dark: #374151;
@@ -18,24 +26,144 @@
 
   --font-mono: var(--font-geist-mono);
   --font-sans: var(--font-geist-sans);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 @layer base {
   body {
-    @apply bg-white font-sans text-black dark:bg-black dark:text-white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    color: white;
   }
 
   h1 {
-    @apply font-sans text-4xl;
+    font-family: var(--font-sans);
+    font-size: 2.25rem;
   }
 
   h2 {
-    @apply text-xl md:text-2xl;
+    font-size: 1.25rem;
   }
 
   h3 {
-    @apply text-lg md:text-xl;
+    font-size: 1.125rem;
   }
+
+  /* Custom scrollbar styling for liquid glass theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Firefox scrollbar styling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+  }
+}
+
+.liquid-glass {
+  background: var(--liquid-glass-bg);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--liquid-glass-border);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  transform-origin: center center;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.liquid-glass::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-glass:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.2),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+    0 0 25px rgba(255, 255, 255, 0.15),
+    0 0 50px rgba(102, 126, 234, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.liquid-glass:active {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 0 15px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .skeleton-animation {
@@ -66,6 +194,7 @@
     background-position: 468px 0;
   }
 }
+
 @keyframes wave-squares {
   0% {
     background-position: -468px 0;

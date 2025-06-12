@@ -17,7 +17,10 @@ export default function SelectButton({
     <button
       type={type}
       className={cn(
-        'bg-primary hover:bg-primary-dark border-primary aria-expanded:hover:bg-card aria-expanded:focus-visible:outline-primary dark:aria-expanded:hover:bg-card-dark rounded-2xl border px-4 py-2 text-white shadow-md outline-offset-1 focus-visible:outline focus-visible:-outline-offset-4 focus-visible:outline-white aria-expanded:bg-white aria-expanded:text-black aria-expanded:focus-visible:outline-2 aria-expanded:focus-visible:-outline-offset-1 dark:aria-expanded:bg-black dark:aria-expanded:text-white',
+        'liquid-glass rounded-2xl px-4 py-2 text-white transition-all duration-300',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50',
+        'aria-expanded:border-white/40 aria-expanded:bg-white/20',
+        'disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
       {...otherProps}

@@ -1,6 +1,11 @@
 import React from 'react';
 import { cn } from '@/utils/cn';
+import { LiquidGlass } from '../LiquidGlass';
 
 export default function Card({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn(className, 'bg-card dark:bg-card-dark gap-6 rounded-xl p-4 md:p-8')}>{children}</div>;
+  return (
+    <LiquidGlass variant="card" intensity="medium" className={cn(className, 'gap-6 p-4 md:p-8')}>
+      {children}
+    </LiquidGlass>
+  );
 }
