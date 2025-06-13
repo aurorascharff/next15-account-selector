@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import React, { unstable_ViewTransition as ViewTransition } from 'react';
 import { getCurrentAccount } from '@/data/services/auth';
-import { LiquidGlass } from './LiquidGlass';
 
 export default async function AccountCircle() {
   const currentAccount = await getCurrentAccount();
@@ -24,11 +23,5 @@ export default async function AccountCircle() {
 }
 
 export function AccountCircleSkeleton() {
-  return (
-    <LiquidGlass
-      variant="card"
-      intensity="medium"
-      className="skeleton-animation size-[80px] rounded-full md:size-[150px]"
-    />
-  );
+  return <div className="liquid-glass skeleton-animation size-[80px] rounded-full backdrop-blur-md md:size-[150px]" />;
 }

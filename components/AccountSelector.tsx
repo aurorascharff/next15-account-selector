@@ -1,11 +1,9 @@
 'use client';
 
 import * as Ariakit from '@ariakit/react';
-import { EllipsisVertical, Check } from 'lucide-react';
+import { EllipsisVertical } from 'lucide-react';
 import React, { use, useOptimistic, useTransition } from 'react';
 import { logOut, switchAccount } from '@/data/actions/auth';
-import { LiquidButton } from './LiquidButton';
-import { LiquidGlass } from './LiquidGlass';
 import Divider from './ui/Divider';
 import SelectButton from './ui/SelectButton';
 import Spinner from './ui/Spinner';
@@ -47,7 +45,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
         </div>
         <Ariakit.SelectPopover
           gutter={8}
-          render={<LiquidGlass variant="panel" intensity="medium" />}
+          render={<div className="liquid-glass rounded-2xl backdrop-blur-md" />}
           className="flex w-[257px] flex-col gap-2 text-white"
         >
           <div className="flex items-start justify-between px-3 py-2 text-lg">
@@ -58,26 +56,24 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                 {optimisticAccount?.plan === 'pro' && <StarMarker />}
               </span>
             </div>
-            {/* Options item */}
-            <LiquidButton variant="ghost" size="sm" className="mt-2 !rounded-full !p-1">
+            <Ariakit.SelectItem className="liquid-glass mt-2 cursor-pointer rounded-full border border-white/20 bg-white/10 p-1 text-white transition-all duration-300 hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50">
               <span className="sr-only">Account options</span>
               <EllipsisVertical aria-hidden="true" width={16} height={16} />
-            </LiquidButton>
+            </Ariakit.SelectItem>
           </div>
           <Divider />
           {accounts.map(account => {
             return (
-              <LiquidButton
+              <Ariakit.SelectItem
+                className="liquid-glass mx-2 flex items-center justify-between gap-4 rounded-md border border-white/20 bg-white/10 px-4 py-2 text-white transition-all duration-300 hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 disabled:cursor-not-allowed disabled:opacity-50"
                 key={account.id}
-                variant="ghost"
-                size="sm"
+                value={account.id}
                 disabled={account.inactive}
                 onClick={() => {
                   handleSwitchAccount(account);
                 }}
-                className="mx-2 flex items-center justify-between gap-4 !rounded-md"
               >
-                <div className="flex flex-col text-left">
+                <div className="flex flex-col">
                   <div className="flex gap-2">
                     <span className="font-semibold">
                       {account.name} {account.inactive && '(inactive)'}{' '}
@@ -86,22 +82,14 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
                   </div>
                   <span className="text-sm">{account.email}</span>
                 </div>
-                {/* Active account check */}
-                {account.id === optimisticAccount?.id && (
-                  <span>
-                    <span className="sr-only">Active account</span>
-                    <Check aria-hidden="true" width={18} height={18} />
-                  </span>
-                )}
-              </LiquidButton>
+                <Ariakit.SelectItemCheck />
+              </Ariakit.SelectItem>
             );
           })}
           <Divider />
-          <LiquidButton
-            variant="ghost"
-            size="sm"
-            disabled={logoutIsPending}
-            className="self-end px-2 pb-2 disabled:italic disabled:opacity-50"
+          <Ariakit.SelectItem
+            aria-disabled={logoutIsPending}
+            className="liquid-glass self-end border border-white/20 bg-white/10 px-2 pb-2 text-white transition-all duration-300 hover:bg-white/20 not-aria-disabled:hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 aria-disabled:cursor-not-allowed aria-disabled:text-white/50 aria-disabled:italic"
             onClick={() => {
               startLogoutTransition(async () => {
                 await logOut();
@@ -109,7 +97,7 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
             }}
           >
             {logoutIsPending ? 'Logging out...' : 'Log out'}
-          </LiquidButton>
+          </Ariakit.SelectItem>
         </Ariakit.SelectPopover>
       </Ariakit.SelectProvider>
     </div>
@@ -120,9 +108,12 @@ export function AccountSelectorSkeleton() {
   return (
     <div className="flex w-fit flex-col">
       <span className="mb-2 font-bold text-white">ACCOUNT</span>
-      <LiquidButton disabled variant="ghost" size="md">
+      <button
+        disabled
+        className="liquid-glass cursor-not-allowed rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-white opacity-50 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
+      >
         Loading...
-      </LiquidButton>
+      </button>
     </div>
   );
 }

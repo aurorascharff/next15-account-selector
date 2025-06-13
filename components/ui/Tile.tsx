@@ -1,7 +1,6 @@
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import { LiquidGlass } from '../LiquidGlass';
 import { StarMarker } from './StarMarker';
 
 type Props = {
@@ -18,11 +17,7 @@ export default function Tile({ children, starred, href, heading, icon }: Props) 
       href={href}
       className="block h-full w-full rounded-xl transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
     >
-      <LiquidGlass
-        variant="card"
-        intensity="medium"
-        className="flex h-full w-full items-center justify-between gap-4 px-8 py-6 transition-all duration-200 hover:scale-[1.02]"
-      >
+      <div className="liquid-glass flex h-full w-full items-center justify-between gap-4 rounded-xl px-8 py-6 backdrop-blur-md transition-all duration-200 hover:scale-[1.02]">
         <div className="s-10">{icon}</div>
         <div className="flex flex-grow flex-col gap-3">
           <span>
@@ -32,7 +27,7 @@ export default function Tile({ children, starred, href, heading, icon }: Props) 
           <span className="text-sm text-white/80">{children}</span>
         </div>
         <ChevronRight width={20} height={20} className="flex-shrink-0 text-white" />
-      </LiquidGlass>
+      </div>
     </Link>
   );
 }
