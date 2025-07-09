@@ -23,5 +23,5 @@ export default async function AccountCircle() {
 }
 
 export function AccountCircleSkeleton() {
-  return <div className="dark:bg-section size-[80px] rounded-full bg-gray-300 md:size-[150px]" />;
+  return <div className="dark:bg-section size-[80px] rounded-full bg-gray-300 md:size-30 lg:size-[150px]" />;
 }

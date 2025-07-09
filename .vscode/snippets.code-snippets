@@ -96,7 +96,7 @@
         "body": [
             "<Ariakit.SelectItem className=\"aria-disabled:text-gray self-end px-2 pb-2 aria-disabled:italic not-aria-disabled:data-active-item:underline\">",
             "  Log out",
-            "</Ariakit.SelectItem>;"
+            "</Ariakit.SelectItem>"
         ]
     }
 }
