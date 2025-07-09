@@ -1,9 +1,9 @@
 # DEMO STEPS
 
-## Starting point
+## Setup
 
 - What you're looking at is an project dashboard demo app with an account selector. This is based on a real feature I built for my current project, the inspiration behind this talk.
-- Let’s pretend your designer gave this nice custom UI, with a custom account select that didn't exist in your component library. So you built it yourself. And all is well, right? Let's try this out.
+- Let’s pretend your designer gave this nice custom UI in Figma, with a custom account select that didn't exist in your component library. So you built it yourself. And all is well, right?  Let's try this out.
 - This account select allows me to switch account, get a loading state spinner, a toast, and see the updated dashboard. There was a strange interaction there, the loading state was not entirely in sync with the visual update. Oh well, let's also try interacting with this dropdown.
 - (My toast is also out of sync, it shows the success message before the dashboard has updated.)
 - The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu popover placement isn't smart and doe not have any smart auto positioning functionality (show with console).
@@ -11,7 +11,7 @@
 - This situation was me not long ago. Who else has been in a similar situation?
 - That's why, the goal of this demo: show you how to make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
 
-## Setup
+## Starting Point
 
 - The setup is the Next.js App Router, Prisma ORM and an Prisma Postgres DB, and Tailwind CSS v4.
 - I already completed all the data fetching here.
@@ -119,12 +119,12 @@
 - Navigate with tabs, open menu and use the menu with the arrow keys, all my styling is applied accordingly with hover or focus, open/close menu with enter with good focus, escape close, click outside. Popover automatic placement. And trust me the screen reader experience is good as well, provided by Ariakit.
 - Execute the switch, we have optimistic updates, and get an in sync loading state and a toast. Open menu and log out again with pending state and finally log back in.
 
-## Conclusion
+## (Conclusion)
 
 - What is the bottom line? What did we achieve?
 - AccountSelector: With ariakit, we were able to build fully accessible UI, and rather than nameless divs we also got clean, declarative, composable component code without boilerplate.
 - We were able to easily customize the UI and style it with our normal tailwind CSS flow using data- and aria-attributes provided.
 - With React 19, we streamlined server communication using server functions, eliminating the need for a separate API layer.
-- We utilized alternatives to common solutions like useState with useTransition and useOptimistic, and got smooth interactions, instant user feedback and "error rollback", and simplified loading states and code.
-- And finally, we quickly added some addition features like a logout button and a login form with more server functions and transitions, the React 19 form API and useFormStatus.
+- We utilized alternatives to common solutions like useState and useEffect and got smooth interactions and simplified loading states with Actions through useTransition and useFormStatus.
+- And we achieved instant user feedback and "error rollback" with useOptimistic.
 - The result: a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.
