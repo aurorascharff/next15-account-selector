@@ -44,15 +44,14 @@
 - Provider: Add ariakit Ariakit.SelectProvider between with value={currentAccount?.id}
 - Label: Replace label div with Ariakit.SelectLabel
 - Select: Replace open button with Ariakit.Select and remove setExpanded
-- SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState
+- SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState. Showcase.
 - SelectButton: Replace all styles and render SelectButton and showcase aria-expanded
-- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover
+- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover.
 - SelectItem: Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
 - SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
 - SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}
-- All of this is in the documentation! And there are docs for non-tailwind users as well. And so many ariakit primitives, not only for selects, but also for menus, dialogs, tooltips, and more. And they can be composed together.
 - Remove setExpanded from handleSwitchAccount, remove expanded useState.
-- Showcase the result. Smart placement, keyboard nav, focus trap, arrow keys, escape to close, click outside to close, open/close with enter, and the menu is now accessible by default, everything you would expect from a select.
+- All of this is in the documentation! And there are docs for non-tailwind users as well. And so many ariakit primitives, not only for selects, but also for menus, dialogs, tooltips, and more. And they can be composed together.
 - No longer have nameless divs, rather used declarative components with Ariakit without compromising on the customizability.
 
 ## Add useTransition for the loading state
@@ -79,7 +78,7 @@
 - I'm gonna try an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
 - Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation. Server side. I'm still testing this, so it might change in the future. This is just a demo.
 
-## Move toast code to server function
+## (Move toast code to server function)
 
 - For these toasts, I'm actually using an implementation that Ryan Toronto shared on build UI, utilizing cookies to trigger toasts from the server side. I won't get into the details of this implementation, but it's a nice way to handle toasts in a server function. And they work across page navigations.
 - We can actually move the toast code from AccountSelector, trigger toast from the server function, error and success.
