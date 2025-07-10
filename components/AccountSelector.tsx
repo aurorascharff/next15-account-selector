@@ -92,10 +92,10 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
               </span>
             </div>
             {/* Options item */}
-            <div className="hover:outline-primary mt-2 cursor-pointer rounded-full p-1 hover:outline">
+            <button className="hover:outline-primary mt-2 cursor-pointer rounded-full p-1 hover:outline">
               <span className="sr-only">Account options</span>
               <EllipsisVertical aria-hidden="true" width={16} height={16} />
-            </div>
+            </button>
           </div>
           <Divider />
           {/* Account items */}

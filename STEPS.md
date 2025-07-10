@@ -4,9 +4,10 @@
 
 - What you're looking at is an project dashboard demo app with an account selector. This is based on a real feature I built for my current project, the inspiration behind this talk.
 - Let’s pretend your designer gave this nice custom UI in Figma, with a custom account select that didn't exist in your component library. So you built it yourself. And all is well, right?  Let's try this out.
-- This account select allows me to switch account, get a loading state spinner, a toast, and see the updated dashboard. There was a strange interaction there, the loading state was not entirely in sync with the visual update. Oh well, let's also try interacting with this dropdown.
+- The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside.
+- This account select allows me to switch account, get a loading state spinner, a toast, and see the updated dashboard. There was a strange interaction there, the loading state was not entirely in sync with the visual update.
 - (My toast is also out of sync, it shows the success message before the dashboard has updated.)
-- The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu popover placement isn't smart and doe not have any smart auto positioning functionality (show with console).
+functionality (show with console).
 - I have these challenges: I'm trying to build a custom UI component, yet I want it to be accessible. But I'm not an accessibility expert. I also want to smoothly handle async operations with a good UX. But I don't want to write lot's of code to get all this right.
 - This situation was me not long ago. Who else has been in a similar situation?
 - That's why, the goal of this demo: show you how to make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
@@ -46,7 +47,7 @@
 - Select: Replace open button with Ariakit.Select and remove setExpanded
 - SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState. Showcase.
 - SelectButton: Replace all styles and render SelectButton and showcase aria-expanded
-- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover.
+- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover. Showcase.
 - SelectItem: Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
 - SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
 - SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}
