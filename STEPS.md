@@ -99,7 +99,7 @@ functionality (show with console).
 
 ## Add logout item in menu
 
-- Im already done with my improvements, but let's add some final features to this account selector.
+- Im already done with my improvements, but let's add some final features to this account selector to bring everything together.
 - Let's add another custom UI element to the select. A logout button, showcasing the customizability of Ariakit.
 - Styled with aria-disabled and not-aria-disabled:data-active-item underline.
 - Showcase the result when focusing it and hovering it.
