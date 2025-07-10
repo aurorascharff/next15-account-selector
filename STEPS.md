@@ -105,7 +105,7 @@
 - We're gonna onClick call another Server Function, which deletes our account cookie (showcase). Track its loading state with another useTransition, creating a React Action. Add disabled= and "logging out" text.
 - Log out and showcase the loading state and the styling with ariakit.
 
-## Update login form to login again
+## (Update login form to login again)
 
 - Here logged out, let's complete the app with a functional login button. Let's use a React 19 improved form that let's us call a function in the action property. Need a parameter, instead of creating a client component with a callback function, let's use bind to directly bind the server function to the button.
 - We also will have some interactivity on this button, because it's the React 19 useFormStatus hook to track the loading state of the nearest parent form. Composable interactive button that can be used in any form.
@@ -117,6 +117,7 @@
 - Load page and view the UI right away, get this stable loading state with suspense fallback using server components.
 - Navigate with tabs, open menu and use the menu with the arrow keys, all my styling is applied accordingly with hover or focus, open/close menu with enter with good focus, escape close, click outside. Popover automatic placement. And trust me the screen reader experience is good as well, provided by Ariakit. Everything you would expect from a select.
 - Execute the switch, we have optimistic updates, and get an in sync loading state and a toast. Open menu and log out again with pending state and finally log back in.
+- (And the result, a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.)
 
 ## (Conclusion)
 
