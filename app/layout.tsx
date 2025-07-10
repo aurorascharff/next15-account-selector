@@ -1,9 +1,10 @@
 import './globals.css';
 
 import { Geist } from 'next/font/google';
-import { Toaster } from 'sonner';
+import { Toaster } from '@/components/toast/Toaster';
 import SubmitButton from '@/components/ui/SubmitButton';
 import KeyPressed from '@/components/utils/KeyPressed';
+import { logIn } from '@/data/actions/auth';
 import { isAuthenticated } from '@/data/services/auth';
 import { cn } from '@/utils/cn';
 import type { Metadata } from 'next';
@@ -20,14 +21,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <body className={cn(GeistSans.className, 'mb-12 flex grow flex-col p-4 sm:p-10 xl:px-40 2xl:px-96')}>
+      <body className={cn(GeistSans.className, '3xl:px-96 mb-12 flex grow flex-col p-4 sm:p-10 xl:px-40 2xl:px-80')}>
         <main>
-          <Toaster position="bottom-right" />
+          <Toaster />
           {isAuth ? (
             children
           ) : (
             <div className="flex flex-col items-center justify-center pt-20">
-              <SubmitButton>Log in as Jane Smith</SubmitButton>
+              <form action={logIn.bind(null, 'jane.smith@work.com')}>
+                <SubmitButton>Log in as Jane Smith</SubmitButton>
+              </form>
             </div>
           )}
         </main>

@@ -42,7 +42,7 @@ functionality (show with console).
 - Ariakit is a React library that provides unstyled, primitive components and hooks for building interactive UIs. Provides declarative components that are accessible by default following WCAG-standard and have all the functionality we need built in, and can compose together.
 - Lets step by step replace all the divs with Ariakit equivalents.
 - Remove "relative" from parent div
-- Provider: Add ariakit Ariakit.SelectProvider between with value={currentAccount?.id}
+- Provider: Add ariakit Ariakit.SelectProvider between
 - Label: Replace label div with Ariakit.SelectLabel
 - Select: Replace open button with Ariakit.Select and remove setExpanded
 - SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState. Showcase.
@@ -50,7 +50,7 @@ functionality (show with console).
 - SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover. Showcase.
 - SelectItem: Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
 - SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
-- SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}
+- SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}, Provider value={currentAccount?.id}
 - Remove setExpanded from handleSwitchAccount, remove expanded useState.
 - All of this is in the documentation! And there are docs for non-tailwind users as well. And so many ariakit primitives, not only for selects, but also for menus, dialogs, tooltips, and more. And they can be composed together.
 - No longer have nameless divs, rather used declarative components with Ariakit without compromising on the customizability.

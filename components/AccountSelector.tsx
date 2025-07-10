@@ -3,10 +3,8 @@
 import { EllipsisVertical, ChevronDown, Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { use, useState } from 'react';
-import { toast as sonnerToast } from 'sonner';
-import type { ToastType } from '@/types/toast';
+import { toast } from '@/data/utils/toast';
 import { cn } from '@/utils/cn';
-import { Toast } from './toast/Toast';
 import Divider from './ui/Divider';
 import Spinner from './ui/Spinner';
 import { StarMarker } from './ui/StarMarker';
@@ -25,12 +23,6 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
   const [expanded, setExpanded] = useState(false);
   const router = useRouter();
 
-  const toast = (message: string, type: ToastType) => {
-    sonnerToast.custom(id => {
-      return <Toast id={id as string} type={type} message={message} />;
-    });
-  };
-
   const handleSwitchAccount = async (account: Account) => {
     setExpanded(false);
     if (currentAccount?.id === account.id) {
@@ -45,9 +37,9 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
     if (!response.ok) {
       setCurrentAccount(currentAccountResolved);
       const body = await response.json();
-      toast(body.error, 'error');
+      toast.error(body.error);
     } else {
-      toast('Account changed successfully!', 'success');
+      toast.success('Account changed successfully!');
       router.refresh();
     }
     setIsPending(false);
