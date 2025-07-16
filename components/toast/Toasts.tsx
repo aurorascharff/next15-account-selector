@@ -1,6 +1,6 @@
 'use client';
 
-import { startTransition, useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { Toaster as SonnerToaster, toast as sonnerToast } from 'sonner';
 import { dismissToast } from '@/data/actions/toast';
 import type { Toast as ToastType } from '@/types/toast';
@@ -8,6 +8,7 @@ import { Toast } from './Toast';
 
 export function Toasts({ toasts }: { toasts: ToastType[] }) {
   const [sentToSonner, setSentToSonner] = useState<string[]>([]);
+  const [, startTransition] = useTransition();
 
   const dismissToastAction = (id: string) => {
     startTransition(() => {
