@@ -11,8 +11,8 @@ export function Toasts({ toasts }: { toasts: ToastType[] }) {
   const [, startTransition] = useTransition();
 
   const dismissToastAction = (id: string) => {
-    startTransition(() => {
-      dismissToast(id);
+    startTransition(async () => {
+      await dismissToast(id);
     });
   };
 
