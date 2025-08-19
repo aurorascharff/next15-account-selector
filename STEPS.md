@@ -47,9 +47,9 @@ functionality (show with console).
 - Select: Replace open button with Ariakit.Select and remove setExpanded
 - SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState. Showcase.
 - SelectButton: Replace all styles and render SelectButton and showcase aria-expanded
-- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover. Showcase.
+- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover. Showcase click outside and escape close, viewport aware placement.
 - SelectItem: Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
-- SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
+- SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit. Showcase keyboard navigation, focus trap.
 - SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}, Provider value={currentAccount?.id}
 - Remove setExpanded from handleSwitchAccount, remove expanded useState.
 - All of this is in the documentation! And there are docs for non-tailwind users as well. And so many ariakit primitives, not only for selects, but also for menus, dialogs, tooltips, and more. And they can be composed together.
@@ -60,7 +60,7 @@ functionality (show with console).
 - Now lets get to work on the async operation, the account switching. This is a lot of boilerplate code. We can use the new react 19 to simplify this, and fix the out of sync spinner as well.
 - To track the loading state, lets use the improved useTransition hook from React 19. It let's use mark a state update as non-urgent or deferred, and commits all of them once they are all done. Returns pending state for the transition and a startTransition function.
 - Remove pending state useState.
-- Wrap everything above the api call with useTransition, remove setPending, get pending state isPending. Move async keyword.
+- Wrap everything above the api call with useTransition, remove setPending, get pending state isPending. Move async keyword. We are creating an Action.
 - Test that it works. The spinner is correctly synced to the UI update of the dashboard now.
 
 ## Use Server Function for the mutation
