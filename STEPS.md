@@ -52,7 +52,7 @@ functionality (show with console).
 - SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit. Showcase keyboard navigation, focus trap.
 - SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}, Provider value={currentAccount?.id}
 - Remove setExpanded from handleSwitchAccount, remove expanded useState.
-- All of this is in the documentation! And there are docs for non-tailwind users as well. And so many ariakit primitives, not only for selects, but also for menus, dialogs, tooltips, and more. And they can be composed together.
+- All of this is in the documentation! And there are docs for non-tailwind users as well. And so many ariakit primitives, not only for selects, but also for menus, dialogs, tooltips, and more. And they can be composed together, and the docs contain examples of how to combine them.
 - No longer have nameless divs, rather used declarative components with Ariakit without compromising on the customizability.
 
 ## Add useTransition for the loading state
