@@ -9,7 +9,7 @@
 - (My toast is also out of sync, it shows the success message before the dashboard has updated.)
 functionality (show with console).
 - I have these challenges: I'm trying to build a custom UI component, yet I want it to be accessible. But I'm not an accessibility expert. I also want to smoothly handle async operations with a good UX. But I don't want to write lot's of code to get all this right.
-- This situation was me not long ago. Who else has been in a similar situation?
+- This situation was me not long ago.
 - That's why, the goal of this demo: show you how to make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
 
 ## Starting Point
