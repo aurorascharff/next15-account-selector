@@ -57,10 +57,11 @@ functionality (show with console).
 
 ## Add useTransition for the loading state
 
-- Now lets get to work on the async operation, the account switching. This is a lot of boilerplate code. We can use the new react 19 to simplify this, and fix the out of sync spinner as well.
+- Now lets get to work on the async operation, the account switching. This is a lot of boilerplate code, and we need to fix the out of sync spinner.
+- Fortunately, React has a API for this: transitions. Transitions allow react to coordinate async requests in events and render. Let's see how we can use transitions here to create a better experience, with no sync issues, and less code.
 - To track the loading state, lets use the improved useTransition hook from React 19. It let's use mark a state update as non-urgent or deferred, and commits all of them once they are all done. Returns pending state for the transition and a startTransition function.
 - Remove pending state useState.
-- Wrap everything above the api call with useTransition, remove setPending, get pending state isPending. Move async keyword. We are creating an Action.
+- Creating an Action. An action is a function called in a transition, meaning we have a specific term for this type of lower priority behavior.
 - Test that it works. The spinner is correctly synced to the UI update of the dashboard now.
 
 ## Use Server Function for the mutation
@@ -88,14 +89,17 @@ functionality (show with console).
 
 ## Add useOptimistic for the optimistic update
 
-- Let's use more React 19 to make this easier.
+- What about the current setState optimistic update here. It adds this additional code with this manual rollback. Imagine if we had more logic, the rollback would get increasingly complex.
 - Remove naive useState and use currentAccountResolved directly, rename to currentAccount. See delayed update on the select.
+- I now have the UX problem of the select values not updating until the async operation is done. The select is not reflecting the user action immediately, it feels "stuck", (and it only select one value. We could use the updater function.)
+- Another useful react 19 api, is useOptimistic. UseOptimistic let's us manage optimistic updates more easily, and works along side Actions. It takes in state to show when no action is pending, and update function, and the optimistic state and trigger.
+- Within a transition, we can create a temporary optimistic update. This state shows for as long as the transitions run, and when its done, settles to the passed value. Seamlessly merge with the new value.
 - To avoid the delayed update on the select depending on the server, let's use the new useOptimistic hook from React 19. It takes in a state to show when no transition is pending, which is our server truth of the currentAccount, and returns a optimistic account state and a function to update it.
 - Call useOptimistic hook above the server function inside the transition. Use the optimistic value for all the existing account variables (remember inside handleSwitchAccount).
 - Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background.
 - Showcase failure state by removing the disabled prop. We get automatic "rollback" because the optimistic value is not the same as the server value, it's just a temporary state.
 - UseOptimistic creates a temporary state that is shown while the transition is running, then throws it away and settles to the passed value.
-- We simplified the handleSwitchAccount function greatly with less code, fixed the out of sync loading state, and made it arguably better with less risk of bugs.
+- Notice how our handleSwitchAccount interaction is completely smooth. We fixed the out of sync loading state, and have a more robust optimistic update that works with the transition, with less code, and no UX problems.
 
 ## Add logout item in menu
 
