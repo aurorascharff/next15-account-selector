@@ -4,11 +4,12 @@
 
 - What you're looking at is an project dashboard demo app with an account selector. This is based on a real feature I built for my current project, the inspiration behind this talk.
 - Let’s pretend your designer gave this nice custom UI in Figma, with a custom account select that didn't exist in your component library. So you built it yourself. And all is well, right?  Let's try this out.
-- This account select allows me to switch account, get a loading state spinner, a toast, and see the updated dashboard. There was a strange interaction there, the loading state was not entirely in sync with the visual update. Oh well, let's also try interacting with this dropdown.
+- The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside.
+- This account select allows me to switch account, get a loading state spinner, a toast, and see the updated dashboard. There was a strange interaction there, the loading state was not entirely in sync with the visual update.
 - (My toast is also out of sync, it shows the success message before the dashboard has updated.)
-- The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside. The menu popover placement isn't smart and doe not have any smart auto positioning functionality (show with console).
+functionality (show with console).
 - I have these challenges: I'm trying to build a custom UI component, yet I want it to be accessible. But I'm not an accessibility expert. I also want to smoothly handle async operations with a good UX. But I don't want to write lot's of code to get all this right.
-- This situation was me not long ago. Who else has been in a similar situation?
+- This situation was me not long ago.
 - That's why, the goal of this demo: show you how to make this custom account selector interactive and accessible, and improve the unstable UX using certain tools: Ariakit and React 19. Let's get to the code!
 
 ## Starting Point
@@ -41,25 +42,26 @@
 - Ariakit is a React library that provides unstyled, primitive components and hooks for building interactive UIs. Provides declarative components that are accessible by default following WCAG-standard and have all the functionality we need built in, and can compose together.
 - Lets step by step replace all the divs with Ariakit equivalents.
 - Remove "relative" from parent div
-- Provider: Add ariakit Ariakit.SelectProvider between with value={currentAccount?.id}
+- Provider: Add ariakit Ariakit.SelectProvider between
 - Label: Replace label div with Ariakit.SelectLabel
 - Select: Replace open button with Ariakit.Select and remove setExpanded
 - SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState. Showcase.
 - SelectButton: Replace all styles and render SelectButton and showcase aria-expanded
-- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover.
+- SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover. Showcase click outside and escape close, viewport aware placement.
 - SelectItem: Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
-- SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit.
-- SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}
+- SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit. Showcase keyboard navigation, focus trap.
+- SelectItemCheck: Replace the selected item check with Ariakit.SelectItemCheck and add value={account.id}, Provider value={currentAccount?.id}
 - Remove setExpanded from handleSwitchAccount, remove expanded useState.
-- All of this is in the documentation! And there are docs for non-tailwind users as well. And so many ariakit primitives, not only for selects, but also for menus, dialogs, tooltips, and more. And they can be composed together.
+- All of this is in the documentation! And there are docs for non-tailwind users as well. And so many ariakit primitives, not only for selects, but also for menus, dialogs, tooltips, and more. And they can be composed together, and the docs contain examples of how to combine them.
 - No longer have nameless divs, rather used declarative components with Ariakit without compromising on the customizability.
 
 ## Add useTransition for the loading state
 
-- Now lets get to work on the async operation, the account switching. This is a lot of boilerplate code. We can use the new react 19 to simplify this, and fix the out of sync spinner as well.
+- Now lets get to work on the async operation, the account switching. This is a lot of boilerplate code, and we need to fix the out of sync spinner.
+- Fortunately, React has a API for this: transitions. Transitions allow react to coordinate async requests in events and render. Let's see how we can use transitions here to create a better experience, with no sync issues, and less code.
 - To track the loading state, lets use the improved useTransition hook from React 19. It let's use mark a state update as non-urgent or deferred, and commits all of them once they are all done. Returns pending state for the transition and a startTransition function.
 - Remove pending state useState.
-- Wrap everything above the api call with useTransition, remove setPending, get pending state isPending. Move async keyword.
+- Creating an Action. An action is a function called in a transition, meaning we have a specific term for this type of lower priority behavior.
 - Test that it works. The spinner is correctly synced to the UI update of the dashboard now.
 
 ## Use Server Function for the mutation
@@ -87,25 +89,28 @@
 
 ## Add useOptimistic for the optimistic update
 
-- Let's use more React 19 to make this easier.
+- What about the current setState optimistic update here. It adds this additional code with this manual rollback. Imagine if we had more logic, the rollback would get increasingly complex.
 - Remove naive useState and use currentAccountResolved directly, rename to currentAccount. See delayed update on the select.
+- I now have the UX problem of the select values not updating until the async operation is done. The select is not reflecting the user action immediately, it feels "stuck", (and it only select one value. We could use the updater function.)
+- Another useful react 19 api, is useOptimistic. UseOptimistic let's us manage optimistic updates more easily, and works along side Actions. It takes in state to show when no action is pending, and update function, and the optimistic state and trigger.
+- Within a transition, we can create a temporary optimistic update. This state shows for as long as the transitions run, and when its done, settles to the passed value. Seamlessly merge with the new value.
 - To avoid the delayed update on the select depending on the server, let's use the new useOptimistic hook from React 19. It takes in a state to show when no transition is pending, which is our server truth of the currentAccount, and returns a optimistic account state and a function to update it.
 - Call useOptimistic hook above the server function inside the transition. Use the optimistic value for all the existing account variables (remember inside handleSwitchAccount).
 - Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background.
 - Showcase failure state by removing the disabled prop. We get automatic "rollback" because the optimistic value is not the same as the server value, it's just a temporary state.
 - UseOptimistic creates a temporary state that is shown while the transition is running, then throws it away and settles to the passed value.
-- We simplified the handleSwitchAccount function greatly with less code, fixed the out of sync loading state, and made it arguably better with less risk of bugs.
+- Notice how our handleSwitchAccount interaction is completely smooth. We fixed the out of sync loading state, and have a more robust optimistic update that works with the transition, with less code, and no UX problems.
 
 ## Add logout item in menu
 
-- Im already done with my improvements, but let's add some final features to this account selector.
+- Im already done with my improvements, but let's add some final features to this account selector to bring everything together.
 - Let's add another custom UI element to the select. A logout button, showcasing the customizability of Ariakit.
 - Styled with aria-disabled and not-aria-disabled:data-active-item underline.
 - Showcase the result when focusing it and hovering it.
 - We're gonna onClick call another Server Function, which deletes our account cookie (showcase). Track its loading state with another useTransition, creating a React Action. Add disabled= and "logging out" text.
 - Log out and showcase the loading state and the styling with ariakit.
 
-## Update login form to login again
+## (Update login form to login again)
 
 - Here logged out, let's complete the app with a functional login button. Let's use a React 19 improved form that let's us call a function in the action property. Need a parameter, instead of creating a client component with a callback function, let's use bind to directly bind the server function to the button.
 - We also will have some interactivity on this button, because it's the React 19 useFormStatus hook to track the loading state of the nearest parent form. Composable interactive button that can be used in any form.
@@ -115,8 +120,9 @@
 
 - Alright, let's do a final demo.
 - Load page and view the UI right away, get this stable loading state with suspense fallback using server components.
-- Navigate with tabs, open menu and use the menu with the arrow keys, all my styling is applied accordingly with hover or focus, open/close menu with enter with good focus, escape close, click outside. Popover automatic placement. And trust me the screen reader experience is good as well, provided by Ariakit.
+- Navigate with tabs, open menu and use the menu with the arrow keys, all my styling is applied accordingly with hover or focus, open/close menu with enter with good focus, escape close, click outside. Popover automatic placement. And trust me the screen reader experience is good as well, provided by Ariakit. Everything you would expect from a select.
 - Execute the switch, we have optimistic updates, and get an in sync loading state and a toast. Open menu and log out again with pending state and finally log back in.
+- (And the result, a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.)
 
 ## (Conclusion)
 

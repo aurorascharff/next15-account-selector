@@ -22,7 +22,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <body className={cn(GeistSans.className, 'mb-12 flex grow flex-col p-4 sm:p-10 xl:px-40 2xl:px-96')}>
+      <body className={cn(GeistSans.className, '3xl:px-96 mb-12 flex grow flex-col p-4 sm:p-10 xl:px-40 2xl:px-80')}>
         <main>
           <Suspense>
             <Toaster />

@@ -10,8 +10,8 @@ export function Toasts({ toasts }: { toasts: ToastType[] }) {
   const [sentToSonner, setSentToSonner] = useState<string[]>([]);
 
   const dismissToastAction = (id: string) => {
-    startTransition(() => {
-      dismissToast(id);
+    startTransition(async () => {
+      await dismissToast(id);
     });
   };
 
