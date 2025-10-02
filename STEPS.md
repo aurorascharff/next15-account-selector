@@ -42,7 +42,7 @@ functionality (show with console).
 - Ariakit is a React library that provides unstyled, primitive components and hooks for building interactive UIs. Provides declarative components that are accessible by default following WCAG-standard and have all the functionality we need built in, and can compose together.
 - Lets step by step replace all the divs with Ariakit equivalents.
 - Remove "relative" from parent div
-- Provider: Add ariakit Ariakit.SelectProvider between
+- Provider: What is this component? Most similar a Select. Add ariakit Ariakit.SelectProvider between.
 - Label: Replace label div with Ariakit.SelectLabel
 - Select: Replace open button with Ariakit.Select and remove setExpanded
 - SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState. Showcase.
@@ -63,6 +63,7 @@ functionality (show with console).
 - Remove pending state useState.
 - Creating an Action. An action is a function called in a transition, meaning we have a specific term for this type of lower priority behavior.
 - Test that it works. The spinner is correctly synced to the UI update of the dashboard now.
+- This is just one simple example, theres so much power in transitions.
 
 ## Use Server Function for the mutation
 
