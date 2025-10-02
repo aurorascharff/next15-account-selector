@@ -46,7 +46,7 @@ functionality (show with console).
 - Label: Replace label div with Ariakit.SelectLabel
 - Select: Replace open button with Ariakit.Select and remove setExpanded
 - SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState. Showcase.
-- SelectButton: Replace all styles and render SelectButton and showcase aria-expanded
+- SelectButton: Replace all styles and render SelectButton and showcase aria-expanded. Flexible with render prop.
 - SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover. Showcase click outside and escape close, viewport aware placement.
 - SelectItem: Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
 - SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit. Showcase keyboard navigation, focus trap.
