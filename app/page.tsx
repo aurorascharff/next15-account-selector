@@ -9,7 +9,7 @@ import Divider from '@/components/ui/Divider';
 import IconButton from '@/components/ui/IconButton';
 import { getAccounts, getCurrentAccount } from '@/data/services/auth';
 
-export default async function RootPage() {
+export default function RootPage() {
   const accounts = getAccounts();
   const currentAccount = getCurrentAccount();
 
