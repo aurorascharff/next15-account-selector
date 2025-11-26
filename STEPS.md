@@ -6,7 +6,7 @@
 - Let’s pretend your designer gave this nice custom UI in Figma, with a custom account select that didn't exist in your component library. So you built it yourself. And all is well, right?  Let's try this out.
 - The keyboard navigation is incorrectly implemented, trying to use arrows, I have to use tabs when I should be using the arrow keys, does not close moving to next element. It does not close on escape click or on click outside.
 - This account select allows me to switch account, get a loading state spinner, a toast, and see the updated dashboard. There was a strange interaction there, the loading state was not entirely in sync with the visual update.
-- (My toast is also out of sync, it shows the success message before the dashboard has updated.)
+- My toast is also out of sync, it shows the success message before the dashboard has updated.
 functionality (show with console).
 - I have these challenges: I'm trying to build a custom UI component, yet I want it to be accessible. But I'm not an accessibility expert. I also want to smoothly handle async operations with a good UX. But I don't want to write lot's of code to get all this right.
 - This situation was me not long ago.
@@ -63,6 +63,7 @@ functionality (show with console).
 - Remove pending state useState.
 - Creating an Action. An action is a function called in a transition, meaning we have a specific term for this type of lower priority behavior.
 - Test that it works. The spinner is correctly synced to the UI update of the dashboard now.
+- However, the toast is not yet in sync with the UI update. Edge case of UI after an await, we need another startTransition to ensure the toast is shown after the UI update. Will not be needed in future React versions.
 - This is just one simple example, theres so much power in transitions.
 
 ## Use Server Function for the mutation
@@ -74,19 +75,6 @@ functionality (show with console).
 - Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
 - Update the toast code to use response.error. Test it. It still works!
 - Replace router.refresh with revalidatePath inside the server function, so that the page is revalidated and the new account and data is fetched from the server. Remove router.
-
-## (Showcase and use new toast implementation)
-
-- I want to improve the out of sync toast. It's actually triggering when the response comes back but before the UI has updated in the dashboard. And in addition, this toast doesn't work across page navigations. For example if I want a success toast after deleting an item, that would be a problem.
-- I'm gonna try an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
-- Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation. Server side. I'm still testing this, so it might change in the future. This is just a demo.
-
-## (Move toast code to server function)
-
-- For these toasts, I'm actually using an implementation that Ryan Toronto shared on build UI, utilizing cookies to trigger toasts from the server side. I won't get into the details of this implementation, but it's a nice way to handle toasts in a server function. And they work across page navigations.
-- We can actually move the toast code from AccountSelector, trigger toast from the server function, error and success.
-- This is nice because it's here on the server we know what the result of the action is and have all the information. And it works across page navigations.
-- Delete toasts from handleSwitchAccount. Still works.
 
 ## Add useOptimistic for the optimistic update
 
@@ -121,7 +109,7 @@ functionality (show with console).
 - Alright, let's do a final demo. Fullscreen.
 - Login, load page and view the UI right away, get this stable loading state with suspense fallback using server components.
 - Navigate with tabs, open menu and use the menu with the arrow keys, all my styling is applied accordingly with hover or focus, open/close menu with enter with good focus, escape close, click outside. Popover automatic placement. And trust me the screen reader experience is good as well, provided by Ariakit. Everything you would expect from a select.
-- Execute the switch, we have optimistic updates, and get an in sync loading state and a toast. Open menu and log out again with pending state and finally log back in.
+- Execute the switch, we have optimistic updates, and get an in sync loading state and an in-sync toast. Open menu and log out again with pending state and finally log back in.
 - And the result, a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.
 
 ## (Conclusion)

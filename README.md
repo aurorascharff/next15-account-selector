@@ -1,6 +1,6 @@
 # Next.js 16 Account Selector
 
-An interactive, accessible, responsive, account selector built with Next.js 15, React 19 features, Ariakit, Sonner, Tailwind CSS v4 and Prisma. It's been purposely slowed down to showcase the handling of loading state.
+An interactive, accessible, responsive, account selector built with Next.js 15, React 19 features, Ariakit, react-hot-toast, Tailwind CSS v4 and Prisma. It's been purposely slowed down to showcase the handling of loading state.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
