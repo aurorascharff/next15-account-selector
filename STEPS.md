@@ -25,7 +25,7 @@ functionality (show with console).
 
 - Now, thats the setup, but our problems are is the AccountSelector component. It's reading a promise from the server of the current account with React 19 use().
 - Showcase the typical React code using isLoading, expanded states. Mutation through endpoint contains lots of boilerplate code. A sort of naive optimistic update here using setState. Quite a lot of code, probably prone to bugs. Let's say I just coded this up without thinking too much about it, and it works, but it could be better.
-- For the select, it's hard to read the divs and spans, I even marked them so I can find them. I should maybe have extracted this to components. And probably I should have used different elements. I'm using state variables to define styles which is not optimal.
+- For the select, it's hard to read the divs and spans, styled based on requirements, I even marked them so I can find them. I should maybe have extracted this to components. And probably I should have used different elements. I'm using state variables to define styles which is not optimal.
 
 ## Try to fix the accessibility issues
 
@@ -42,11 +42,11 @@ functionality (show with console).
 - Ariakit is a React library that provides unstyled, primitive components and hooks for building interactive UIs. Provides declarative components that are accessible by default following WCAG-standard and have all the functionality we need built in, and can compose together.
 - Lets step by step replace all the divs with Ariakit equivalents.
 - Remove "relative" from parent div
-- Provider: Add ariakit Ariakit.SelectProvider between
+- Provider: What is this component? Most similar a Select. Could be Menu. There is not 100% right in accessibility, 70% is good enough. Add ariakit Ariakit.SelectProvider between.
 - Label: Replace label div with Ariakit.SelectLabel
 - Select: Replace open button with Ariakit.Select and remove setExpanded
 - SelectArrow: We can't use expanded state anymore, replace chevron icon inside with Ariakit.SelectArrow, add class "group" to the Ariakit.Select and use group-expanded for the icon rotate rather than the useState. Showcase.
-- SelectButton: Replace all styles and render SelectButton and showcase aria-expanded
+- SelectButton: Replace all styles and render SelectButton and showcase aria-expanded. Flexible with render prop.
 - SelectPopover: Open the popover, remove expanded wrapper, replace "absolute" div Ariakit.SelectPopover, remove top-20, and add gutter={8},  open the popover. Showcase click outside and escape close, viewport aware placement.
 - SelectItem: Replace Icon item with Ariakit.SelectItem, replace hover: with data-active-item, the active item functionality is built in to Ariakit and stylable with data-active-item
 - SelectItem: Replace item with Ariakit.SelectItem, and use data-active-item: rather than hover:, replace focus-visible with data-focus-visible to differentiate between the mouse and keyboard focus correctly, replace disabled: with aria-disabled, the disabled={} prop now is correctly implemented behind the scenes by Ariakit. Showcase keyboard navigation, focus trap.
@@ -63,6 +63,7 @@ functionality (show with console).
 - Remove pending state useState.
 - Creating an Action. An action is a function called in a transition, meaning we have a specific term for this type of lower priority behavior.
 - Test that it works. The spinner is correctly synced to the UI update of the dashboard now.
+- This is just one simple example, theres so much power in transitions.
 
 ## Use Server Function for the mutation
 
@@ -91,15 +92,14 @@ functionality (show with console).
 
 - What about the current setState optimistic update here. It adds this additional code with this manual rollback. Imagine if we had more logic, the rollback would get increasingly complex.
 - Remove naive useState and use currentAccountResolved directly, rename to currentAccount. See delayed update on the select.
-- I now have the UX problem of the select values not updating until the async operation is done. The select is not reflecting the user action immediately, it feels "stuck", (and it only select one value. We could use the updater function.)
-- Another useful react 19 api, is useOptimistic. UseOptimistic let's us manage optimistic updates more easily, and works along side Actions. It takes in state to show when no action is pending, and update function, and the optimistic state and trigger.
-- Within a transition, we can create a temporary optimistic update. This state shows for as long as the transitions run, and when its done, settles to the passed value. Seamlessly merge with the new value.
+- I now have the UX problem of the select values not updating until the async operation is done. The select is not reflecting the user action immediately, it feels "stuck".
 - To avoid the delayed update on the select depending on the server, let's use the new useOptimistic hook from React 19. It takes in a state to show when no transition is pending, which is our server truth of the currentAccount, and returns a optimistic account state and a function to update it.
 - Call useOptimistic hook above the server function inside the transition. Use the optimistic value for all the existing account variables (remember inside handleSwitchAccount).
+- Within a transition, we can create a temporary optimistic update. This state shows for as long as the transitions run, and when its done, settles to the passed value. Seamlessly merge with the new value.
 - Showcase the optimistic update in the UI. The select updates immediately, and the loading state is shown in the background.
 - Showcase failure state by removing the disabled prop. We get automatic "rollback" because the optimistic value is not the same as the server value, it's just a temporary state.
 - UseOptimistic creates a temporary state that is shown while the transition is running, then throws it away and settles to the passed value.
-- Notice how our handleSwitchAccount interaction is completely smooth. We fixed the out of sync loading state, and have a more robust optimistic update that works with the transition, with less code, and no UX problems.
+- Notice how our handleSwitchAccount interaction is completely smooth. We fixed the out of sync loading state, we skipped the api layer, and have a more robust optimistic update that works with the transition, with less code, and no UX problems.
 
 ## Add logout item in menu
 
@@ -118,11 +118,11 @@ functionality (show with console).
 
 ## Final demo
 
-- Alright, let's do a final demo.
-- Load page and view the UI right away, get this stable loading state with suspense fallback using server components.
+- Alright, let's do a final demo. Fullscreen.
+- Login, load page and view the UI right away, get this stable loading state with suspense fallback using server components.
 - Navigate with tabs, open menu and use the menu with the arrow keys, all my styling is applied accordingly with hover or focus, open/close menu with enter with good focus, escape close, click outside. Popover automatic placement. And trust me the screen reader experience is good as well, provided by Ariakit. Everything you would expect from a select.
 - Execute the switch, we have optimistic updates, and get an in sync loading state and a toast. Open menu and log out again with pending state and finally log back in.
-- (And the result, a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.)
+- And the result, a maintainable, accessible, and user-friendly account selector with minimal boilerplate and modern best practices.
 
 ## (Conclusion)
 

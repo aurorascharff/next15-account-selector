@@ -2,7 +2,7 @@ import './globals.css';
 
 import { Geist } from 'next/font/google';
 import { Suspense } from 'react';
-import { Toaster } from '@/components/toast/Toaster';
+import { Toaster } from 'sonner';
 import SubmitButton from '@/components/ui/SubmitButton';
 import KeyPressed from '@/components/utils/KeyPressed';
 import { logIn } from '@/data/actions/auth';
@@ -13,8 +13,8 @@ import type { Metadata } from 'next';
 const GeistSans = Geist({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  description: 'Next.js 15 Account Selector using Server Functions, React 19 and Ariakit',
-  title: 'Next.js 15 Account Selector',
+  description: 'Next.js 16 Account Selector using Server Functions, React 19 and Ariakit',
+  title: 'Next.js 16 Account Selector',
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

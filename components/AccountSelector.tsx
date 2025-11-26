@@ -5,6 +5,7 @@ import * as Ariakit from '@ariakit/react';
 import { EllipsisVertical } from 'lucide-react';
 import React, { use, useOptimistic, useTransition } from 'react';
 import { logOut, switchAccount } from '@/data/actions/auth';
+import { toast } from '@/data/utils/toast';
 import Divider from './ui/Divider';
 import SelectButton from './ui/SelectButton';
 import Spinner from './ui/Spinner';
@@ -29,7 +30,12 @@ export default function AccountSelector({ accountsPromise, currentAccountPromise
     }
     startTransition(async () => {
       setOptimisticAccount(account);
-      await switchAccount(account.id);
+      const error = await switchAccount(account.id);
+      if (error) {
+        toast.error(error.error);
+      } else {
+        toast.success('Account changed successfully!');
+      }
     });
   };
 
