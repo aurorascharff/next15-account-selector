@@ -1,9 +1,7 @@
 'use client';
 
 import { Check, TriangleAlert, X } from 'lucide-react';
-import { startTransition } from 'react';
-import { toast as sonnerToast } from 'sonner';
-import { dismissToast } from '@/data/actions/toast';
+import { toast } from 'sonner';
 import type { ToastType } from '@/types/toast';
 import { cn } from '@/utils/cn';
 
@@ -11,9 +9,18 @@ type Props = {
   message: string;
   id: string;
   type: ToastType;
+  onDismiss?: (id: string) => void;
 };
 
-export function Toast({ message, id, type }: Props) {
+export function Toast({ message, id, type, onDismiss }: Props) {
+  const handleDismiss = () => {
+    if (onDismiss) {
+      onDismiss(id);
+    } else {
+      toast.dismiss(id);
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -32,10 +39,7 @@ export function Toast({ message, id, type }: Props) {
       <button
         className="rounded-full p-1 hover:outline"
         onClick={() => {
-          startTransition(async () => {
-            sonnerToast.dismiss(id);
-            await dismissToast(id);
-          });
+          handleDismiss();
         }}
       >
         <span className="sr-only">Close</span>

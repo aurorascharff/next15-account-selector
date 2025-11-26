@@ -2,7 +2,6 @@ import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import autofix from 'eslint-plugin-autofix';
 import reactHooks from 'eslint-plugin-react-hooks';
 import sortKeysFix from 'eslint-plugin-sort-keys-fix';
-import reactCompiler from 'eslint-plugin-react-compiler';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
@@ -20,19 +19,18 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   {
-    ignores: ['**/next-env.d.ts'],
+    ignores: ['**/next-env.d.ts', '.next/**', 'node_modules/**'],
   },
   ...fixupConfigRules(
     compat.extends(
       'eslint:recommended',
-      'eslint-config-prettier',
       'plugin:react/recommended',
       'plugin:@typescript-eslint/recommended',
       'plugin:import/recommended',
       'plugin:jsx-a11y/recommended',
       'next',
       'next/core-web-vitals',
-      'prettier',
+      'next/typescript',
     ),
   ),
   {
@@ -51,12 +49,10 @@ const eslintConfig = [
     },
     plugins: {
       autofix,
-      'react-compiler': reactCompiler,
       'react-hooks': fixupPluginRules(reactHooks),
       'sort-keys-fix': sortKeysFix,
     },
     rules: {
-      'react-compiler/react-compiler': 'error',
       'sort-keys-fix/sort-keys-fix': 'warn',
     },
   },

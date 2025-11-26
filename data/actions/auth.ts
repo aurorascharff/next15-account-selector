@@ -4,7 +4,6 @@ import { cookies } from 'next/headers';
 import { prisma } from '@/db';
 import { slow } from '@/utils/slow';
 import { getAccount } from '../services/auth';
-import { toast } from '../utils/toast';
 
 export async function switchAccount(accountId: string) {
   const account = await getAccount(accountId);
@@ -35,8 +34,7 @@ export async function logIn(email: string) {
   });
 
   if (!account) {
-    const error = 'No account found with this email address.';
-    return toast.error(error);
+    throw new Error('No account found with this email address.');
   }
 
   (await cookies()).set('selectedAccountId', account?.id);
