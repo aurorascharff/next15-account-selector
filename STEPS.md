@@ -75,19 +75,6 @@ functionality (show with console).
 - Update the toast code to use response.error. Test it. It still works!
 - Replace router.refresh with revalidatePath inside the server function, so that the page is revalidated and the new account and data is fetched from the server. Remove router.
 
-## (Showcase and use new toast implementation)
-
-- I want to improve the out of sync toast. It's actually triggering when the response comes back but before the UI has updated in the dashboard. And in addition, this toast doesn't work across page navigations. For example if I want a success toast after deleting an item, that would be a problem.
-- I'm gonna try an implementation that Ryan Toronto shared on build ui, utilizing cookies to trigger toasts from the server side. And they work across page navigations.
-- Replace Toaster from sonner with custom Toaster component in layout.tsx. Showcase implementation. Server side. I'm still testing this, so it might change in the future. This is just a demo.
-
-## (Move toast code to server function)
-
-- For these toasts, I'm actually using an implementation that Ryan Toronto shared on build UI, utilizing cookies to trigger toasts from the server side. I won't get into the details of this implementation, but it's a nice way to handle toasts in a server function. And they work across page navigations.
-- We can actually move the toast code from AccountSelector, trigger toast from the server function, error and success.
-- This is nice because it's here on the server we know what the result of the action is and have all the information. And it works across page navigations.
-- Delete toasts from handleSwitchAccount. Still works.
-
 ## Add useOptimistic for the optimistic update
 
 - What about the current setState optimistic update here. It adds this additional code with this manual rollback. Imagine if we had more logic, the rollback would get increasingly complex.
