@@ -6,6 +6,8 @@ import { slow } from '@/utils/slow';
 import { getAccount } from '../services/auth';
 
 export async function switchAccount(accountId: string) {
+  await slow();
+
   const account = await getAccount(accountId);
 
   if (account.inactive) {
