@@ -88,7 +88,7 @@ functionality (show with console).
 - Showcase failure state by removing the disabled prop. We get automatic "rollback" because the optimistic value is not the same as the server value, it's just a temporary state.
 - UseOptimistic creates a temporary state that is shown while the transition is running, then throws it away and settles to the passed value.
 - Notice how our handleSwitchAccount interaction is completely smooth. We fixed the out of sync loading state, we skipped the api layer, and have a more robust optimistic update that works with the transition, with less code, and no UX problems.
-- As component libraries adopt react Actions in the future, this sort of async management will be handled by the components themselves, making it even easier to build async interactions. For now, we are doing it manually.
+- As component libraries adopt react Actions internally in the future, this sort of async management will be handled by the components themselves, making it even easier to build async interactions. For now, we are doing it manually.
 
 ## Add logout item in menu
 
