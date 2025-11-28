@@ -74,7 +74,7 @@ functionality (show with console).
 - Type safe with RPC.
 - Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
 - Update the toast code to use response.error. Test it. It still works!
-- Replace router.refresh with revalidatePath inside the server function, so that the page is revalidated and the new account and data is fetched from the server. Remove router.
+- Replace router.refresh with refresh inside the server function, so that the page is revalidated and the new account and data is fetched from the server. Remove router.
 
 ## Add useOptimistic for the optimistic update
 
@@ -88,6 +88,7 @@ functionality (show with console).
 - Showcase failure state by removing the disabled prop. We get automatic "rollback" because the optimistic value is not the same as the server value, it's just a temporary state.
 - UseOptimistic creates a temporary state that is shown while the transition is running, then throws it away and settles to the passed value.
 - Notice how our handleSwitchAccount interaction is completely smooth. We fixed the out of sync loading state, we skipped the api layer, and have a more robust optimistic update that works with the transition, with less code, and no UX problems.
+- As component libraries adopt react Actions in the future, this sort of async management will be handled by the components themselves, making it even easier to build async interactions. For now, we are doing it manually.
 
 ## Add logout item in menu
 
