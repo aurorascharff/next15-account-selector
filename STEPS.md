@@ -66,16 +66,6 @@ functionality (show with console).
 - However, the toast is not yet in sync with the UI update. Edge case of UI after an await, we need another startTransition to ensure the toast is shown after the UI update. Will not be needed in future React versions.
 - This is just one simple example, theres so much power in transitions.
 
-## Use Server Function for the mutation
-
-- Now the API call. Let's replace this with a function call to the server, switchAccount.
-- (Create new file auth.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
-- Call the server function inside the onClick instead of API. Showcase server function in account.ts. We can with React 19 server functions call server code from the client as a function, it creates a hidden API endpoint. Here setting the cookie simulating switching accounts. Erroring if the account is not active.
-- Type safe with RPC.
-- Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
-- Update the toast code to use response.error. Test it. It still works!
-- Replace router.refresh with refresh inside the server function, so that the page is revalidated and the new account and data is fetched from the server. Remove router.
-
 ## Add useOptimistic for the optimistic update
 
 - What about the current setState optimistic update here. It adds this additional code with this manual rollback. Imagine if we had more logic, the rollback would get increasingly complex.
@@ -90,13 +80,23 @@ functionality (show with console).
 - Notice how our handleSwitchAccount interaction is completely smooth. We fixed the out of sync loading state, we skipped the api layer, and have a more robust optimistic update that works with the transition, with less code, and no UX problems.
 - As component libraries adopt react Actions internally in the future, this sort of async management will be handled by the components themselves, making it even easier to build async interactions. For now, we are doing it manually.
 
+## Use Server Function for the mutation
+
+- Now the API call. Let's replace this with a function call to the server, switchAccount.
+- (Create new file auth.ts with "use server", copy the API code. Call the server function inside the onClick. Type safe.)
+- Call the server function inside the onClick instead of API. Showcase server function in account.ts. We can with React 19 server functions call server code from the client as a function, it creates a hidden API endpoint. Here setting the cookie simulating switching accounts. Erroring if the account is not active.
+- Type safe with RPC.
+- Delete api code and api layer. No type safety here by the way, I just deleted the endpoint but there was no way to know.
+- Update the toast code to use response.error. Test it. It still works!
+- Replace router.refresh with refresh inside the server function, so that the page is revalidated and the new account and data is fetched from the server. Remove router.
+
 ## Add logout item in menu
 
 - Im already done with my improvements, but let's add some final features to this account selector to bring everything together.
 - Let's add another custom UI element to the select. A logout button, showcasing the customizability of Ariakit.
 - Styled with aria-disabled and not-aria-disabled:data-active-item underline.
 - Showcase the result when focusing it and hovering it.
-- We're gonna onClick call another Server Function, which deletes our account cookie (showcase). Track its loading state with another useTransition, creating a React Action. Add disabled= and "logging out" text.
+- We're gonna onClick call another Server Function, which deletes our account cookie (showcase). Track its loading state with another useTransition, creating a React Action. Add disabled= and "logging out" text. Amazing, that how easy we can create async interactions now.
 - Log out and showcase the loading state and the styling with ariakit.
 
 ## (Update login form to login again)
