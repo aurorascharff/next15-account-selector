@@ -19,7 +19,7 @@
     "@types/node": "24.10.1",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
-    "babel-plugin-react-compiler": "^19.1.0-rc.3",
+    "babel-plugin-react-compiler": "19.1.0-rc.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eslint": "9.39.1",
